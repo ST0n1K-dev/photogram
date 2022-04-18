@@ -12,7 +12,7 @@ import {
 	Add as AddIcon,
 	Home as HomeIcon
 } from '@mui/icons-material';
-import SpeedDial from '../SpeedDial';
+import SpeedDial from 'Component/SpeedDial';
 import { HeaderProps } from './Header.config';
 
 const renderDrawerListItem = (text: string, icon: React.ReactNode) => (

@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "paths": {
       "Component/*": [
-        "components/*"
+        "./components/*"
       ],
       "Screen/*": [
-        "screens/*"
+        "./screens/*"
       ],
       "Type/*": [
         "./types/*"
