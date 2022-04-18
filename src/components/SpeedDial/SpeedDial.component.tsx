@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 
 import { SpeedDialProps } from './SpeedDial.config';
+import './SpeedDial.style.scss';
 
 const SpeedDialComponent: React.FC<SpeedDialProps> = (props) => {
 	const {
@@ -15,13 +16,11 @@ const SpeedDialComponent: React.FC<SpeedDialProps> = (props) => {
 
 	return (
 		<SpeedDial
-			ariaLabel="SPeed dial menu"
+			ariaLabel="Speed dial menu"
 			sx={{
-				position: 'absolute',
-				bottom: 16,
-				right: 16,
 				display: { xs: 'none', md: 'flex' }
 			}}
+			direction="left"
 			icon={<SpeedDialIcon />}
 			onClose={handleClose}
 			onOpen={handleOpen}
