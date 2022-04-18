@@ -45,7 +45,12 @@
         "no-restricted-exports": "off",
         "import/no-unresolved": "off",
         "comma-dangle": "off",
-        "react/jsx-one-expression-per-line": "off"
+        "react/jsx-one-expression-per-line": "off",
+        "no-tabs": "off",
+        "indent": "off",
+        "react/jsx-indent": "off",
+        "no-mixed-spaces-and-tabs": "off",
+        "react/jsx-indent-props": "off"
     },
     "settings": {
         "import/resolver": {

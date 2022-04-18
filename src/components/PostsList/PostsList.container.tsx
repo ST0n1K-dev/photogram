@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Home from './Home.component';
+import PostsList from './PostsList.component';
 
-const HomeContainer: React.FC = () => {
+const PostsListContainer: React.FC = () => {
   const containerProps = () => ({
     test: 'asd',
   });
@@ -10,11 +10,11 @@ const HomeContainer: React.FC = () => {
   const containerFunctions = {};
 
   return (
-    <Home
+    <PostsList
       {...containerProps()}
       {...containerFunctions}
     />
   );
 };
 
-export default HomeContainer;
+export default PostsListContainer;
