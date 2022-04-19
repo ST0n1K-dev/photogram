@@ -1,16 +1,21 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import FirebaseContext from './context/firebase';
 import './index.scss';
 import './styles/main.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { firebase, analytics } from './lib/firebase';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <FirebaseContext.Provider value={{ firebase, analytics }}>
+      <App />
+    </FirebaseContext.Provider>
   </React.StrictMode>,
 );
 
