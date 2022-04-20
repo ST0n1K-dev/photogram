@@ -3,7 +3,8 @@ import { createContext } from 'react';
 
 interface FirebaseContextInterface {
     firebase: any,
-    analytics: any
+    analytics: any,
+    FieldValue: any
 }
 
 export const FirebaseContext = createContext<FirebaseContextInterface | null>(null);

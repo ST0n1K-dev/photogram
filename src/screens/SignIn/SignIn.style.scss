@@ -1,0 +1,58 @@
+.SignIn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - var(--header-height));
+
+    &__InformationalBlock {
+        text-align: center;
+        &--picture {
+            width: 60%;
+        }
+        flex: 50%;
+    }
+
+    &__LoginFormWrapper {
+        flex: 50%;
+
+        &--title {
+            text-align: center;
+        }
+
+        &--createAccountButton {
+            text-transform: none;
+            justify-content: center;
+        }
+    }
+
+    &__CreateAccount {
+        width: 65%;
+        margin: 10px auto;
+        text-align: end;
+    }
+
+    &__LoginForm {
+        width: 100%;
+        text-align: center;
+        
+        form {
+            width: 100%;
+
+            button {
+                margin: 10px 0;
+            }
+        }
+
+        .InputField {
+            width: 100%;
+            margin: 10px 0 0;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .SignIn {
+        flex-direction: row;
+    }
+  }

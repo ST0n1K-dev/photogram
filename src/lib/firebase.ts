@@ -14,6 +14,7 @@ const config = {
 };
 
 const app = firebase.initializeApp(config);
+const { FieldValue } = firebase.firestore;
 const analytics = getAnalytics(app);
 
-export { app as firebase, analytics };
+export { app as firebase, analytics, FieldValue };

@@ -15,26 +15,28 @@ const SpeedDialComponent: React.FC<SpeedDialProps> = (props) => {
 	} = props;
 
 	return (
-		<SpeedDial
-			ariaLabel="Speed dial menu"
-			sx={{
-				display: { xs: 'none', md: 'flex' }
-			}}
-			direction="left"
-			icon={<SpeedDialIcon />}
-			onClose={handleClose}
-			onOpen={handleOpen}
-			open={open}
-		>
-			{speedDialActions.map((action) => (
-				<SpeedDialAction
-					key={action.name}
-					icon={action.icon}
-					tooltipTitle={action.name}
-					onClick={handleClose}
-				/>
-			))}
-		</SpeedDial>
+		<div className="SpeedDial">
+			<SpeedDial
+				ariaLabel="Speed dial menu"
+				sx={{
+					display: { xs: 'none', md: 'flex' }
+				}}
+				direction="left"
+				icon={<SpeedDialIcon />}
+				onClose={handleClose}
+				onOpen={handleOpen}
+				open={open}
+			>
+				{speedDialActions.map((action) => (
+					<SpeedDialAction
+						key={action.name}
+						icon={action.icon}
+						tooltipTitle={action.name}
+						onClick={handleClose}
+					/>
+				))}
+			</SpeedDial>
+		</div>
 	);
 };
 
