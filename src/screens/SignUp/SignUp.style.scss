@@ -1,4 +1,4 @@
-.SignIn {
+.SignUp {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -62,7 +62,7 @@
 }
 
 @media screen and (min-width: 768px) {
-    .SignIn {
+    .SignUp {
         flex-direction: row;
     }
   }

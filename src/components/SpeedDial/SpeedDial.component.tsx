@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
 	SpeedDial,
 	SpeedDialAction,
@@ -11,7 +10,7 @@ import './SpeedDial.style.scss';
 
 const SpeedDialComponent: React.FC<SpeedDialProps> = (props) => {
 	const {
-	 open, handleOpen, handleClose, speedDialActions
+	 open, handleOpen, handleClose, onNavigate, speedDialActions
 	} = props;
 
 	return (
@@ -32,7 +31,7 @@ const SpeedDialComponent: React.FC<SpeedDialProps> = (props) => {
 						key={action.name}
 						icon={action.icon}
 						tooltipTitle={action.name}
-						onClick={handleClose}
+						onClick={() => onNavigate(action.url)}
 					/>
 				))}
 			</SpeedDial>

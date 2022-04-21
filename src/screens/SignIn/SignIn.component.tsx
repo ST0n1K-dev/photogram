@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { Button } from '@mui/material';
 import InputField from 'Component/InputField';
+import * as ROUTES from 'Type/routes';
 import { SignupSchema, SignInValues, SingInInterface } from './SignIn.config';
-
 import './SignIn.style.scss';
 
 const SignInForm: React.FC<SingInInterface> = ({ handleLogin }) => {
@@ -69,12 +70,8 @@ export const SignIn: React.FC<SingInInterface> = (props) => {
 					<SignInForm handleLogin={handleLogin} />
 				</div>
 				<div className="SignIn__CreateAccount">
-					<Button
-						className="SignIn__LoginFormWrapper--createAccountButton"
-						variant="text"
-					>
-						Create an account
-					</Button>
+					<p>Don&apos;t have an account?</p>
+					<Link to={ROUTES.SIGNUP}>Sign up</Link>
 				</div>
 			</div>
 		</div>
