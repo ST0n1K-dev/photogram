@@ -1,0 +1,17 @@
+.InputField {
+    padding: 10px 5px;
+    border-color: lightgray;
+    border-width: 1px;
+    border-radius: 15px;
+
+    &--container {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 810px) {
+        &--container {
+            width: 100%;
+        }
+    }
+}

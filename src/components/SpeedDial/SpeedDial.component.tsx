@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
 	SpeedDial,
 	SpeedDialAction,
@@ -11,30 +10,32 @@ import './SpeedDial.style.scss';
 
 const SpeedDialComponent: React.FC<SpeedDialProps> = (props) => {
 	const {
-	 open, handleOpen, handleClose, speedDialActions
+	 open, handleOpen, handleClose, onNavigate, speedDialActions
 	} = props;
 
 	return (
-		<SpeedDial
-			ariaLabel="Speed dial menu"
-			sx={{
-				display: { xs: 'none', md: 'flex' }
-			}}
-			direction="left"
-			icon={<SpeedDialIcon />}
-			onClose={handleClose}
-			onOpen={handleOpen}
-			open={open}
-		>
-			{speedDialActions.map((action) => (
-				<SpeedDialAction
-					key={action.name}
-					icon={action.icon}
-					tooltipTitle={action.name}
-					onClick={handleClose}
-				/>
-			))}
-		</SpeedDial>
+		<div className="SpeedDial">
+			<SpeedDial
+				ariaLabel="Speed dial menu"
+				sx={{
+					display: { xs: 'none', md: 'flex' }
+				}}
+				direction="left"
+				icon={<SpeedDialIcon />}
+				onClose={handleClose}
+				onOpen={handleOpen}
+				open={open}
+			>
+				{speedDialActions.map((action) => (
+					<SpeedDialAction
+						key={action.name}
+						icon={action.icon}
+						tooltipTitle={action.name}
+						onClick={() => onNavigate(action.url)}
+					/>
+				))}
+			</SpeedDial>
+		</div>
 	);
 };
 

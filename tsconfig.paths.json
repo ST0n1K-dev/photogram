@@ -10,6 +10,15 @@
       ],
       "Type/*": [
         "./types/*"
+      ],
+      "Context/*": [
+        "./context/*"
+      ],
+      "Hook/*": [
+        "./hooks/*"
+      ],
+      "Util/*": [
+        "./utils/*"
       ]
     }
   }

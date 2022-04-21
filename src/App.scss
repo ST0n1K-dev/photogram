@@ -6,11 +6,21 @@
 
  .App {
    width: 100%;
+   padding: 0 20px;
  }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.Formik {
+  &--error {
+    width: inherit;
+    display: block;
+    text-align: left!important;
+    color: red;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -49,7 +59,8 @@
 
  @media screen and (min-width: 768px) {
    .App {
-     width: 75%
+     width: 75%;
+     padding: 0;
    }
  }
 
