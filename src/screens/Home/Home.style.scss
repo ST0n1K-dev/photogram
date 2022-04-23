@@ -1,0 +1,17 @@
+.HomePage {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+
+    &__Posts {
+        flex: 75%;
+    }
+
+    &__Sidebar {
+        flex: 25%;
+
+        @media (max-width: 810px) {
+            display: none;
+        }
+    }
+}

@@ -19,3 +19,16 @@ export const isEmailExists = async (email: string) => {
 
     return response.docs.map((user) => user.data().length > 0).length > 0;
 };
+
+export const getUserById = async (userId: string) => {
+    const response = await firebase
+        .firestore()
+        .collection('users')
+        .where('userId', '==', userId)
+        .get();
+
+    return response.docs.map((user) => ({
+        ...user.data(),
+        docId: user.id
+    }));
+};
