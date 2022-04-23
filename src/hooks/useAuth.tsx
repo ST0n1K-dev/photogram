@@ -6,7 +6,7 @@ import { User } from 'Type/User';
 
 const AUTH_USER = 'authUser';
 
-export const useAuth = () => {
+export function useAuth() {
   const [user, setUser] = useState<User | null>(
       JSON.parse(localStorage.getItem(AUTH_USER) as string)
     ) || null;
@@ -23,8 +23,8 @@ export const useAuth = () => {
           }
       });
 
-      return () => listener;
+      return () => listener();
   }, [firebase]);
 
   return { user };
-};
+}

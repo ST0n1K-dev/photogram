@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { FirebaseContext, FirebaseContextInterface } from 'Context/firebase';
 
-export const useFirebase = () => {
+export function useFirebase() {
   const [receivedFirebase, setReceivedFirebase] = useState<FirebaseContextInterface | null>(null);
   const { firebase } = useContext(FirebaseContext) as FirebaseContextInterface;
 
@@ -12,6 +12,6 @@ export const useFirebase = () => {
   }, [firebase]);
 
   return { firebase: receivedFirebase };
-};
+}
 
 export default useFirebase;
