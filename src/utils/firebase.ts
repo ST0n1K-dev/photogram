@@ -1,3 +1,4 @@
+import { User } from 'Type/User';
 import { firebase } from '../lib/firebase';
 
 export const isUserExists = async (username: string) => {
@@ -31,4 +32,18 @@ export const getUserById = async (userId: string) => {
         ...user.data(),
         docId: user.id
     }));
+};
+
+export const getSuggestedProfiles = async (userId: string, following: Array<string>) => {
+    const response = await firebase
+        .firestore()
+        .collection('users')
+        .limit(5)
+        .get();
+
+    return response.docs.map((user) => ({
+		...user.data(),
+		docId: user.id,
+	})).filter((user) => (user as User).userId !== userId
+        && !following.includes((user as User).userId));
 };

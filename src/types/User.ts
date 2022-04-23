@@ -3,8 +3,8 @@ export interface User {
     docId: string
     uid?: string
     emailAddress: string
-    followers: Array<User>
-    following: Array<User>
+    followers: Array<string>
+    following: Array<string>
     fullName: string
     userId: string
     username: string

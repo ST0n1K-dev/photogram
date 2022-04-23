@@ -1,0 +1,29 @@
+.SuggestedUsers {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding: 15px;
+
+    &__Wrapper {
+        background-color: white;
+        border-radius: 10px;
+    }
+
+    &__InfoWrapper {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__Info {
+        &--title {
+            margin: 0;
+        }
+    }
+
+    &--link {
+        text-decoration: none;
+        color: black;
+    }
+}

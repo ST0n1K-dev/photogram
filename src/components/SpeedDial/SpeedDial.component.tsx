@@ -25,7 +25,7 @@ const SpeedDialComponent: React.FC<SpeedDialProps> = (props) => {
 			{speedDialActions.map((action) => (
 				<Link key={action.name} to={action.url}>
 					<IconButton
-						color="secondary"
+						color="primary"
 						aria-label={action.name}
 						component="span"
 					>
@@ -34,7 +34,7 @@ const SpeedDialComponent: React.FC<SpeedDialProps> = (props) => {
 				</Link>
 			))}
 			{Object.keys(user).length > 0 && (
-				<IconButton color="secondary" onClick={() => firebase.auth().signOut()}>
+				<IconButton color="primary" onClick={() => firebase.auth().signOut()}>
 					<LogoutIcon />
 				</IconButton>
 			)}
