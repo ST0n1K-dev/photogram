@@ -1,7 +1,6 @@
 import React from 'react';
 import UserCrumb from 'Component/UserCrumb';
 import SuggestedUsers from 'Component/SuggestedUsers';
-import { useUser } from 'Hook/useUser';
 import { HomeProps } from './Home.config';
 import './Home.style.scss';
 
@@ -11,12 +10,12 @@ export const HomeScreen: React.FC<HomeProps> = (props) => {
             fullName,
             username,
             userId,
-            following
+            following,
+            followers,
+            docId
         },
-		accountActivityInfo,
+        user
 	} = props;
-
-    const { user } = useUser();
 
     if (!Object.keys(user).length) {
        return <h3>No user</h3>;
@@ -32,11 +31,16 @@ export const HomeScreen: React.FC<HomeProps> = (props) => {
                     <UserCrumb
                         username={username}
                         fullName={fullName}
-                        accountActivityInfo={accountActivityInfo}
+                        following={following}
+                        followers={followers}
                     />
                 </div>
                 <div className="HomePage__Sidebar--Suggestions">
-                    <SuggestedUsers userId={userId} following={following} />
+                    <SuggestedUsers
+                        currentUserId={userId}
+                        following={following}
+                        currentUserDocId={docId}
+                    />
                 </div>
             </div>
         </div>

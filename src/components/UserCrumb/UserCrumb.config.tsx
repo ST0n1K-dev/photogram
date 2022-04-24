@@ -1,13 +1,13 @@
-import { AccountActibityInterface } from 'Screen/Home/Home.config';
-
 export interface UserCrumbContainerInterface {
     username: string
     fullName: string
-    accountActivityInfo: AccountActibityInterface
+    following: Array<string>
+    followers: Array<string>
 }
 
 export interface UserCrumbComponentInterface {
     username: string
     fullName: string
-    accountActivityInfo: AccountActibityInterface
+    following: number
+    followers: number
 }

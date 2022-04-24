@@ -5,25 +5,27 @@ import SuggestedUsersComponent from './SuggestedUsers.component';
 import { SuggestedUsersInterface } from './SuggestedUsers.config';
 
 const SuggestedUsersContainer: React.FC<SuggestedUsersInterface> = (props) => {
-	const { userId, following } = props;
+	const { currentUserId, following, currentUserDocId } = props;
 	const [profiles, setProfiles] = useState<Array<User>>([]);
 
 	useEffect(() => {
 		async function getSuggestedUsers() {
 			const suggestedProfiles = await getSuggestedProfiles(
-				userId,
+				currentUserId,
 				following
 			);
 			setProfiles(suggestedProfiles as Array<User>);
 		}
 
-		if (userId) {
+		if (currentUserId) {
 			getSuggestedUsers();
 		}
-	}, [userId, following]);
+	}, [currentUserId, following]);
 
 	const containerProps = () => ({
-    profiles
+    profiles,
+    currentUserDocId,
+    currentUserId
   });
 
 	const containerFunctions = {};

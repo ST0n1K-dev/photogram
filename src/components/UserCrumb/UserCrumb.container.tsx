@@ -2,13 +2,16 @@ import React from 'react';
 import UserCrumbComponent from './UserCrumb.component';
 import { UserCrumbContainerInterface } from './UserCrumb.config';
 
-const HeaderContainer: React.FC<UserCrumbContainerInterface> = (props) => {
-  const { username, fullName, accountActivityInfo } = props;
+const UserCrumbContainer: React.FC<UserCrumbContainerInterface> = (props) => {
+  const {
+    username, fullName, following, followers
+  } = props;
 
   const containerProps = () => ({
     username,
     fullName,
-    accountActivityInfo
+    following: following.length,
+    followers: followers.length
   });
 
   const containerFunctions = {};
@@ -21,4 +24,4 @@ const HeaderContainer: React.FC<UserCrumbContainerInterface> = (props) => {
   );
 };
 
-export default HeaderContainer;
+export default UserCrumbContainer;

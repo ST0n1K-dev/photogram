@@ -7,5 +7,6 @@ export interface User {
     following: Array<string>
     fullName: string
     userId: string
-    username: string
+    username: string,
+    profileId: string
 }

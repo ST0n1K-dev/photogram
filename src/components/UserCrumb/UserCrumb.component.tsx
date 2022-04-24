@@ -8,8 +8,9 @@ import { UserCrumbComponentInterface } from './UserCrumb.config';
 import './UserCrumb.style.scss';
 
 const UserCrumbComponent: React.FC<UserCrumbComponentInterface> = (props) => {
-	const { username, fullName, accountActivityInfo } = props;
-  const { followers, following } = accountActivityInfo;
+	const {
+    username, fullName, followers, following
+  } = props;
 
   if (!username || !fullName) {
     return <Skeleton variant="text" animation="wave" height={60} />;
