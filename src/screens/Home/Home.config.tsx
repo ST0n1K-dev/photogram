@@ -1,8 +1,7 @@
 import { User } from 'Type/User';
 
 export interface HomeProps {
-    user: User,
-    accountActivityInfo: AccountActibityInterface
+    user: User
 }
 
 export interface AccountActibityInterface {

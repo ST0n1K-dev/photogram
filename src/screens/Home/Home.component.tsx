@@ -13,7 +13,7 @@ export const HomeScreen: React.FC<HomeProps> = (props) => {
             following,
             followers,
             docId
-        },
+        } = {},
         user
 	} = props;
 
@@ -29,17 +29,17 @@ export const HomeScreen: React.FC<HomeProps> = (props) => {
             <div className="HomePage__Sidebar">
                 <div className="HomePage__Sidebar--User">
                     <UserCrumb
-                        username={username}
-                        fullName={fullName}
-                        following={following}
-                        followers={followers}
+                        username={username!}
+                        fullName={fullName!}
+                        following={following!}
+                        followers={followers!}
                     />
                 </div>
                 <div className="HomePage__Sidebar--Suggestions">
                     <SuggestedUsers
-                        currentUserId={userId}
-                        following={following}
-                        currentUserDocId={docId}
+                        currentUserId={userId!}
+                        following={following!}
+                        currentUserDocId={docId!}
                     />
                 </div>
             </div>

@@ -10,7 +10,7 @@ export function useUser() {
   useEffect(() => {
       async function getUser() {
           const [receivedUser] = await getUserById(user!.uid!);
-          setCurrentUser(receivedUser);
+          setCurrentUser(receivedUser || {});
       }
 
       if (user && user?.uid) {

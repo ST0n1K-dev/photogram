@@ -7,18 +7,8 @@ import HomeComponent from './Home.component';
 export const HomeContainer = () => {
     const { user } = useUser();
 
-	const getAccountActivityInfo = () => {
-		const { followers = [], following = [] } = user as User;
-
-		return {
-			followers: followers.length,
-			following: following.length
-		};
-	};
-
     const containerProps = () => ({
-		user: user as User,
-		accountActivityInfo: getAccountActivityInfo()
+		user: user as User
 	});
 
 	const containerFunctions = {};
