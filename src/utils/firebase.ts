@@ -1,4 +1,5 @@
 import { User } from 'Type/User';
+import { PostInterface } from 'Type/Post';
 import { FieldValue, firebase } from '../lib/firebase';
 
 export const isUserExists = async (username: string) => {
@@ -75,3 +76,32 @@ export const updateFollowedUserFollowers = async (
 				? FieldValue.arrayRemove(currentUserId)
 				: FieldValue.arrayUnion(currentUserId),
 		});
+
+export const getPosts = async (userId: string, following: Array<string>) => {
+    const response = await firebase
+		.firestore()
+		.collection('posts')
+		.where('userId', 'in', following)
+        .get();
+
+    const followedUsersPosts: any = response.docs.map((post) => ({
+        ...post.data(),
+        docId: post.id
+    }));
+
+    const detailedPosts: Array<PostInterface> = await Promise.all(
+        followedUsersPosts.map(async (post: any) => {
+            let isLiked = false;
+            if (post.likes.includes(userId)) {
+                isLiked = true;
+            }
+
+            const user: any = await getUserById(post.userId);
+            const { username } = user[0];
+
+            return { username, ...post, isLiked };
+        })
+    );
+
+    return detailedPosts;
+};

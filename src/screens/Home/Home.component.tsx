@@ -1,4 +1,5 @@
 import React from 'react';
+import UserStrip from 'Component/UserStrip';
 import UserCrumb from 'Component/UserCrumb';
 import SuggestedUsers from 'Component/SuggestedUsers';
 import { HomeProps } from './Home.config';
@@ -24,7 +25,7 @@ export const HomeScreen: React.FC<HomeProps> = (props) => {
     return (
         <div className="HomePage">
             <div className="HomePage__Posts">
-                <h2>Home page of {fullName}</h2>
+                <UserStrip />
             </div>
             <div className="HomePage__Sidebar">
                 <div className="HomePage__Sidebar--User">

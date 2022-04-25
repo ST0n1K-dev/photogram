@@ -1,0 +1,55 @@
+.Post {
+    max-width: 450px;
+    background-color: white;
+    margin: 20px auto;
+
+    &__Header {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        column-gap: 10px;
+        padding: 10px 15px;
+
+        &--user {
+            display: flex;
+            flex-direction: column;
+            row-gap: 3px;
+        }
+
+        &--username {
+            font-weight: 700;
+        }
+
+        &--location {
+            font-size: 12px;
+            color: gray;
+        }
+    }
+
+    &__Image {
+        width: 100%;
+    }
+
+    &__Actions {
+        display: flex;
+        flex-direction: column;
+        column-gap: 10px;
+        margin: 0 10px;
+
+        &--buttons {
+            display: flex;
+            padding: 5px 3px;
+        }
+
+        &--likes {
+            font-weight: 700;
+            margin-top: 5px;
+        }
+    }
+
+    &__Content {
+        display: flex;
+        gap: 5px;
+        padding: 5px 10px 15px 10px;
+    }
+}
