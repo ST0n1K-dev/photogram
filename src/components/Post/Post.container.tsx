@@ -19,6 +19,7 @@ const PostContainer: React.FC<PostContainerInterface> = ({ post }) => {
   // const commentInput = useRef(null);
   const [isLiked, setIsLiked] = useState(post.isLiked);
   const [likes, setLikes] = useState(post.likes.length);
+  const [comments, setComments] = useState(post.comments);
 
   const handleLike = async () => {
     setIsLiked((prevIsLiked) => !prevIsLiked);
@@ -39,7 +40,8 @@ const PostContainer: React.FC<PostContainerInterface> = ({ post }) => {
   const containerProps = () => ({
     post,
     isLiked,
-    likes
+    likes,
+    comments
   });
 
   const containerFunctions = {
