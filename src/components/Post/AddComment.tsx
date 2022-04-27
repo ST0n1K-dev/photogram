@@ -36,7 +36,7 @@ const PostAddComment = (props: AddCommentInterface) => {
                     type="text"
                     name="comment-field"
                     value={comment}
-                    ref={commentInput}
+                    ref={commentInput!}
                     onChange={onChangeComment}
                 />
                 <Button

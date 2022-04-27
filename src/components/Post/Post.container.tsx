@@ -9,7 +9,8 @@ import PostComponent from './Post.component';
 import { PostContainerInterface } from './Post.config';
 
 const PostContainer: React.FC<PostContainerInterface> = ({ post }) => {
-  const { user: { uid: userId = '', displayName = '' } } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  const { uid: userId = '', displayName = '' } = user || {};
   const { firebase, FieldValue } = useContext(FirebaseContext) as FirebaseContextInterface;
 
   const commentInput = useRef<HTMLInputElement>(null);
@@ -52,7 +53,11 @@ const PostContainer: React.FC<PostContainerInterface> = ({ post }) => {
       });
   };
 
-  const handleCommentFocus = () => commentInput!.current!.focus();
+  const handleCommentFocus = () => {
+    if (commentInput && commentInput.current) {
+      commentInput.current.focus();
+    }
+  };
 
   const containerProps = () => ({
     post,
