@@ -2,10 +2,14 @@ import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router-dom';
 
+import AddComment from './AddComment';
+
 import { PostCommentsInterface } from './Post.config';
 
 const PostComments = (props: PostCommentsInterface) => {
-	const { comments, dateCreated, docId } = props;
+	const {
+        comments, dateCreated, docId, handleAddComment, commentInput
+    } = props;
 
 	return (
         <>
@@ -19,6 +23,12 @@ const PostComments = (props: PostCommentsInterface) => {
             </div>
         )) }
         { comments.length > 2 && <p className="Post__Comment--viewAll">View all {comments.length} comments</p> }
+        <AddComment
+            docId={docId}
+            comments={comments}
+            addComment={handleAddComment}
+            commentInput={commentInput}
+        />
         <p className="Post__Comment--date">{formatDistanceToNow(dateCreated)} ago</p>
         </>
     );

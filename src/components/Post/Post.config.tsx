@@ -1,3 +1,4 @@
+import React from 'react';
 import { PostInterface } from 'Type/Post';
 
 interface Comment {
@@ -15,6 +16,9 @@ export interface PostComponentInterface {
     likes: number
     comments: Array<Comment>
     handleLike: () => Promise<void>
+    handleCommentFocus: () => void
+    handleAddComment: (e: React.SyntheticEvent, comment: string) => void
+    commentInput: React.RefObject<HTMLInputElement>
 }
 
 export interface PostHeaderInterface {
@@ -29,6 +33,7 @@ export interface PostImageInterface {
 export interface PostActionsInterface {
     likes: number
     isLiked: boolean
+    handleCommentFocus: () => void
     handleLike: () => Promise<void>
 }
 
@@ -41,4 +46,13 @@ export interface PostCommentsInterface {
     comments: Array<Comment>
     dateCreated: number
     docId: string
+    handleAddComment: (e: React.SyntheticEvent, comment: string) => void
+    commentInput: React.RefObject<HTMLInputElement>
+}
+
+export interface AddCommentInterface {
+    docId: string
+    comments: Array<Comment>
+    addComment: (e: React.SyntheticEvent, comment: string) => void
+    commentInput: React.RefObject<HTMLInputElement>
 }

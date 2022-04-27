@@ -77,4 +77,20 @@
             color: gray;
         }
     }
+
+    &__CommentInputWrapper {
+        padding: 5px 10px;
+    }
+
+    &__CommentInputForm {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .MuiInput-root {
+            flex: 1;
+        }
+    }
+
 }

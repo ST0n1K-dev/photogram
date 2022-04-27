@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useSnackbar } from 'notistack';
 
 import { PostInterface } from 'Type/Post';
@@ -9,14 +9,15 @@ import PostComponent from './Post.component';
 import { PostContainerInterface } from './Post.config';
 
 const PostContainer: React.FC<PostContainerInterface> = ({ post }) => {
-  const { user: { uid: userId = '' } } = useContext(UserContext);
+  const { user: { uid: userId = '', displayName = '' } } = useContext(UserContext);
   const { firebase, FieldValue } = useContext(FirebaseContext) as FirebaseContextInterface;
+
+  const commentInput = useRef<HTMLInputElement>(null);
 
   const { enqueueSnackbar } = useSnackbar();
 
   const { docId } = post as PostInterface;
 
-  // const commentInput = useRef(null);
   const [isLiked, setIsLiked] = useState(post.isLiked);
   const [likes, setLikes] = useState(post.likes.length);
   const [comments, setComments] = useState(post.comments);
@@ -35,17 +36,36 @@ const PostContainer: React.FC<PostContainerInterface> = ({ post }) => {
     }
   };
 
-  // handleCommentFocus = () => commentInput.current!.focus();
+  const handleAddComment = (e: React.SyntheticEvent, comment: string) => {
+    if (e) {
+      e.preventDefault();
+    }
+
+    setComments([...comments, { displayName, comment }]);
+
+    return firebase
+      .firestore()
+      .collection('posts')
+      .doc(docId)
+      .update({
+        comments: FieldValue.arrayUnion({ displayName, comment })
+      });
+  };
+
+  const handleCommentFocus = () => commentInput!.current!.focus();
 
   const containerProps = () => ({
     post,
     isLiked,
     likes,
-    comments
+    comments,
+    commentInput
   });
 
   const containerFunctions = {
-    handleLike
+    handleLike,
+    handleCommentFocus,
+    handleAddComment
   };
 
   return (

@@ -9,7 +9,9 @@ import {
 
 import { PostActionsInterface } from './Post.config';
 
-const PostActions = ({ likes, isLiked, handleLike }: PostActionsInterface) => (
+const PostActions = ({
+    likes, isLiked, handleLike, handleCommentFocus
+}: PostActionsInterface) => (
     <div className="Post__Actions">
         <div className="Post__Actions--buttons">
             <IconButton
@@ -20,7 +22,7 @@ const PostActions = ({ likes, isLiked, handleLike }: PostActionsInterface) => (
             >
                 { isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
             </IconButton>
-            <IconButton>
+            <IconButton onClick={handleCommentFocus}>
                 <ChatBubbleOutlineIcon />
             </IconButton>
         </div>
