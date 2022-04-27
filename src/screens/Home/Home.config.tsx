@@ -1,3 +1,10 @@
+import { User } from 'Type/User';
+
 export interface HomeProps {
-    test: string
+    user: User
+}
+
+export interface AccountActibityInterface {
+    followers: number
+	following: number
 }

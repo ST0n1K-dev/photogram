@@ -1,0 +1,22 @@
+.HomePage {
+    display: flex;
+    margin-top: 50px;
+
+    &__Posts {
+        flex: 75%;
+    }
+
+    &__Sidebar {
+        flex: 25%;
+
+        &--Suggestions {
+            h4 {
+                margin-bottom: 5px;
+            }
+        }
+
+        @media (max-width: 810px) {
+            display: none;
+        }
+    }
+}

@@ -8,9 +8,5 @@ export type SpeedDialActions = {
 }
 
 export interface SpeedDialProps {
-	handleOpen: () => void;
-	handleClose: () => void;
-	onNavigate: (url: string) => void;
-	open: boolean;
 	speedDialActions: SpeedDialActions[]
 }

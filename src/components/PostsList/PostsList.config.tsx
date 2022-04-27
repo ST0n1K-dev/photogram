@@ -1,3 +1,5 @@
+import { PostInterface } from 'Type/Post';
+
 export interface PostsListTypes {
-  test: string
+  posts: Array<PostInterface> | null
 }

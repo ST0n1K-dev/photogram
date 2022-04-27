@@ -20,9 +20,9 @@ function App() {
 					}}
 					maxSnack={3}
 				>
+					<Header />
 					<div className="AppWrapper">
 						<div className="App">
-							<Header />
 							<Navigation />
 						</div>
 					</div>
