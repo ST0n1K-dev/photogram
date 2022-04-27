@@ -23,7 +23,7 @@ function App() {
 					<Header />
 					<div className="AppWrapper">
 						<div className="App">
-							<Navigation />
+							<Navigation user={user} />
 						</div>
 					</div>
 				</SnackbarProvider>

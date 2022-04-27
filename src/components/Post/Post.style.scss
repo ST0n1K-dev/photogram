@@ -55,6 +55,7 @@
 
     &__Comment {
         display: flex;
+        align-items: center;
         gap: 5px;
         padding: 0px 10px 5px 10px;
 
@@ -73,7 +74,7 @@
         }
 
         &--date {
-            padding: 0px 10px 5px 10px;
+            padding: 0px 10px 10px 10px;
             color: gray;
         }
     }

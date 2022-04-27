@@ -6,7 +6,9 @@ import { PostInterface } from 'Type/Post';
 
 export default function usePosts() {
   const [posts, setPosts] = useState<Array<PostInterface> | null>(null);
-  const { user: { uid: userId = '' } } = useContext(UserContext) as { user: User };
+  const { user } = useContext(UserContext) as { user: User };
+
+  const { uid: userId = '' } = user || {};
 
   useEffect(() => {
     async function getDisplayedPosts() {
@@ -22,7 +24,9 @@ export default function usePosts() {
       setPosts(followingUsersPosts);
     }
 
-    getDisplayedPosts();
+    if (userId) {
+      getDisplayedPosts();
+    }
   }, [userId]);
 
   return { posts };
