@@ -22,7 +22,7 @@ const PostComments = (props: PostCommentsInterface) => {
                 <span className="Post__Comment--commentBody">{comment}</span>
             </div>
         )) }
-        { comments.length > 2 && <p className="Post__Comment--viewAll">View all {comments.length} comments</p> }
+        { comments.length > 2 && <p className="Post__Comment--viewAll">View all comments</p> }
         <AddComment
             docId={docId}
             comments={comments}

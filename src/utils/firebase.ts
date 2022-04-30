@@ -35,6 +35,19 @@ export const getUserById = async (userId: string) => {
     }));
 };
 
+export const getUserByUsername = async (username: string): Promise<Array<User>> => {
+    const response = await firebase
+        .firestore()
+        .collection('users')
+        .where('username', '==', username)
+        .get();
+
+    return response.docs.map((user) => ({
+        ...user.data(),
+        docId: user.id
+    } as User));
+};
+
 export const getSuggestedProfiles = async (userId: string, following: Array<string>) => {
     const response = await firebase
         .firestore()
@@ -104,4 +117,31 @@ export const getPosts = async (userId: string, following: Array<string>) => {
     );
 
     return detailedPosts;
+};
+
+export const getUserPosts = async (user: User): Promise<Array<PostInterface>> => {
+    const response = await firebase
+		.firestore()
+		.collection('posts')
+		.where('userId', '==', user.userId)
+        .get();
+
+    return response.docs.map((post) => ({
+        ...post.data(),
+        docId: post.id
+    } as PostInterface));
+};
+
+export const getIsFollowingProfile = async (
+	currentUsername: string,
+	userId: string
+): Promise<boolean> => {
+	const response = await firebase
+		.firestore()
+		.collection('users')
+		.where('username', '==', currentUsername)
+		.where('following', 'array-contains', userId)
+		.get();
+
+	return response.docs.map((user) => user.data().length > 0).length > 0;
 };
