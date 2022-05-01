@@ -12,10 +12,16 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
   const initialState = {
     profile: null,
     posts: [],
-    totalFollowers: 0
+    totalFollowers: 0,
+    followersPopupOpen: false
   };
 
-  const [{ profile, posts, totalFollowers }, dispatch] = useReducer(reducer, initialState);
+  const [{
+    profile,
+    posts,
+    totalFollowers,
+    followersPopupOpen
+  }, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     async function getProfileInfo() {
@@ -25,6 +31,7 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
         profile: user,
         posts: receivedPosts,
         totalFollowers: user?.followers.length || 0,
+        followersPopupOpen: false
       });
     }
 
@@ -36,7 +43,8 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
   const containerProps = () => ({
     profile,
     posts,
-    totalFollowers
+    totalFollowers,
+    followersPopupOpen
   });
 
   const containerFunctions = {

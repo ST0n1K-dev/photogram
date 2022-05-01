@@ -8,7 +8,7 @@ import './Profile.style.scss';
 
 const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
   const {
-    profile, posts, totalFollowers, dispatch
+    profile, posts, totalFollowers, followersPopupOpen, dispatch
   } = props;
 
   return (
@@ -17,6 +17,7 @@ const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
         profile={profile}
         postsTotal={posts?.length}
         totalFollowers={totalFollowers}
+        followersPopupOpen={followersPopupOpen}
         dispath={dispatch}
       />
       <Divider />

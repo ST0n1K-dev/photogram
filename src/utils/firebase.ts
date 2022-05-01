@@ -35,6 +35,18 @@ export const getUserById = async (userId: string) => {
     }));
 };
 
+export const getUsersById = async (userIds: Array<string>) => {
+    const response = await firebase
+		.firestore()
+		.collection('users')
+		.where('userId', 'in', userIds)
+        .get();
+
+    return response.docs.map((post) => ({
+        ...post.data()
+    }));
+};
+
 export const getUserByUsername = async (username: string): Promise<Array<User>> => {
     const response = await firebase
         .firestore()

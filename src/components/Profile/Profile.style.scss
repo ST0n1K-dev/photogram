@@ -35,6 +35,23 @@
             font-size: 18px;
         }
 
+        &--button {
+            background-color: transparent;
+            border: none;
+            font-size: 18px;
+
+            .Profile__Details--stat {
+                margin: 0;
+                padding: 3px 0;
+            }
+
+            &:hover {
+                background-color: rgb(236, 235, 235);
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        }
+
         &--username {
             display: flex;
             flex-direction: row;
@@ -120,6 +137,45 @@
                     }
                 }
             }
+        }
+    }
+}
+
+.FollowersModal {
+    .FollowingUser {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        padding: 15px;
+    
+        &__Wrapper {
+            background-color: white;
+            border-radius: 10px;
+            min-height: 60px;
+        }
+    
+        &__InfoWrapper {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+        }
+    
+        &__Info {
+            &--title {
+                margin: 0;
+            }
+        }
+    
+        &__Action {
+            button {
+                text-transform: none;
+            }
+        }
+    
+        &--link {
+            text-decoration: none;
+            color: black;
         }
     }
 }

@@ -8,11 +8,14 @@ import './SuggestedUsers.style.scss';
 const SuggestedUsersComponent = (props: SuggestedUsersComponentInterface): any => {
 	const { profiles, currentUserId, currentUserDocId } = props;
 
+  if (!profiles.length) {
+    return null;
+  }
+
 	return (
     <>
       <h4>Check out this ninjas</h4>
       <div className="SuggestedUsers__Wrapper">
-        { !profiles.length && <h5>No ninjas detected</h5> }
         { profiles.map((profile) => {
           const {
             username, docId, userId: suggestedUserId, fullName

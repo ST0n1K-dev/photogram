@@ -8,19 +8,14 @@ import './Home.style.scss';
 export const HomeScreen: React.FC<HomeProps> = (props) => {
     const {
 		user: {
-            fullName,
-            username,
-            userId,
-            following,
-            followers,
-            docId
+            fullName = '',
+            username = '',
+            userId = '',
+            following = [],
+            followers = [],
+            docId = ''
         } = {},
-        user
 	} = props;
-
-    if (!Object.keys(user).length) {
-       return <h3>No user</h3>;
-    }
 
     return (
         <div className="HomePage">

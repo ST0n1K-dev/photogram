@@ -10,11 +10,17 @@ import {
 import useUser from 'Hook/useUser';
 import { User } from 'Type/User';
 
+import FollowersModal from './FollowersModal';
+
 import { UserHeroInterface } from './Profile.config';
 
 const UserHero: React.FC<UserHeroInterface> = (props) => {
 	const {
-        profile = {}, postsTotal = 0, totalFollowers = 0, dispath
+        profile = {},
+		postsTotal = 0,
+		totalFollowers = 0,
+		followersPopupOpen,
+		dispath
     } = props;
 
 	const {
@@ -35,6 +41,10 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 	const [isFollowing, setIsFollowing] = React.useState<boolean>(false);
 
     const isFollowAvailable = username && (currentUser as User)?.username !== username;
+
+	const handlePopupOpen = () => {
+		dispath({ followersPopupOpen: true });
+	};
 
     const handleFollowClick = async () => {
         setIsFollowing((isFollowing) => !isFollowing);
@@ -78,12 +88,16 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 						<p className="Profile__Details--stat">
 							<b>{postsTotal}</b> posts
 						</p>
-						<p className="Profile__Details--stat">
-							<b>{totalFollowers}</b> followers
-						</p>
-						<p className="Profile__Details--stat">
-							<b>{following.length}</b> following
-						</p>
+						<button type="button" className="Profile__Details--button" onClick={handlePopupOpen}>
+							<p className="Profile__Details--stat">
+								<b>{totalFollowers}</b> followers
+							</p>
+						</button>
+						<button type="button" className="Profile__Details--button">
+							<p className="Profile__Details--stat">
+								<b>{following.length}</b> following
+							</p>
+						</button>
 					</div>
 				) : (
 					<Skeleton variant="text" animation="wave" />
@@ -96,6 +110,12 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 					)}
 				</div>
 			</div>
+			<FollowersModal
+				isOpen={followersPopupOpen!}
+				onClose={() => dispath({ followersPopupOpen: false })}
+				followers={(profile as User)?.followers}
+				type="followers"
+			/>
 		</div>
 	);
 };
