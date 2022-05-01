@@ -10,6 +10,15 @@
             width: 150px;
             height: 150px;
         }
+
+        @media (max-width: 810px) {
+            column-gap: 10px;
+
+            .MuiAvatar-root {
+                width: 100px;
+                height: 100px;
+            }
+        }
     }
 
     &__Details {
@@ -20,6 +29,7 @@
         &--statistics {
             display: flex;
             flex-direction: row;
+            text-align: center;
             column-gap: 20px;
             align-items: center;
             font-size: 18px;
@@ -65,6 +75,7 @@
 
     &__UserPost {
         position: relative;
+        margin: 0 auto;
         width: 20vw;
 
         img {
