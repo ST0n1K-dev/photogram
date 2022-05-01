@@ -4,6 +4,7 @@
         align-items: center;
         flex-direction: row;
         column-gap: 100px;
+        margin-bottom: 50px;
 
         .MuiAvatar-root {
             width: 150px;
@@ -39,6 +40,74 @@
 
             &:hover {
                 background-color: lightgray;
+            }
+        }
+    }
+
+    &__UserPosts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 20px;
+        margin: 20px 0;
+        text-align: center;
+
+        &--noPosts {
+            display: flex;
+            margin-top: 50px;
+            flex-direction: column;
+            align-items: center;
+
+            svg {
+                font-size: 70px;
+            }
+        }
+    }
+
+    &__UserPost {
+        position: relative;
+        width: 20vw;
+
+        img {
+            width: 20vw;
+        }
+
+        &--hidden {
+            display: none;
+        }
+
+        &--hover {
+            position: absolute;
+            display: flex;
+            background-color: rgba($color: #000000, $alpha: 0.4);
+            width: 20vw;
+            height: 100%;
+            bottom: 0;
+            left: 0;
+            align-items: center;
+            justify-content: space-evenly;
+            color: white;
+
+            span {
+                display: flex;
+                flex-direction: row;
+                column-gap: 5px;
+                align-items: center;
+                width: fit-content;
+                &:first-child {
+                    svg {
+                        color: red;
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            .Profile {
+                &__UserPost {
+                    &--hidden {
+                        display: block;
+                    }
+                }
             }
         }
     }

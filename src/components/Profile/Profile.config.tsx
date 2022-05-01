@@ -22,3 +22,7 @@ export interface UserHeroInterface {
     totalFollowers?: number
     dispath: React.Dispatch<ReducerStateInterface>
 }
+
+export interface UserPostsInterface {
+    posts?: Array<PostInterface> | Array<never>
+}

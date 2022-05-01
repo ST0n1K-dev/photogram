@@ -1,4 +1,5 @@
 import React from 'react';
+import { Divider } from '@mui/material';
 import UserHero from './UserHero';
 import UserPosts from './UserPosts';
 
@@ -18,7 +19,8 @@ const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
         totalFollowers={totalFollowers}
         dispath={dispatch}
       />
-      <UserPosts />
+      <Divider />
+      <UserPosts posts={posts} />
     </div>
   );
 };
