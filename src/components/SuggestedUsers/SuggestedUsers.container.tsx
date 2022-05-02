@@ -5,7 +5,9 @@ import SuggestedUsersComponent from './SuggestedUsers.component';
 import { SuggestedUsersInterface } from './SuggestedUsers.config';
 
 const SuggestedUsersContainer: React.FC<SuggestedUsersInterface> = (props) => {
-	const { currentUserId, following, currentUserDocId } = props;
+	const {
+		currentUserId, following, currentUserDocId, setFollowing
+	} = props;
 	const [profiles, setProfiles] = useState<Array<User>>([]);
 
 	useEffect(() => {
@@ -28,7 +30,9 @@ const SuggestedUsersContainer: React.FC<SuggestedUsersInterface> = (props) => {
     currentUserId
   });
 
-	const containerFunctions = {};
+	const containerFunctions = {
+		setFollowing
+	};
 
 	return (
 		<SuggestedUsersComponent

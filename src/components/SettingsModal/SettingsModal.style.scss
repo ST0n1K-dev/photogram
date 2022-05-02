@@ -1,0 +1,16 @@
+.SettingsModal {
+    .InputField {
+        width: 100%;
+        margin: 10px 0;
+
+        &--container {
+            input[type=textarea] {
+                height: 80px;
+            }
+        }
+    }
+
+    form {
+        text-align: center;
+    }
+}

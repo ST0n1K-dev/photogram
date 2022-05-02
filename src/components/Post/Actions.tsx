@@ -20,7 +20,7 @@ const PostActions = ({
                 edge="start"
                 onClick={handleLike}
             >
-                { isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
+                { isLiked ? <FavoriteIcon className="Post__Actions--liked" /> : <FavoriteBorderIcon /> }
             </IconButton>
             <IconButton onClick={handleCommentFocus}>
                 <ChatBubbleOutlineIcon />

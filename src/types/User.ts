@@ -9,4 +9,5 @@ export interface User {
     userId: string
     username: string,
     profileId: string
+    description?: string
 }

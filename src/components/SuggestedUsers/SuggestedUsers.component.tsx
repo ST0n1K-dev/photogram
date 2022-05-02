@@ -6,7 +6,9 @@ import { SuggestedUsersComponentInterface } from './SuggestedUsers.config';
 import './SuggestedUsers.style.scss';
 
 const SuggestedUsersComponent = (props: SuggestedUsersComponentInterface): any => {
-	const { profiles, currentUserId, currentUserDocId } = props;
+	const {
+    profiles, currentUserId, currentUserDocId, setFollowing
+  } = props;
 
   if (!profiles.length) {
     return null;
@@ -30,6 +32,7 @@ const SuggestedUsersComponent = (props: SuggestedUsersComponentInterface): any =
               currentUserDocId={currentUserDocId}
               suggestedUserId={suggestedUserId}
               currentUserId={currentUserId}
+              setFollowing={setFollowing}
             />
           );
         })}

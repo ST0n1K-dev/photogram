@@ -21,7 +21,9 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
     followingPopupOpen: false,
     followers: [],
     following: [],
-    isFollowing: false
+    isFollowing: false,
+    fullName: '',
+    description: ''
   };
 
   const [{
@@ -31,7 +33,9 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
     followersPopupOpen,
     followingPopupOpen,
     followers,
-    following
+    following,
+    fullName,
+    description
   }, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -45,7 +49,9 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
         followersPopupOpen: false,
         followingPopupOpen: false,
         followers: user?.followers,
-        following: user?.following
+        following: user?.following,
+        fullName: user?.fullName,
+        description: user?.description || ''
       });
     }
 
@@ -61,7 +67,9 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
     followersPopupOpen,
     followingPopupOpen,
     followers,
-    following
+    following,
+    fullName,
+    description
   });
 
   const containerFunctions = {

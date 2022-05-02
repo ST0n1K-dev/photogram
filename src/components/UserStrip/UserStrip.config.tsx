@@ -1,3 +1,3 @@
 export interface UserStripContainerInterface {
-    test?: string
+    following?: Array<string>
 }

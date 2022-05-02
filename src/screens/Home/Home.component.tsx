@@ -11,10 +11,11 @@ export const HomeScreen: React.FC<HomeProps> = (props) => {
             fullName = '',
             username = '',
             userId = '',
-            following = [],
             followers = [],
             docId = ''
         } = {},
+        following = [],
+        setFollowing
 	} = props;
 
     return (
@@ -36,6 +37,7 @@ export const HomeScreen: React.FC<HomeProps> = (props) => {
                         currentUserId={userId!}
                         following={following!}
                         currentUserDocId={docId!}
+                        setFollowing={setFollowing}
                     />
                 </div>
             </div>

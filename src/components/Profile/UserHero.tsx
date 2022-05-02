@@ -1,13 +1,19 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import React from 'react';
-import { Avatar, Skeleton, Button } from '@mui/material';
+import {
+	Avatar, Skeleton, Button, IconButton
+} from '@mui/material';
+import { Settings as SettingsIcon } from '@mui/icons-material';
 
+import SettingsModal from 'Component/SettingsModal';
 import {
     getIsFollowingProfile,
     updateCurrentUserFollowing,
     updateFollowedUserFollowers
 } from 'Util/firebase';
 import useUser from 'Hook/useUser';
+import useModal from 'Hook/useModal';
+
 import { User } from 'Type/User';
 
 import FollowersModal from './FollowersModal';
@@ -23,6 +29,8 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 		followingPopupOpen,
 		followers = [],
 		following = [],
+		fullName = '',
+		description = '',
 		dispatch
     } = props;
 
@@ -30,9 +38,9 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
         userId: profileUserId = '',
         docId: profileUserDocId = '',
 		username = '',
-		fullName = ''
 	} = (profile as User) || {};
 
+	const { isShowing, toggle } = useModal();
 	const { user: currentUser } = useUser();
     const {
         docId: currentUserDocId = '',
@@ -42,7 +50,7 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 
 	const [isFollowing, setIsFollowing] = React.useState<boolean>(false);
 
-    const isFollowAvailable = username && (currentUser as User)?.username !== username;
+    const isMe = username && (currentUser as User)?.username === username;
 
 	const handleFollowersPopupOpen = () => {
 		dispatch({ followersPopupOpen: true });
@@ -83,11 +91,16 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 					) : (
 						<Skeleton variant="text" animation="wave" />
 					)}
-                    {username && isFollowAvailable && (
+                    {username && !isMe && (
                         <Button className={isFollowing ? 'Profile__FollowButton--following' : ''} variant="contained" onClick={handleFollowClick}>
                             { isFollowing ? 'Unfollow' : 'Follow'}
                         </Button>
                     )}
+					{ isMe && (
+						<IconButton onClick={toggle}>
+							<SettingsIcon />
+						</IconButton>
+					)}
 				</div>
 				{username ? (
 					<div className="Profile__Details--statistics">
@@ -110,7 +123,10 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 				)}
 				<div className="Profile__Details--userDetails">
 					{username ? (
-						<h4>{fullName}</h4>
+						<>
+							<p>{description}</p>
+							<h4>{fullName}</h4>
+						</>
 					) : (
 						<Skeleton variant="text" animation="wave" />
 					)}
@@ -128,6 +144,16 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 				followers={following}
 				type="following"
 			/>
+			{ isMe && (
+				<SettingsModal
+					isShowing={isShowing}
+					fullName={fullName}
+					description={description}
+					docId={currentUserDocId}
+					dispatch={dispatch}
+					onClose={toggle}
+				/>
+			)}
 		</div>
 	);
 };

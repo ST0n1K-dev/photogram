@@ -15,6 +15,8 @@ const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
     followingPopupOpen,
     followers,
     following,
+    fullName,
+    description,
     dispatch
   } = props;
 
@@ -28,6 +30,8 @@ const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
         followingPopupOpen={followingPopupOpen}
         followers={followers}
         following={following}
+        fullName={fullName}
+        description={description}
         dispatch={dispatch}
       />
       <Divider />

@@ -18,6 +18,8 @@ export interface ReducerStateInterface {
     followingPopupOpen?: boolean
     followers?: Array<string> | []
     following?: Array<string> | []
+    fullName?: string
+    description?: string
 }
 
 export interface UserHeroInterface {
@@ -28,6 +30,8 @@ export interface UserHeroInterface {
     followingPopupOpen?: boolean
     followers?: Array<string> | []
     following?: Array<string> | []
+    fullName?: string
+    description?: string
     dispatch: React.Dispatch<ReducerStateInterface>
 }
 

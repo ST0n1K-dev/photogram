@@ -6,7 +6,13 @@ import SuggestedUserProfileComponent from './SuggestedUserProfile.component';
 
 const SuggestedUserProfileContainer: React.FC<SuggestedUserProfileContainerInterface> = (props) => {
   const {
-    username, suggestedUserId, currentUserId, suggestedUserDocId, fullName, currentUserDocId
+    username,
+    suggestedUserId,
+    currentUserId,
+    suggestedUserDocId,
+    fullName,
+    currentUserDocId,
+    setFollowing
   } = props;
 
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
@@ -16,6 +22,7 @@ const SuggestedUserProfileContainer: React.FC<SuggestedUserProfileContainerInter
     e.stopPropagation();
 
     setIsFollowed(true);
+    setFollowing((following) => [...following, suggestedUserId]);
 
     await updateCurrentUserFollowing(currentUserDocId, suggestedUserId, isFollowed);
     await updateFollowedUserFollowers(suggestedUserDocId, currentUserId, isFollowed);
