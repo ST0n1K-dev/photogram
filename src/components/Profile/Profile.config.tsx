@@ -15,6 +15,9 @@ export interface ReducerStateInterface {
     posts?: Array<PostInterface> | Array<never>
     totalFollowers?: number
     followersPopupOpen?: boolean
+    followingPopupOpen?: boolean
+    followers?: Array<string> | []
+    following?: Array<string> | []
 }
 
 export interface UserHeroInterface {
@@ -22,7 +25,10 @@ export interface UserHeroInterface {
     postsTotal?: number
     totalFollowers?: number
     followersPopupOpen?: boolean
-    dispath: React.Dispatch<ReducerStateInterface>
+    followingPopupOpen?: boolean
+    followers?: Array<string> | []
+    following?: Array<string> | []
+    dispatch: React.Dispatch<ReducerStateInterface>
 }
 
 export interface UserPostsInterface {
@@ -33,7 +39,7 @@ export type FollowersModalType = 'followers' | 'following';
 
 export interface FollowersModalInterface {
     isOpen: boolean
-    followers: Array<string>
+    followers: Array<string> | []
     onClose: () => void
     type: FollowersModalType
 }
@@ -41,4 +47,6 @@ export interface FollowersModalInterface {
 export interface UserProfileInterface {
     fullName: string
     username: string
+    userId: string
+    docId: string
 }

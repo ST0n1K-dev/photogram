@@ -20,15 +20,17 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 		postsTotal = 0,
 		totalFollowers = 0,
 		followersPopupOpen,
-		dispath
+		followingPopupOpen,
+		followers = [],
+		following = [],
+		dispatch
     } = props;
 
 	const {
         userId: profileUserId = '',
         docId: profileUserDocId = '',
 		username = '',
-		fullName = '',
-		following = [],
+		fullName = ''
 	} = (profile as User) || {};
 
 	const { user: currentUser } = useUser();
@@ -42,13 +44,17 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 
     const isFollowAvailable = username && (currentUser as User)?.username !== username;
 
-	const handlePopupOpen = () => {
-		dispath({ followersPopupOpen: true });
+	const handleFollowersPopupOpen = () => {
+		dispatch({ followersPopupOpen: true });
+	};
+
+	const handleFollowingPopupOpen = () => {
+		dispatch({ followingPopupOpen: true });
 	};
 
     const handleFollowClick = async () => {
         setIsFollowing((isFollowing) => !isFollowing);
-        dispath({
+        dispatch({
             totalFollowers: isFollowing ? totalFollowers! - 1 : totalFollowers! + 1
         });
 
@@ -88,14 +94,14 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 						<p className="Profile__Details--stat">
 							<b>{postsTotal}</b> posts
 						</p>
-						<button type="button" className="Profile__Details--button" onClick={handlePopupOpen}>
+						<button type="button" className="Profile__Details--button" onClick={handleFollowersPopupOpen}>
 							<p className="Profile__Details--stat">
 								<b>{totalFollowers}</b> followers
 							</p>
 						</button>
-						<button type="button" className="Profile__Details--button">
+						<button type="button" className="Profile__Details--button" onClick={handleFollowingPopupOpen}>
 							<p className="Profile__Details--stat">
-								<b>{following.length}</b> following
+								<b>{following?.length}</b> following
 							</p>
 						</button>
 					</div>
@@ -112,9 +118,15 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 			</div>
 			<FollowersModal
 				isOpen={followersPopupOpen!}
-				onClose={() => dispath({ followersPopupOpen: false })}
-				followers={(profile as User)?.followers}
+				onClose={() => dispatch({ followersPopupOpen: false })}
+				followers={followers}
 				type="followers"
+			/>
+			<FollowersModal
+				isOpen={followingPopupOpen!}
+				onClose={() => dispatch({ followingPopupOpen: false })}
+				followers={following}
+				type="following"
 			/>
 		</div>
 	);

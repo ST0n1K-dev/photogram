@@ -1,10 +1,14 @@
+import useUser from 'Hook/useUser';
 import React, { useEffect, useReducer } from 'react';
 import { getUserPosts } from 'Util/firebase';
+import { User } from 'Type/User';
 import ProfileComponent from './Profile.component';
 import { ProfileContainerInterface, ReducerStateInterface } from './Profile.config';
 
 const ProfileContainer = (props: ProfileContainerInterface) => {
   const { user } = props;
+  const { user: currentUser } = useUser();
+  const { username: currentUsername = '' } = currentUser as User || {};
   const reducer = (state: ReducerStateInterface, newState: ReducerStateInterface) => ({
     ...state, ...newState
   });
@@ -13,14 +17,21 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
     profile: null,
     posts: [],
     totalFollowers: 0,
-    followersPopupOpen: false
+    followersPopupOpen: false,
+    followingPopupOpen: false,
+    followers: [],
+    following: [],
+    isFollowing: false
   };
 
   const [{
     profile,
     posts,
     totalFollowers,
-    followersPopupOpen
+    followersPopupOpen,
+    followingPopupOpen,
+    followers,
+    following
   }, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -31,20 +42,26 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
         profile: user,
         posts: receivedPosts,
         totalFollowers: user?.followers.length || 0,
-        followersPopupOpen: false
+        followersPopupOpen: false,
+        followingPopupOpen: false,
+        followers: user?.followers,
+        following: user?.following
       });
     }
 
     if (user) {
       getProfileInfo();
     }
-  }, [user]);
+  }, [user, currentUsername]);
 
   const containerProps = () => ({
     profile,
     posts,
     totalFollowers,
-    followersPopupOpen
+    followersPopupOpen,
+    followingPopupOpen,
+    followers,
+    following
   });
 
   const containerFunctions = {

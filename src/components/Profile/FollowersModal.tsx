@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
     Box,
     Modal,
     Typography,
-    Avatar,
-    Button
+    Avatar
 } from '@mui/material';
+import useUser from 'Hook/useUser';
 import { User } from 'Type/User';
 import { getUsersById } from 'Util/firebase';
 
@@ -24,24 +26,33 @@ const style = {
   };
 
 const FollowingUserProfile = (props: UserProfileInterface) => {
-    const { fullName, username } = props;
+    const {
+        fullName, username
+    } = props;
+    const { user } = useUser();
+    const {
+        username: currentUsername = ''
+    } = user as User || {};
+
     return (
-        <div className="FollowingUser">
-            <Avatar alt="Remy Sharp" src="/images/avatar.png" />
-            <div className="FollowingUser__InfoWrapper">
-                <div className="FollowingUser__Info">
-                    <h5 className="FollowingUser__Info--title">
-                        {fullName}
-                    </h5>
-                    <span className="FollowingUser__Info--username">
-                        {username}
-                    </span>
-                </div>
-                <div className="FollowingUser__Action">
-                    <Button variant="text">Follow</Button>
+        <Link to={`/profile/${username}`}>
+            <div className="FollowingUser">
+                <Avatar alt="Remy Sharp" src="/images/avatar.png" />
+                <div className="FollowingUser__InfoWrapper">
+                    <div className="FollowingUser__Info">
+                        <h5 className="FollowingUser__Info--title">
+                            {fullName}
+                        </h5>
+                        <span className="FollowingUser__Info--username">
+                            {username}
+                        </span>
+                    </div>
+                    <div className="FollowingUser__Action">
+                        { currentUsername === username && <span>It&apos;s you</span> }
+                    </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
@@ -71,13 +82,15 @@ const FollowersModal = ({
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     { type === 'followers' ? 'Current followers' : 'Following accounts'}
                 </Typography>
-                { profiles?.map((profile) => (
+                { profiles.length ? profiles?.map((profile) => (
                     <FollowingUserProfile
                         key={profile?.username}
                         fullName={profile?.fullName}
                         username={profile?.username}
+                        userId={profile?.userId}
+                        docId={profile?.docId}
                     />
-                ))}
+                )) : <h4 className="FollowersModal__NoUsers">No people here</h4>}
             </Box>
             </Modal>
         </div>

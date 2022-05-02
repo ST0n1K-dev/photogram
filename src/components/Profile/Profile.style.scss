@@ -142,6 +142,13 @@
 }
 
 .FollowersModal {
+    border: none;
+    max-height: 80vh;
+    overflow: auto;
+
+    &__NoUsers {
+        text-align: center;
+    }
     .FollowingUser {
         display: flex;
         align-items: center;
@@ -168,9 +175,7 @@
         }
     
         &__Action {
-            button {
-                text-transform: none;
-            }
+            color: lightgrey;
         }
     
         &--link {
