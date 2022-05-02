@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React, { useContext } from 'react';
+import { ref, uploadBytes } from 'firebase/storage';
 import { useSnackbar } from 'notistack';
 import { FirebaseContext, FirebaseContextInterface } from 'Context/firebase';
+import { getUserAvatar } from 'Util/firebase';
 
 import SettingsModalComponent from './SettingsModal.component';
 
@@ -11,20 +14,37 @@ const SettingsModalContainer = (props: SettingsModalContainerInterface) => {
     fullName,
     description,
     docId,
+    userId,
     isShowing,
     onClose,
     dispatch
   } = props;
   const { enqueueSnackbar } = useSnackbar();
 
-  const { firebase } = useContext(FirebaseContext) as FirebaseContextInterface;
+  const { firebase, storage } = useContext(FirebaseContext) as FirebaseContextInterface;
+
+  const uploadAvatar = async (avatar: File) => {
+    if (avatar === null) return;
+
+    const imageRef = ref(storage, `avatars/${userId}`);
+    await uploadBytes(imageRef, avatar);
+  };
 
   const handleUpdateProfile = async (values: UserFormInterface) => {
     try {
+      const { fullName, description, avatar } = values;
       await firebase.firestore().collection('users')
         .doc(docId).update({
-          ...values
+          fullName,
+          description
         });
+
+      if (avatar) {
+        await uploadAvatar(avatar!);
+        const imagePath = await getUserAvatar(userId);
+
+        dispatch({ avatar: imagePath });
+      }
 
       dispatch({ fullName: values.fullName, description: values.description });
 

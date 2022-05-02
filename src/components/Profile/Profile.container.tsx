@@ -1,6 +1,6 @@
 import useUser from 'Hook/useUser';
 import React, { useEffect, useReducer } from 'react';
-import { getUserPosts } from 'Util/firebase';
+import { getUserPosts, getUserAvatar } from 'Util/firebase';
 import { User } from 'Type/User';
 import ProfileComponent from './Profile.component';
 import { ProfileContainerInterface, ReducerStateInterface } from './Profile.config';
@@ -23,7 +23,8 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
     following: [],
     isFollowing: false,
     fullName: '',
-    description: ''
+    description: '',
+    avatar: {}
   };
 
   const [{
@@ -35,12 +36,14 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
     followers,
     following,
     fullName,
-    description
+    description,
+    avatar
   }, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     async function getProfileInfo() {
       const receivedPosts = await getUserPosts(user!);
+      const receivedAvatar = await getUserAvatar(user!.userId);
 
       dispatch({
         profile: user,
@@ -51,7 +54,8 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
         followers: user?.followers,
         following: user?.following,
         fullName: user?.fullName,
-        description: user?.description || ''
+        description: user?.description || '',
+        avatar: receivedAvatar
       });
     }
 
@@ -69,7 +73,8 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
     followers,
     following,
     fullName,
-    description
+    description,
+    avatar
   });
 
   const containerFunctions = {

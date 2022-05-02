@@ -31,6 +31,7 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 		following = [],
 		fullName = '',
 		description = '',
+		avatar,
 		dispatch
     } = props;
 
@@ -83,7 +84,7 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 
 	return (
 		<div className="Profile__UserHero">
-			{ username ? <Avatar alt="Remy Sharp" src="/images/avatar.png" /> : <Skeleton variant="circular" width={150} height={150} /> }
+			{ username ? <Avatar alt="Remy Sharp" src={avatar || '/images/avatar.png'} /> : <Skeleton variant="circular" width={150} height={150} /> }
 			<div className="Profile__Details">
 				<div className="Profile__Details--username">
 					{username ? (
@@ -150,6 +151,7 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 					fullName={fullName}
 					description={description}
 					docId={currentUserDocId}
+					userId={currentUserId}
 					dispatch={dispatch}
 					onClose={toggle}
 				/>

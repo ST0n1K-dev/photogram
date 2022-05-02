@@ -46,9 +46,9 @@ const SettingsModalComponent: React.FC<SettingsModalComponentInterface> = (
 					</Typography>
 					<Formik
 						initialValues={{ fullName, description }}
-            validationSchema={ProfileSettingsSchema}
+						validationSchema={ProfileSettingsSchema}
 						onSubmit={(values) => {
-              handleUpdateProfile(values);
+							handleUpdateProfile(values);
 						}}
 					>
 						{({
@@ -57,8 +57,20 @@ const SettingsModalComponent: React.FC<SettingsModalComponentInterface> = (
 							values,
 							handleBlur,
 							handleChange,
+							setFieldValue,
 						}) => (
 							<Form>
+								<input
+									id="avatar"
+									name="avatar"
+									type="file"
+									onChange={(event) => {
+										setFieldValue(
+											'avatar',
+											event!.currentTarget!.files![0]
+										);
+									}}
+								/>
 								<InputField
 									id="fullName"
 									name="fullName"
@@ -81,7 +93,8 @@ const SettingsModalComponent: React.FC<SettingsModalComponentInterface> = (
 									onChange={handleChange('description')}
 									onBlur={handleBlur('description')}
 									error={
-										errors.description && touched.description
+										errors.description
+										&& touched.description
 											? errors.description
 											: null
 									}

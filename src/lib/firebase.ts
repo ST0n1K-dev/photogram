@@ -1,5 +1,6 @@
 import firebase from 'firebase/compat/app';
 import { getAnalytics } from 'firebase/analytics';
+import { getStorage } from 'firebase/storage';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
@@ -14,7 +15,13 @@ const config = {
 };
 
 const app = firebase.initializeApp(config);
+const storage = getStorage(app);
 const { FieldValue } = firebase.firestore;
 const analytics = getAnalytics(app);
 
-export { app as firebase, analytics, FieldValue };
+export {
+    app as firebase,
+    analytics,
+    FieldValue,
+    storage
+};

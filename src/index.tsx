@@ -6,14 +6,19 @@ import './index.scss';
 import './styles/main.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { firebase, analytics, FieldValue } from './lib/firebase';
+import {
+ firebase, analytics, FieldValue, storage
+} from './lib/firebase';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <FirebaseContext.Provider value={{ firebase, analytics, FieldValue }}>
+    <FirebaseContext.Provider value={{
+      firebase, analytics, FieldValue, storage
+    }}
+    >
       <App />
     </FirebaseContext.Provider>
   </React.StrictMode>,

@@ -6,6 +6,7 @@ export interface SettingsModalContainerInterface {
     fullName: string
     description: string
     docId: string
+    userId: string
     isShowing: boolean
     onClose: () => void
     dispatch: React.Dispatch<ReducerStateInterface>
@@ -21,7 +22,8 @@ export interface SettingsModalComponentInterface {
 
 export interface UserFormInterface {
     fullName: string,
-    description?: string
+    description?: string,
+    avatar?: File
 }
 
 export const ProfileSettingsSchema = Yup.object().shape({

@@ -17,6 +17,7 @@ const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
     following,
     fullName,
     description,
+    avatar,
     dispatch
   } = props;
 
@@ -24,6 +25,7 @@ const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
     <div className="Profile">
       <UserHero
         profile={profile}
+        avatar={avatar}
         postsTotal={posts?.length}
         totalFollowers={totalFollowers}
         followersPopupOpen={followersPopupOpen}

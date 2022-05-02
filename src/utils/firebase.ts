@@ -1,6 +1,7 @@
+import { ref, getDownloadURL } from 'firebase/storage';
 import { User } from 'Type/User';
 import { PostInterface } from 'Type/Post';
-import { FieldValue, firebase } from '../lib/firebase';
+import { FieldValue, firebase, storage } from '../lib/firebase';
 
 export const isUserExists = async (username: string) => {
     const response = await firebase
@@ -156,4 +157,16 @@ export const getIsFollowingProfile = async (
 		.get();
 
 	return response.docs.map((user) => user.data().length > 0).length > 0;
+};
+
+export const getUserAvatar = (userId: string) => {
+    try {
+        const path = ref(storage, `avatars/${userId}`);
+
+        return getDownloadURL(path)
+            .then((url) => Promise.resolve(url))
+            .catch(() => Promise.resolve(''));
+    } catch {
+        return '';
+    }
 };

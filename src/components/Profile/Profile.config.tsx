@@ -20,6 +20,7 @@ export interface ReducerStateInterface {
     following?: Array<string> | []
     fullName?: string
     description?: string
+    avatar?: any
 }
 
 export interface UserHeroInterface {
@@ -32,6 +33,7 @@ export interface UserHeroInterface {
     following?: Array<string> | []
     fullName?: string
     description?: string
+    avatar?: any
     dispatch: React.Dispatch<ReducerStateInterface>
 }
 
