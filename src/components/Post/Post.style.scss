@@ -1,7 +1,12 @@
 .Post {
     max-width: 450px;
+    min-height: 500px;
     background-color: white;
     margin: 20px auto;
+
+    &:first-child {
+        margin-top: 0;
+    }
 
     &__Header {
         display: flex;
@@ -39,6 +44,10 @@
         &--buttons {
             display: flex;
             padding: 5px 3px;
+        }
+
+        &--liked {
+            color: red;
         }
 
         &--likes {

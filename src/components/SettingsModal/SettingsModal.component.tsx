@@ -1,0 +1,114 @@
+/* eslint-disable react/destructuring-assignment */
+import React from 'react';
+import { Formik, Form } from 'formik';
+import InputField from 'Component/InputField';
+
+import {
+  Modal, Box, Typography, Button
+} from '@mui/material';
+
+import { SettingsModalComponentInterface, ProfileSettingsSchema } from './SettingsModal.config';
+import './SettingsModal.style.scss';
+
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 400,
+	bgcolor: 'background.paper',
+	border: '2px solid #000',
+	boxShadow: 24,
+	p: 4,
+};
+
+const SettingsModalComponent: React.FC<SettingsModalComponentInterface> = (
+	props
+) => {
+	const {
+    isShowing,
+    onClose,
+    handleUpdateProfile,
+    fullName,
+    description
+  } = props;
+
+	return (
+		<div>
+			<Modal
+				open={isShowing}
+				onClose={onClose}
+				aria-labelledby="user-settings"
+			>
+				<Box className="SettingsModal" sx={style}>
+					<Typography id="title" variant="h6" component="h2">
+						Settings
+					</Typography>
+					<Formik
+						initialValues={{ fullName, description }}
+						validationSchema={ProfileSettingsSchema}
+						onSubmit={(values) => {
+							handleUpdateProfile(values);
+						}}
+					>
+						{({
+							errors,
+							touched,
+							values,
+							handleBlur,
+							handleChange,
+							setFieldValue,
+						}) => (
+							<Form>
+								<input
+									id="avatar"
+									name="avatar"
+									type="file"
+									onChange={(event) => {
+										setFieldValue(
+											'avatar',
+											event!.currentTarget!.files![0]
+										);
+									}}
+								/>
+								<InputField
+									id="fullName"
+									name="fullName"
+									placeholder="Full name"
+									value={values.fullName}
+									onChange={handleChange('fullName')}
+									onBlur={handleBlur('fullName')}
+									error={
+										errors.fullName && touched.fullName
+											? errors.fullName
+											: null
+									}
+								/>
+								<InputField
+									id="description"
+									type="textarea"
+									name="description"
+									placeholder="Description"
+									value={values.description || ''}
+									onChange={handleChange('description')}
+									onBlur={handleBlur('description')}
+									error={
+										errors.description
+										&& touched.description
+											? errors.description
+											: null
+									}
+								/>
+								<Button type="submit" variant="contained">
+									Save
+								</Button>
+							</Form>
+						)}
+					</Formik>
+				</Box>
+			</Modal>
+		</div>
+	);
+};
+
+export default SettingsModalComponent;

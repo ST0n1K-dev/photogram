@@ -1,30 +1,47 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import React from 'react';
-import { Avatar, Skeleton, Button } from '@mui/material';
+import {
+	Avatar, Skeleton, Button, IconButton
+} from '@mui/material';
+import { Settings as SettingsIcon } from '@mui/icons-material';
 
+import SettingsModal from 'Component/SettingsModal';
 import {
     getIsFollowingProfile,
     updateCurrentUserFollowing,
     updateFollowedUserFollowers
 } from 'Util/firebase';
 import useUser from 'Hook/useUser';
+import useModal from 'Hook/useModal';
+
 import { User } from 'Type/User';
+
+import FollowersModal from './FollowersModal';
 
 import { UserHeroInterface } from './Profile.config';
 
 const UserHero: React.FC<UserHeroInterface> = (props) => {
 	const {
-        profile = {}, postsTotal = 0, totalFollowers = 0, dispath
+        profile = {},
+		postsTotal = 0,
+		totalFollowers = 0,
+		followersPopupOpen,
+		followingPopupOpen,
+		followers = [],
+		following = [],
+		fullName = '',
+		description = '',
+		avatar,
+		dispatch
     } = props;
 
 	const {
         userId: profileUserId = '',
         docId: profileUserDocId = '',
 		username = '',
-		fullName = '',
-		following = [],
 	} = (profile as User) || {};
 
+	const { isShowing, toggle } = useModal();
 	const { user: currentUser } = useUser();
     const {
         docId: currentUserDocId = '',
@@ -34,11 +51,19 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 
 	const [isFollowing, setIsFollowing] = React.useState<boolean>(false);
 
-    const isFollowAvailable = username && (currentUser as User)?.username !== username;
+    const isMe = username && (currentUser as User)?.username === username;
+
+	const handleFollowersPopupOpen = () => {
+		dispatch({ followersPopupOpen: true });
+	};
+
+	const handleFollowingPopupOpen = () => {
+		dispatch({ followingPopupOpen: true });
+	};
 
     const handleFollowClick = async () => {
         setIsFollowing((isFollowing) => !isFollowing);
-        dispath({
+        dispatch({
             totalFollowers: isFollowing ? totalFollowers! - 1 : totalFollowers! + 1
         });
 
@@ -59,7 +84,7 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 
 	return (
 		<div className="Profile__UserHero">
-			{ username ? <Avatar alt="Remy Sharp" src="/images/avatar.png" /> : <Skeleton variant="circular" width={150} height={150} /> }
+			{ username ? <Avatar alt="Remy Sharp" src={avatar || '/images/avatar.png'} /> : <Skeleton variant="circular" width={150} height={150} /> }
 			<div className="Profile__Details">
 				<div className="Profile__Details--username">
 					{username ? (
@@ -67,35 +92,70 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 					) : (
 						<Skeleton variant="text" animation="wave" />
 					)}
-                    {username && isFollowAvailable && (
+                    {username && !isMe && (
                         <Button className={isFollowing ? 'Profile__FollowButton--following' : ''} variant="contained" onClick={handleFollowClick}>
                             { isFollowing ? 'Unfollow' : 'Follow'}
                         </Button>
                     )}
+					{ isMe && (
+						<IconButton onClick={toggle}>
+							<SettingsIcon />
+						</IconButton>
+					)}
 				</div>
 				{username ? (
 					<div className="Profile__Details--statistics">
 						<p className="Profile__Details--stat">
 							<b>{postsTotal}</b> posts
 						</p>
-						<p className="Profile__Details--stat">
-							<b>{totalFollowers}</b> followers
-						</p>
-						<p className="Profile__Details--stat">
-							<b>{following.length}</b> following
-						</p>
+						<button type="button" className="Profile__Details--button" onClick={handleFollowersPopupOpen}>
+							<p className="Profile__Details--stat">
+								<b>{totalFollowers}</b> followers
+							</p>
+						</button>
+						<button type="button" className="Profile__Details--button" onClick={handleFollowingPopupOpen}>
+							<p className="Profile__Details--stat">
+								<b>{following?.length}</b> following
+							</p>
+						</button>
 					</div>
 				) : (
 					<Skeleton variant="text" animation="wave" />
 				)}
 				<div className="Profile__Details--userDetails">
 					{username ? (
-						<h4>{fullName}</h4>
+						<>
+							<p>{description}</p>
+							<h4>{fullName}</h4>
+						</>
 					) : (
 						<Skeleton variant="text" animation="wave" />
 					)}
 				</div>
 			</div>
+			<FollowersModal
+				isOpen={followersPopupOpen!}
+				onClose={() => dispatch({ followersPopupOpen: false })}
+				followers={followers}
+				type="followers"
+			/>
+			<FollowersModal
+				isOpen={followingPopupOpen!}
+				onClose={() => dispatch({ followingPopupOpen: false })}
+				followers={following}
+				type="following"
+			/>
+			{ isMe && (
+				<SettingsModal
+					isShowing={isShowing}
+					fullName={fullName}
+					description={description}
+					docId={currentUserDocId}
+					userId={currentUserId}
+					dispatch={dispatch}
+					onClose={toggle}
+				/>
+			)}
 		</div>
 	);
 };

@@ -6,13 +6,18 @@ import { SuggestedUsersComponentInterface } from './SuggestedUsers.config';
 import './SuggestedUsers.style.scss';
 
 const SuggestedUsersComponent = (props: SuggestedUsersComponentInterface): any => {
-	const { profiles, currentUserId, currentUserDocId } = props;
+	const {
+    profiles, currentUserId, currentUserDocId, setFollowing
+  } = props;
+
+  if (!profiles.length) {
+    return null;
+  }
 
 	return (
     <>
       <h4>Check out this ninjas</h4>
       <div className="SuggestedUsers__Wrapper">
-        { !profiles.length && <h5>No ninjas detected</h5> }
         { profiles.map((profile) => {
           const {
             username, docId, userId: suggestedUserId, fullName
@@ -27,6 +32,7 @@ const SuggestedUsersComponent = (props: SuggestedUsersComponentInterface): any =
               currentUserDocId={currentUserDocId}
               suggestedUserId={suggestedUserId}
               currentUserId={currentUserId}
+              setFollowing={setFollowing}
             />
           );
         })}

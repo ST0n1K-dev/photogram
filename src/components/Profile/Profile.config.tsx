@@ -14,11 +14,45 @@ export interface ReducerStateInterface {
     profile?: User | null | object
     posts?: Array<PostInterface> | Array<never>
     totalFollowers?: number
+    followersPopupOpen?: boolean
+    followingPopupOpen?: boolean
+    followers?: Array<string> | []
+    following?: Array<string> | []
+    fullName?: string
+    description?: string
+    avatar?: any
 }
 
 export interface UserHeroInterface {
     profile?: User | null | object
     postsTotal?: number
     totalFollowers?: number
-    dispath: React.Dispatch<ReducerStateInterface>
+    followersPopupOpen?: boolean
+    followingPopupOpen?: boolean
+    followers?: Array<string> | []
+    following?: Array<string> | []
+    fullName?: string
+    description?: string
+    avatar?: any
+    dispatch: React.Dispatch<ReducerStateInterface>
+}
+
+export interface UserPostsInterface {
+    posts?: Array<PostInterface> | Array<never>
+}
+
+export type FollowersModalType = 'followers' | 'following';
+
+export interface FollowersModalInterface {
+    isOpen: boolean
+    followers: Array<string> | []
+    onClose: () => void
+    type: FollowersModalType
+}
+
+export interface UserProfileInterface {
+    fullName: string
+    username: string
+    userId: string
+    docId: string
 }

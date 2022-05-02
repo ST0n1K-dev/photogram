@@ -8,19 +8,15 @@ import './Home.style.scss';
 export const HomeScreen: React.FC<HomeProps> = (props) => {
     const {
 		user: {
-            fullName,
-            username,
-            userId,
-            following,
-            followers,
-            docId
+            fullName = '',
+            username = '',
+            userId = '',
+            followers = [],
+            docId = ''
         } = {},
-        user
+        following = [],
+        setFollowing
 	} = props;
-
-    if (!Object.keys(user).length) {
-       return <h3>No user</h3>;
-    }
 
     return (
         <div className="HomePage">
@@ -41,6 +37,7 @@ export const HomeScreen: React.FC<HomeProps> = (props) => {
                         currentUserId={userId!}
                         following={following!}
                         currentUserDocId={docId!}
+                        setFollowing={setFollowing}
                     />
                 </div>
             </div>

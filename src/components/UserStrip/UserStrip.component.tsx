@@ -5,7 +5,6 @@ import './UserStrip.style.scss';
 
 const UserStripComponent = () => (
     <div>
-      UserStrip
       <PostsList />
     </div>
   );

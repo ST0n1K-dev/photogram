@@ -1,4 +1,5 @@
 import React from 'react';
+import { Divider } from '@mui/material';
 import UserHero from './UserHero';
 import UserPosts from './UserPosts';
 
@@ -7,18 +8,36 @@ import './Profile.style.scss';
 
 const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
   const {
-    profile, posts, totalFollowers, dispatch
+    profile,
+    posts,
+    totalFollowers,
+    followersPopupOpen,
+    followingPopupOpen,
+    followers,
+    following,
+    fullName,
+    description,
+    avatar,
+    dispatch
   } = props;
 
   return (
     <div className="Profile">
       <UserHero
         profile={profile}
+        avatar={avatar}
         postsTotal={posts?.length}
         totalFollowers={totalFollowers}
-        dispath={dispatch}
+        followersPopupOpen={followersPopupOpen}
+        followingPopupOpen={followingPopupOpen}
+        followers={followers}
+        following={following}
+        fullName={fullName}
+        description={description}
+        dispatch={dispatch}
       />
-      <UserPosts />
+      <Divider />
+      <UserPosts posts={posts} />
     </div>
   );
 };

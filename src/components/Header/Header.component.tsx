@@ -1,11 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './Header.style.scss';
 import IconButton from '@mui/material/IconButton';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import SpeedDial from 'Component/SpeedDial';
 import AccountMenu from 'Component/AccountMenu';
+import { HOME } from 'Type/routes';
+
 import { HeaderProps } from './Header.config';
 
 const Header: React.FC<HeaderProps> = (props) => {
@@ -15,7 +18,7 @@ const Header: React.FC<HeaderProps> = (props) => {
 		<div className="HeaderWrapper">
 			<header className="Header">
 				<div className="Header__logo">
-					Photogram
+					<Link to={HOME}>Photogram</Link>
 				</div>
 				<div className="Header__actions">
 					<IconButton

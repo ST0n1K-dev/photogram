@@ -7,6 +7,7 @@ export interface SuggestedUserProfileContainerInterface {
     suggestedUserDocId: string
     suggestedUserId: string
     currentUserId: string
+    setFollowing: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 export interface SuggestedUserProfileComponentInterface {
