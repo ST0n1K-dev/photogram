@@ -149,6 +149,7 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 				<SettingsModal
 					isShowing={isShowing}
 					username={username}
+					avatar={avatar}
 					fullName={fullName}
 					description={description}
 					docId={currentUserDocId}

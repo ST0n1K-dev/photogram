@@ -30,8 +30,19 @@ const SettingsModalComponent: React.FC<SettingsModalComponentInterface> = (
     onClose,
     handleUpdateProfile,
     fullName,
+	avatar,
     description
   } = props;
+
+  const getImageFromFile = (file: any): string => {
+	  if (typeof file === 'object') {
+		const url = URL.createObjectURL(file);
+
+		return url;
+	  }
+
+	  return file;
+  };
 
 	return (
 		<div>
@@ -45,7 +56,7 @@ const SettingsModalComponent: React.FC<SettingsModalComponentInterface> = (
 						Settings
 					</Typography>
 					<Formik
-						initialValues={{ fullName, description }}
+						initialValues={{ fullName, description, avatar }}
 						validationSchema={ProfileSettingsSchema}
 						onSubmit={(values) => {
 							handleUpdateProfile(values);
@@ -75,7 +86,7 @@ const SettingsModalComponent: React.FC<SettingsModalComponentInterface> = (
 										/>
 										<figure className="personal-figure">
 											<img
-												src="/images/avatar.png"
+												src={values.avatar ? getImageFromFile(values.avatar) : '/images/avatar.png'}
 												className="personal-avatar"
 												alt="avatar"
 											/>

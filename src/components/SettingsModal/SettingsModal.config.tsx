@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 export interface SettingsModalContainerInterface {
     fullName: string
     username: string
+    avatar: string
     description: string
     docId: string
     userId: string
@@ -18,13 +19,14 @@ export interface SettingsModalComponentInterface {
     onClose: () => void
     fullName: string
     description?: string
+    avatar: string,
     handleUpdateProfile: (values: UserFormInterface) => void
 }
 
 export interface UserFormInterface {
     fullName: string,
     description?: string,
-    avatar?: File
+    avatar?: string
 }
 
 export const ProfileSettingsSchema = Yup.object().shape({

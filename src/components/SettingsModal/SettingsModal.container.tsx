@@ -13,6 +13,7 @@ const SettingsModalContainer = (props: SettingsModalContainerInterface) => {
   const {
     fullName,
     username,
+    avatar,
     description,
     docId,
     isShowing,
@@ -23,7 +24,7 @@ const SettingsModalContainer = (props: SettingsModalContainerInterface) => {
 
   const { firebase, storage } = useContext(FirebaseContext) as FirebaseContextInterface;
 
-  const uploadAvatar = async (avatar: File) => {
+  const uploadAvatar = async (avatar: any) => {
     if (avatar === null) return;
 
     const imageRef = ref(storage, `avatars/${username}/avatar`);
@@ -59,7 +60,8 @@ const SettingsModalContainer = (props: SettingsModalContainerInterface) => {
   const containerProps = () => ({
     isShowing,
     fullName,
-    description
+    description,
+    avatar
   });
 
   const containerFunctions = {

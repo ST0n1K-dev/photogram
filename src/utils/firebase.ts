@@ -192,9 +192,12 @@ export const getUserAvatar = (username: string) => {
     try {
         const path = ref(storage, `avatars/${username}/avatar`);
 
-        return getDownloadURL(path)
-            .then((url) => Promise.resolve(url))
-            .catch(() => Promise.resolve(''));
+        if (path) {
+            return getDownloadURL(path)
+                .then((foundURL) => foundURL, () => '');
+        }
+
+        return '';
     } catch {
         return '';
     }
