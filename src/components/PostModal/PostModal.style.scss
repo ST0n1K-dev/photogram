@@ -1,0 +1,133 @@
+.PostModal {
+    display: flex;
+    flex-direction: row;
+
+    &__PostArea {
+        width: 50%;
+        padding-right: 20px;
+        margin: 0 auto;
+    }
+
+    &__DetailsArea {
+        width: 50%;
+        margin: 0 auto;
+
+        h3 {
+            text-align: center;
+        }
+    }
+
+    &__CommentList {
+        max-height: 450px;
+        height: 450px;
+        overflow: auto;
+    }
+
+    .Post {
+        max-width: 450px;
+        min-height: 500px;
+        background-color: white;
+        margin: 0 auto;
+    
+        &:first-child {
+            margin-top: 0;
+        }
+    
+        &__Header {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            column-gap: 10px;
+            padding: 10px 15px;
+    
+            &--user {
+                display: flex;
+                flex-direction: column;
+                row-gap: 3px;
+            }
+    
+            &--username {
+                font-weight: 700;
+            }
+    
+            &--location {
+                font-size: 12px;
+                color: gray;
+            }
+        }
+    
+        &__Image {
+            width: 100%;
+        }
+    
+        &__Actions {
+            display: flex;
+            flex-direction: column;
+            column-gap: 10px;
+            margin: 0 10px;
+    
+            &--buttons {
+                display: flex;
+                padding: 5px 3px;
+            }
+    
+            &--liked {
+                color: red;
+            }
+    
+            &--likes {
+                font-weight: 700;
+                margin-top: 5px;
+            }
+        }
+    
+        &__Content {
+            display: flex;
+            gap: 5px;
+            padding: 5px 10px 5px 10px;
+        }
+    
+        &__Comment {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 0px 10px 5px 10px;
+    
+            &--title {
+                padding: 0px 10px 5px 10px;
+                margin: 0;
+                font-weight: 500;
+                color: gray;
+            }
+    
+            &--viewAll {
+                padding: 0px 10px 5px 10px;
+                margin: 0;
+                font-weight: 500;
+                color: gray;
+            }
+    
+            &--date {
+                padding: 0px 10px 10px 10px;
+                color: gray;
+            }
+        }
+    
+        &__CommentInputWrapper {
+            padding: 5px 10px;
+        }
+    
+        &__CommentInputForm {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+    
+            .MuiInput-root {
+                flex: 1;
+            }
+        }
+    
+    }
+    
+}

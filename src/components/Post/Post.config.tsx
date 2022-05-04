@@ -33,7 +33,7 @@ export interface PostImageInterface {
 export interface PostActionsInterface {
     likes: number
     isLiked: boolean
-    handleCommentFocus: () => void
+    handleCommentFocus?: () => void
     handleLike: () => Promise<void>
 }
 

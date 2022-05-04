@@ -132,6 +132,35 @@ export const getPosts = async (userId: string, following: Array<string>) => {
     return detailedPosts;
 };
 
+export const getDetailedPost = async (userId: string, postId: number) => {
+    const response = await firebase
+		.firestore()
+		.collection('posts')
+		.where('photoId', '==', postId)
+        .get();
+
+    const followedUsersPosts: any = response.docs.map((post) => ({
+        ...post.data(),
+        docId: post.id
+    }));
+
+    const detailedPost: Array<PostInterface> = await Promise.all(
+        followedUsersPosts.map(async (post: any) => {
+            let isLiked = false;
+            if (post.likes.includes(userId)) {
+                isLiked = true;
+            }
+
+            const user: any = await getUserById(post.userId);
+            const { username } = user[0];
+
+            return { username, ...post, isLiked };
+        })
+    );
+
+    return detailedPost[0];
+};
+
 export const getUserPosts = async (user: User): Promise<Array<PostInterface>> => {
     const response = await firebase
 		.firestore()
@@ -159,9 +188,9 @@ export const getIsFollowingProfile = async (
 	return response.docs.map((user) => user.data().length > 0).length > 0;
 };
 
-export const getUserAvatar = (userId: string) => {
+export const getUserAvatar = (username: string) => {
     try {
-        const path = ref(storage, `avatars/${userId}`);
+        const path = ref(storage, `avatars/${username}/avatar`);
 
         return getDownloadURL(path)
             .then((url) => Promise.resolve(url))

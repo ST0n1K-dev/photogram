@@ -43,7 +43,7 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
   useEffect(() => {
     async function getProfileInfo() {
       const receivedPosts = await getUserPosts(user!);
-      const receivedAvatar = await getUserAvatar(user!.userId);
+      const receivedAvatar = await getUserAvatar(user!.username);
 
       dispatch({
         profile: user,

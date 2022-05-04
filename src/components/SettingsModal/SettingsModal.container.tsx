@@ -12,9 +12,9 @@ import { SettingsModalContainerInterface, UserFormInterface } from './SettingsMo
 const SettingsModalContainer = (props: SettingsModalContainerInterface) => {
   const {
     fullName,
+    username,
     description,
     docId,
-    userId,
     isShowing,
     onClose,
     dispatch
@@ -26,7 +26,7 @@ const SettingsModalContainer = (props: SettingsModalContainerInterface) => {
   const uploadAvatar = async (avatar: File) => {
     if (avatar === null) return;
 
-    const imageRef = ref(storage, `avatars/${userId}`);
+    const imageRef = ref(storage, `avatars/${username}/avatar`);
     await uploadBytes(imageRef, avatar);
   };
 
@@ -41,7 +41,7 @@ const SettingsModalContainer = (props: SettingsModalContainerInterface) => {
 
       if (avatar) {
         await uploadAvatar(avatar!);
-        const imagePath = await getUserAvatar(userId);
+        const imagePath = await getUserAvatar(username);
 
         dispatch({ avatar: imagePath });
       }

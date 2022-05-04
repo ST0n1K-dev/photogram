@@ -60,17 +60,31 @@ const SettingsModalComponent: React.FC<SettingsModalComponentInterface> = (
 							setFieldValue,
 						}) => (
 							<Form>
-								<input
-									id="avatar"
-									name="avatar"
-									type="file"
-									onChange={(event) => {
-										setFieldValue(
-											'avatar',
-											event!.currentTarget!.files![0]
-										);
-									}}
-								/>
+								<div className="image-input">
+									<label htmlFor="avatar">
+										<input
+											id="avatar"
+											name="avatar"
+											type="file"
+											onChange={(event) => {
+												setFieldValue(
+													'avatar',
+													event!.currentTarget!.files![0]
+												);
+											}}
+										/>
+										<figure className="personal-figure">
+											<img
+												src="/images/avatar.png"
+												className="personal-avatar"
+												alt="avatar"
+											/>
+											<figcaption className="personal-figcaption">
+												<img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" alt="hover" />
+											</figcaption>
+										</figure>
+									</label>
+								</div>
 								<InputField
 									id="fullName"
 									name="fullName"

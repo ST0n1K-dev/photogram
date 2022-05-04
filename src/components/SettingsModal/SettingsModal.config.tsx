@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 
 export interface SettingsModalContainerInterface {
     fullName: string
+    username: string
     description: string
     docId: string
     userId: string
