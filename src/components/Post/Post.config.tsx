@@ -44,6 +44,7 @@ export interface PostContentInterface {
 
 export interface PostCommentsInterface {
     comments: Array<Comment>
+    post: PostInterface
     dateCreated: number
     docId: string
     handleAddComment: (e: React.SyntheticEvent, comment: string) => void

@@ -20,7 +20,7 @@ const Navigation = ({ children, user }: NavigationProps) => (
 				<Route element={<ProtectedRoute user={user} />}>
 					<Route path={ROUTES.HOME} element={<HomeScreen />} />
 					<Route path={ROUTES.PROFILE} element={<ProfileScreen />} />
-					<Route path={ROUTES.DIRECT} element={<div>Messages</div>} />
+					<Route path={ROUTES.CREATE_POST} element={<div>Create post</div>} />
 				</Route>
 				<Route
 					path={ROUTES.SIGNIN}

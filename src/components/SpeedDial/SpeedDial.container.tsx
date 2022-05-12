@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import {
 	Person as PersonIcon,
-	Send as SendIcon,
+	Add as AddIcon,
 	Home as HomeIcon
 } from '@mui/icons-material';
 import * as ROUTES from 'Type/routes';
@@ -21,7 +21,7 @@ const SpeedDialContainer = () => {
 
 	if (user && Object.keys(user).length > 0) {
 		speedDialActions.splice(0, 0, { icon: <HomeIcon />, name: 'Home', url: ROUTES.HOME });
-		speedDialActions.splice(2, 0, { icon: <SendIcon />, name: 'Messages', url: ROUTES.DIRECT });
+		speedDialActions.splice(2, 0, { icon: <AddIcon />, name: 'New post', url: ROUTES.CREATE_POST });
 	}
 
 	const containerProps = () => ({

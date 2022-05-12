@@ -40,6 +40,7 @@ const PostComponent: React.FC<PostComponentInterface> = (props) => {
       <PostContent username={username} caption={caption} />
       <PostComments
         comments={comments}
+        post={post as PostInterface}
         dateCreated={dateCreated}
         docId={docId}
         handleAddComment={handleAddComment}
