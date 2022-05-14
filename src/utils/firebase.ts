@@ -171,7 +171,7 @@ export const getUserPosts = async (user: User): Promise<Array<PostInterface>> =>
     return response.docs.map((post) => ({
         ...post.data(),
         docId: post.id
-    } as PostInterface));
+    } as PostInterface)).sort((a, b) => b.dateCreated - a.dateCreated);
 };
 
 export const getIsFollowingProfile = async (
@@ -201,4 +201,27 @@ export const getUserAvatar = (username: string) => {
     } catch {
         return '';
     }
+};
+
+export const createPost = async (userId: string, caption: string) => {
+    const { id: postId } = await firebase
+		.firestore()
+		.collection('posts')
+        .add({
+            caption,
+            comments: [],
+            dateCreated: Date.now(),
+            likes: [],
+            userId,
+            photoId: +(new Date().getTime().toString())
+        });
+
+    return postId;
+};
+
+export const getPostImage = (username: string, postDocId: string): Promise<string> => {
+    const path = ref(storage, `posts/${username}/${postDocId}`);
+
+    return getDownloadURL(path)
+        .then((foundURL) => foundURL, () => '');
 };

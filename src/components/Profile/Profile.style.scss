@@ -94,9 +94,16 @@
         position: relative;
         margin: 0 auto;
         width: 20vw;
+        height: 400px;
+
+        @media (max-width: 810px) {
+            height: 150px;
+        }
 
         img {
             width: 20vw;
+            height: inherit;
+            object-fit: cover;
         }
 
         &--hidden {

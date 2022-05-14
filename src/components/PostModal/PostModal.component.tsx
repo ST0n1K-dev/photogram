@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   Modal, Box, Divider, Skeleton
 } from '@mui/material';
+
+import { getPostImage } from 'Util/firebase';
+
 import { PostInterface } from 'Type/Post';
 import PostHeader from 'Component/Post/Header';
 import PostImage from 'Component/Post/Image';
@@ -31,18 +34,30 @@ const PostModalComponent = (props: PostModalComponentInterface) => {
     isShowing, onClose, post, likes, isLiked, comments = [],
     handleLike, handleAddComment, commentInput, isLoading
   } = props;
-
-  if (!post) {
-    return null;
-  }
+  const [postImage, setPostImage] = useState<string>('');
 
   const {
     username = '',
-    imageSrc = '',
     caption = '',
     dateCreated,
     docId = ''
   } = post as PostInterface || {};
+
+  useEffect(() => {
+		async function setImage() {
+			const image = await getPostImage(username, docId);
+
+			setPostImage(image);
+		}
+
+		if (username && post) {
+			setImage();
+		}
+	}, [post, username, docId]);
+
+  if (!post) {
+    return null;
+  }
 
   return (
     <Modal open={isShowing} onClose={onClose} aria-labelledby="post-modal">
@@ -50,7 +65,7 @@ const PostModalComponent = (props: PostModalComponentInterface) => {
         <div className="PostModal__PostArea">
           <div className="Post">
             {isLoading ? <Skeleton variant="rectangular" width={100} height={40} /> : <PostHeader username={username} />}
-            {isLoading ? <Skeleton variant="rectangular" width={450} height={500} /> : <PostImage src={imageSrc} caption={caption} />}
+            {isLoading ? <Skeleton variant="rectangular" width={450} height={500} /> : <PostImage src={postImage} caption={caption} />}
             {isLoading ? <Skeleton variant="rectangular" /> : (
               <PostActions
                 likes={likes!}
@@ -63,9 +78,11 @@ const PostModalComponent = (props: PostModalComponentInterface) => {
         <div className="PostModal__DetailsArea">
           {isLoading ? <Skeleton variant="rectangular" width={450} height={600} /> : (
             <div className="Post">
-              <PostContent username={username} caption={caption} />
-              <Divider />
-              <h3>Comments</h3>
+              <div>
+                <PostContent username={username} caption={caption} />
+                <Divider />
+                <h3>Comments</h3>
+              </div>
               <Comments
                 comments={comments}
                 dateCreated={dateCreated}

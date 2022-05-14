@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PostInterface } from 'Type/Post';
+import { getPostImage } from 'Util/firebase';
 
 import PostHeader from './Header';
 import PostImage from './Image';
@@ -14,14 +15,26 @@ const PostComponent: React.FC<PostComponentInterface> = (props) => {
     post = {}, likes, handleLike, isLiked,
     comments, handleCommentFocus, handleAddComment, commentInput
   } = props;
+  const [postImage, setPostImage] = useState<string>('');
 
   const {
     username = '',
-    imageSrc = '',
     caption = '',
     dateCreated,
     docId
   } = post as PostInterface;
+
+  useEffect(() => {
+		async function setImage() {
+			const image = await getPostImage(username, docId);
+
+			setPostImage(image);
+		}
+
+		if (username && post) {
+			setImage();
+		}
+	}, [post, username, docId]);
 
   if (!post) {
     return null;
@@ -30,7 +43,7 @@ const PostComponent: React.FC<PostComponentInterface> = (props) => {
   return (
     <div className="Post">
       <PostHeader username={username} />
-      <PostImage src={imageSrc} caption={caption} />
+      <PostImage src={postImage} caption={caption} />
       <PostActions
         likes={likes}
         isLiked={isLiked}

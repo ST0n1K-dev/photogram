@@ -12,7 +12,7 @@ export default function usePosts() {
 
   useEffect(() => {
     async function getDisplayedPosts() {
-      const [{ following }] = await getUserById(userId) as any;
+      const [{ following = [] } = {}] = await getUserById(userId) as any;
       let followingUsersPosts: Array<PostInterface> = [];
 
       if (following.length > 0) {

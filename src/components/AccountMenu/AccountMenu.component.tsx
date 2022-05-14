@@ -11,7 +11,6 @@ import { User } from 'Type/User';
 
 import {
 	Person as PersonIcon,
-	Send as SendIcon,
 	Add as AddIcon,
 	Home as HomeIcon
 } from '@mui/icons-material';
@@ -36,7 +35,6 @@ const MenuItems = () => {
 		<>
 			{user && renderDrawerListItem('Home', <HomeIcon />, ROUTES.HOME)}
 			{renderDrawerListItem('Profile', <PersonIcon />, user ? `/profile/${(user as User).username}` : ROUTES.SIGNIN)}
-			{user && renderDrawerListItem('Messages', <SendIcon />, ROUTES.DIRECT)}
 			{user && renderDrawerListItem('Create post', <AddIcon />, ROUTES.PROFILE)}
 		</>
 	);

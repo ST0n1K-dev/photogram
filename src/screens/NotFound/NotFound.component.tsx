@@ -15,13 +15,9 @@ const NotFound = () => (
 				...maybe the page you&apos;re looking for is not found or never
 				existed.
 			</p>
-			<a href="https://www.google.co.in/" target="blank">
-                <Link to={ROUTES.HOME}>
-                    <Button>
-                        Go back home
-                    </Button>
-                </Link>
-			</a>
+			<Link to={ROUTES.HOME}>
+				<Button>Go back home</Button>
+			</Link>
 		</div>
 	</div>
 );
