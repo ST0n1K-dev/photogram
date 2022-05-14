@@ -32,7 +32,7 @@ const style = {
 const PostModalComponent = (props: PostModalComponentInterface) => {
   const {
     isShowing, onClose, post, likes, isLiked, comments = [],
-    handleLike, handleAddComment, commentInput, isLoading
+    handleLike, handleAddComment, commentInput, isLoading, isMyPost
   } = props;
   const [postImage, setPostImage] = useState<string>('');
 
@@ -68,6 +68,8 @@ const PostModalComponent = (props: PostModalComponentInterface) => {
             {isLoading ? <Skeleton variant="rectangular" width={450} height={500} /> : <PostImage src={postImage} caption={caption} />}
             {isLoading ? <Skeleton variant="rectangular" /> : (
               <PostActions
+                editAvailable={isMyPost}
+                deleteAvailable={isMyPost}
                 likes={likes!}
                 isLiked={isLiked!}
                 handleLike={handleLike}

@@ -32,6 +32,8 @@ export interface PostImageInterface {
 
 export interface PostActionsInterface {
     likes: number
+    editAvailable?: boolean
+    deleteAvailable?: boolean
     isLiked: boolean
     handleCommentFocus?: () => void
     handleLike: () => Promise<void>

@@ -89,7 +89,8 @@ const PostModalContainer = (props: PostModalContainerInterface) => {
     likes,
     comments,
     commentInput,
-    isLoading
+    isLoading,
+    isMyPost: post?.userId === userId
   });
 
   const containerFunctions = {

@@ -14,6 +14,7 @@ interface Comment {
 
 export interface PostModalComponentInterface {
     isShowing: boolean
+    isMyPost: boolean
     isLoading: boolean
     post?: PostInterface | never[]
     onClose: () => void,
