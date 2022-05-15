@@ -37,6 +37,10 @@ export const getUserById = async (userId: string) => {
 };
 
 export const getUsersById = async (userIds: Array<string>) => {
+    if (userIds.length < 1) {
+        return [];
+    }
+
     const response = await firebase
 		.firestore()
 		.collection('users')

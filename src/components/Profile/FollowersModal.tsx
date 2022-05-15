@@ -66,10 +66,11 @@ const FollowersModal = ({
 	useEffect(() => {
 		async function getSuggestedUsers() {
 			const userProfiles = await getUsersById(followers);
+
 			setProfiles(userProfiles as Array<User>);
 		}
 
-		if (followers?.length > 0) {
+		if (followers) {
 			getSuggestedUsers();
 		}
 	}, [followers]);

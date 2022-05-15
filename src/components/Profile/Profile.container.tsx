@@ -1,61 +1,36 @@
 import useUser from 'Hook/useUser';
 import React, { useEffect, useReducer } from 'react';
-import { getUserPosts, getUserAvatar } from 'Util/firebase';
+import { useSelector } from 'react-redux';
 import { User } from 'Type/User';
+import { RootState } from '../../redux/store';
 import ProfileComponent from './Profile.component';
-import { ProfileContainerInterface, ReducerStateInterface } from './Profile.config';
+import { ReducerStateInterface } from './Profile.config';
 
-const ProfileContainer = (props: ProfileContainerInterface) => {
-  const { user } = props;
+const ProfileContainer = () => {
+  // const { user } = props;
   const { user: currentUser } = useUser();
+  const selectedUserPosts = useSelector((state: RootState) => state.SelectedProfile.posts);
+  const user = useSelector((state: RootState) => state.SelectedProfile.user) as User;
   const { username: currentUsername = '' } = currentUser as User || {};
   const reducer = (state: ReducerStateInterface, newState: ReducerStateInterface) => ({
     ...state, ...newState
   });
 
   const initialState = {
-    profile: null,
-    posts: [],
-    totalFollowers: 0,
     followersPopupOpen: false,
-    followingPopupOpen: false,
-    followers: [],
-    following: [],
-    isFollowing: false,
-    fullName: '',
-    description: '',
-    avatar: {}
+    followingPopupOpen: false
   };
 
   const [{
-    profile,
-    posts,
-    totalFollowers,
     followersPopupOpen,
-    followingPopupOpen,
-    followers,
-    following,
-    fullName,
-    description,
-    avatar
+    followingPopupOpen
   }, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     async function getProfileInfo() {
-      const receivedPosts = await getUserPosts(user!);
-      const receivedAvatar = await getUserAvatar(user!.username);
-
       dispatch({
-        profile: user,
-        posts: receivedPosts,
-        totalFollowers: user?.followers.length || 0,
         followersPopupOpen: false,
-        followingPopupOpen: false,
-        followers: user?.followers,
-        following: user?.following,
-        fullName: user?.fullName,
-        description: user?.description || '',
-        avatar: receivedAvatar
+        followingPopupOpen: false
       });
     }
 
@@ -65,16 +40,16 @@ const ProfileContainer = (props: ProfileContainerInterface) => {
   }, [user, currentUsername]);
 
   const containerProps = () => ({
-    profile,
-    posts,
-    totalFollowers,
+    profile: user,
+    posts: selectedUserPosts,
+    totalFollowers: user?.followers.length,
     followersPopupOpen,
     followingPopupOpen,
-    followers,
-    following,
-    fullName,
-    description,
-    avatar
+    followers: user?.followers,
+    following: user?.following,
+    fullName: user?.fullName,
+    description: user?.description,
+    avatar: user?.avatar
   });
 
   const containerFunctions = {

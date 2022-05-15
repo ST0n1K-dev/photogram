@@ -1,14 +1,19 @@
-import { useState, useContext, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { User } from 'Type/User';
-import { UserContext } from 'Context/user';
+import { setFollowingPosts } from 'Store/MyAccount';
 import { getPosts, getUserById } from 'Util/firebase';
 import { PostInterface } from 'Type/Post';
 
-export default function usePosts() {
-  const [posts, setPosts] = useState<Array<PostInterface> | null>(null);
-  const { user } = useContext(UserContext) as { user: User };
+import { RootState } from '../redux/store';
 
-  const { uid: userId = '' } = user || {};
+export default function usePosts() {
+  // const [posts, setPosts] = useState<Array<PostInterface> | null>(null);
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.MyAccount.user) as User;
+  const followingPosts = useSelector((state: RootState) => state.MyAccount.followingPosts);
+
+  const { userId = '' } = user || {};
 
   useEffect(() => {
     async function getDisplayedPosts() {
@@ -21,13 +26,13 @@ export default function usePosts() {
 
       // sorting by date desc
       followingUsersPosts.sort((a, b) => b.dateCreated - a.dateCreated);
-      setPosts(followingUsersPosts);
+      dispatch(setFollowingPosts(followingUsersPosts));
     }
 
     if (userId) {
       getDisplayedPosts();
     }
-  }, [userId]);
+  }, [userId, user.following, dispatch]);
 
-  return { posts };
+  return { followingPosts };
 }

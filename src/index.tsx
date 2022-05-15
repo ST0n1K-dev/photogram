@@ -1,9 +1,11 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React from 'react';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom/client';
 import FirebaseContext from './context/firebase';
 import './index.scss';
 import './styles/main.scss';
+import { store } from './redux/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {
@@ -15,12 +17,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <FirebaseContext.Provider value={{
-      firebase, analytics, FieldValue, storage
-    }}
-    >
-      <App />
-    </FirebaseContext.Provider>
+    <Provider store={store}>
+      <FirebaseContext.Provider value={{
+        firebase, analytics, FieldValue, storage
+      }}
+      >
+        <App />
+      </FirebaseContext.Provider>
+    </Provider>
   </React.StrictMode>,
 );
 

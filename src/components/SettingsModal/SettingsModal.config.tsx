@@ -1,5 +1,3 @@
-import { ReducerStateInterface } from 'Component/Profile/Profile.config';
-import React from 'react';
 import * as Yup from 'yup';
 
 export interface SettingsModalContainerInterface {
@@ -11,7 +9,6 @@ export interface SettingsModalContainerInterface {
     userId: string
     isShowing: boolean
     onClose: () => void
-    dispatch: React.Dispatch<ReducerStateInterface>
 }
 
 export interface SettingsModalComponentInterface {

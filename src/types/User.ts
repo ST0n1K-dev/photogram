@@ -11,4 +11,5 @@ export interface User {
     username: string,
     profileId: string
     description?: string
+    avatar?: string
 }

@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import {
 	Avatar, Skeleton, Button, IconButton
 } from '@mui/material';
 import { Settings as SettingsIcon } from '@mui/icons-material';
 
+import { handleFollow } from 'Store/MyAccount';
+import { handleSelectedAccountFollow } from 'Store/SelectedProfile';
 import SettingsModal from 'Component/SettingsModal';
 import {
     getIsFollowingProfile,
@@ -42,6 +45,7 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 	} = (profile as User) || {};
 
 	const { isShowing, toggle } = useModal();
+	const storeDispatch = useDispatch();
 	const { user: currentUser } = useUser();
     const {
         docId: currentUserDocId = '',
@@ -63,9 +67,8 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 
     const handleFollowClick = async () => {
         setIsFollowing((isFollowing) => !isFollowing);
-        dispatch({
-            totalFollowers: isFollowing ? totalFollowers! - 1 : totalFollowers! + 1
-        });
+        storeDispatch(handleFollow({ isFollowing, profileUserId }));
+        storeDispatch(handleSelectedAccountFollow({ isFollowing, currentUserId }));
 
         await updateCurrentUserFollowing(currentUserDocId, profileUserId, isFollowing);
         await updateFollowedUserFollowers(profileUserDocId, currentUserId, isFollowing);
@@ -136,13 +139,13 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 			<FollowersModal
 				isOpen={followersPopupOpen!}
 				onClose={() => dispatch({ followersPopupOpen: false })}
-				followers={followers}
+				followers={followers || []}
 				type="followers"
 			/>
 			<FollowersModal
 				isOpen={followingPopupOpen!}
 				onClose={() => dispatch({ followingPopupOpen: false })}
-				followers={following}
+				followers={following || []}
 				type="following"
 			/>
 			{ isMe && (
@@ -154,7 +157,6 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 					description={description}
 					docId={currentUserDocId}
 					userId={currentUserId}
-					dispatch={dispatch}
 					onClose={toggle}
 				/>
 			)}

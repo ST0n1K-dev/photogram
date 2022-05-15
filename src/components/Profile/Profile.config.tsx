@@ -56,6 +56,7 @@ export interface UserProfileInterface {
     username: string
     userId: string
     docId: string
+    avatar?: string
 }
 
 export interface PostContentInterface {

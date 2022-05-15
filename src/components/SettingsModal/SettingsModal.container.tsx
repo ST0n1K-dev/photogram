@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import React, { useContext } from 'react';
-import { ref, uploadBytes } from 'firebase/storage';
 import { useSnackbar } from 'notistack';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUser } from 'Store/SelectedProfile';
+import { ref, uploadBytes } from 'firebase/storage';
+import { User } from 'Type/User';
 import { FirebaseContext, FirebaseContextInterface } from 'Context/firebase';
 import { getUserAvatar } from 'Util/firebase';
+import { RootState } from '../../redux/store';
 
 import SettingsModalComponent from './SettingsModal.component';
 
@@ -17,10 +21,11 @@ const SettingsModalContainer = (props: SettingsModalContainerInterface) => {
     description,
     docId,
     isShowing,
-    onClose,
-    dispatch
+    onClose
   } = props;
   const { enqueueSnackbar } = useSnackbar();
+  const user = useSelector((state: RootState) => state.MyAccount.user);
+  const dispatch = useDispatch();
 
   const { firebase, storage } = useContext(FirebaseContext) as FirebaseContextInterface;
 
@@ -40,14 +45,14 @@ const SettingsModalContainer = (props: SettingsModalContainerInterface) => {
           description
         });
 
-      if (avatar) {
+      if (avatar && avatar !== (user as User)?.avatar) {
         await uploadAvatar(avatar!);
         const imagePath = await getUserAvatar(username);
 
-        dispatch({ avatar: imagePath });
+        dispatch(updateUser({ avatar: imagePath }));
       }
 
-      dispatch({ fullName: values.fullName, description: values.description });
+      dispatch(updateUser({ fullName: values.fullName, description: values.description! }));
 
       onClose();
 

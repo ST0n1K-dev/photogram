@@ -4,10 +4,10 @@ import React from 'react';
 import PostsList from './PostsList.component';
 
 const PostsListContainer: React.FC = () => {
-  const { posts } = usePosts();
+  const { followingPosts } = usePosts();
 
   const containerProps = () => ({
-    posts
+    posts: followingPosts
   });
 
   const containerFunctions = {};
