@@ -32,11 +32,14 @@ export interface PostImageInterface {
 
 export interface PostActionsInterface {
     likes: number
+    isModal?: boolean
     editAvailable?: boolean
     deleteAvailable?: boolean
     isLiked: boolean
     handleCommentFocus?: () => void
     handleLike: () => Promise<void>
+    handleEditPost?: () => void
+    handleDeletePost?: () => void
 }
 
 export interface PostContentInterface {

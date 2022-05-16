@@ -24,6 +24,7 @@ export interface PostModalComponentInterface {
     handleLike: () => Promise<void>
     handleAddComment: (e: React.SyntheticEvent, comment: string) => void
     handleCommentFocus?: () => void
+    handleDeletePost: () => void
     commentInput: React.RefObject<HTMLInputElement>
 }
 

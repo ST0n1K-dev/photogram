@@ -32,7 +32,8 @@ const style = {
 const PostModalComponent = (props: PostModalComponentInterface) => {
   const {
     isShowing, onClose, post, likes, isLiked, comments = [],
-    handleLike, handleAddComment, commentInput, isLoading, isMyPost
+    handleLike, handleAddComment, commentInput, isLoading, isMyPost,
+    handleDeletePost
   } = props;
   const [postImage, setPostImage] = useState<string>('');
 
@@ -73,6 +74,8 @@ const PostModalComponent = (props: PostModalComponentInterface) => {
                 likes={likes!}
                 isLiked={isLiked!}
                 handleLike={handleLike}
+                handleDeletePost={handleDeletePost}
+                isModal
               />
             )}
           </div>

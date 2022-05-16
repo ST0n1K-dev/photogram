@@ -1,6 +1,8 @@
 import React, {
   useState, useEffect, useContext, useRef
 } from 'react';
+import { useDispatch } from 'react-redux';
+import { deletePost, likePost, commentPost } from 'Store/SelectedProfile';
 import { useSnackbar } from 'notistack';
 
 import { UserContext } from 'Context/user';
@@ -14,6 +16,7 @@ import { PostModalContainerInterface } from './PostModal.config';
 
 const PostModalContainer = (props: PostModalContainerInterface) => {
   const { isShowing, post, onClose } = props;
+  const dispatch = useDispatch();
   const { user } = useContext(UserContext);
   const { uid: userId = '', displayName = '' } = user || {};
   const { firebase, FieldValue } = useContext(FirebaseContext) as FirebaseContextInterface;
@@ -60,6 +63,7 @@ const PostModalContainer = (props: PostModalContainerInterface) => {
           likes: isLiked ? FieldValue.arrayRemove(userId) : FieldValue.arrayUnion(userId)
         });
 
+      dispatch(likePost({ userId, docId, isLiked }));
       setLikes((prevLikes: number | undefined) => (isLiked ? prevLikes! - 1 : prevLikes! + 1));
     } catch (e) {
       enqueueSnackbar((e as Error).message, { variant: 'error' });
@@ -72,6 +76,7 @@ const PostModalContainer = (props: PostModalContainerInterface) => {
     }
 
     setComments([...comments, { displayName, comment }]);
+    dispatch(commentPost({ displayName, comment, docId }));
 
     return firebase
       .firestore()
@@ -80,6 +85,18 @@ const PostModalContainer = (props: PostModalContainerInterface) => {
       .update({
         comments: FieldValue.arrayUnion({ displayName, comment })
       });
+  };
+
+  const handleDeletePost = () => {
+    firebase
+      .firestore()
+      .collection('posts')
+      .doc(docId)
+      .delete();
+
+    dispatch(deletePost({ docId }));
+
+    onClose();
   };
 
   const containerProps = () => ({
@@ -97,7 +114,8 @@ const PostModalContainer = (props: PostModalContainerInterface) => {
     onClose,
     handleLike,
     handleAddComment,
-    handleCommentFocus
+    handleCommentFocus,
+    handleDeletePost
   };
 
   return (

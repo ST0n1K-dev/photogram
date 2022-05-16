@@ -43,11 +43,40 @@ export const selectedUserSlice = createSlice({
             ...action.payload
         };
     },
+    deletePost: (state, action: PayloadAction<{ docId: string }>) => {
+        state.posts = state.posts.filter((post) => post.docId !== action.payload.docId);
+    },
+    likePost: (state, action: PayloadAction<{
+        userId: string, docId: string, isLiked: boolean
+    }>) => {
+        const { userId, docId, isLiked } = action.payload;
+
+        state.posts = state.posts.map((post) => {
+            if (isLiked) {
+                return post.docId === docId ? {
+                ...post,
+                likes: post.likes
+                    .filter((userIdLike) => userIdLike !== userId)
+                } : post;
+            }
+
+            return post.docId === docId ? { ...post, likes: [...post.likes, userId] } : post;
+    });
+    },
+    commentPost: (state, action: PayloadAction<{
+        displayName: string, comment: string, docId: string
+    }>) => {
+        const { docId, comment, displayName } = action.payload;
+        state.posts = state.posts.map((post) => (post.docId === docId
+                ? { ...post, comments: [...post.comments, ...[{ displayName, comment }]] }
+                : post));
+    },
   },
 });
 
 export const {
-    setUser, setUserPosts, handleSelectedAccountFollow, updateUser
+    setUser, setUserPosts, handleSelectedAccountFollow, updateUser,
+    deletePost, likePost, commentPost
 } = selectedUserSlice.actions;
 
 export default selectedUserSlice.reducer;
