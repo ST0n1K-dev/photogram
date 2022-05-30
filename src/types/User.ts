@@ -1,4 +1,5 @@
 export interface User {
+	displayName?: string
     dateCreated: Date
     docId: string
     uid?: string
@@ -10,4 +11,5 @@ export interface User {
     username: string,
     profileId: string
     description?: string
+    avatar?: string
 }

@@ -39,6 +39,7 @@ export interface UserHeroInterface {
 
 export interface UserPostsInterface {
     posts?: Array<PostInterface> | Array<never>
+    profile?: User | null | object
 }
 
 export type FollowersModalType = 'followers' | 'following';
@@ -55,4 +56,11 @@ export interface UserProfileInterface {
     username: string
     userId: string
     docId: string
+    avatar?: string
+}
+
+export interface PostContentInterface {
+    post: PostInterface
+    onPostClick: (post: PostInterface) => void
+    username: string
 }

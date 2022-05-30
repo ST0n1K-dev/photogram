@@ -1,14 +1,19 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
+
+import PostModal from 'Component/PostModal';
+import useModal from 'Hook/useModal';
 
 import AddComment from './AddComment';
 
 import { PostCommentsInterface } from './Post.config';
 
 const PostComments = (props: PostCommentsInterface) => {
+    const { isShowing, toggle } = useModal();
 	const {
-        comments, dateCreated, docId, handleAddComment, commentInput
+        comments, dateCreated, docId, handleAddComment, commentInput, post
     } = props;
 
 	return (
@@ -22,7 +27,14 @@ const PostComments = (props: PostCommentsInterface) => {
                 <span className="Post__Comment--commentBody">{comment}</span>
             </div>
         )) }
-        { comments.length > 2 && <p className="Post__Comment--viewAll">View all comments</p> }
+        { comments.length > 2 && (
+            <Button
+                className="Post__Comment--viewAll"
+                onClick={toggle}
+            >
+                View all comments
+            </Button>
+        )}
         <AddComment
             docId={docId}
             comments={comments}
@@ -30,6 +42,7 @@ const PostComments = (props: PostCommentsInterface) => {
             commentInput={commentInput}
         />
         <p className="Post__Comment--date">{formatDistanceToNow(dateCreated)} ago</p>
+        {post && <PostModal isShowing={isShowing} post={post} onClose={toggle} /> }
         </>
     );
 };

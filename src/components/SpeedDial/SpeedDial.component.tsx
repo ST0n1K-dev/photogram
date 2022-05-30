@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { IconButton, Box } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useFirebase } from 'Hook/useFirebase';
-import useUser from 'Hook/useUser';
 
 import { FirebaseContextInterface } from 'Context/firebase';
 
@@ -11,8 +10,7 @@ import { SpeedDialProps } from './SpeedDial.config';
 import './SpeedDial.style.scss';
 
 const SpeedDialComponent: React.FC<SpeedDialProps> = (props) => {
-	const { speedDialActions } = props;
-	const { user } = useUser();
+	const { speedDialActions, user } = props;
 	const { firebase } = useFirebase() as FirebaseContextInterface;
 
 	return (

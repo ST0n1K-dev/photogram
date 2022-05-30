@@ -1,4 +1,5 @@
 import React from 'react';
+import { User } from 'Type/User';
 
 export type SpeedDialActions = {
 	icon: React.ReactNode,
@@ -8,5 +9,6 @@ export type SpeedDialActions = {
 }
 
 export interface SpeedDialProps {
-	speedDialActions: SpeedDialActions[]
+	speedDialActions: SpeedDialActions[],
+	user: User | object
 }

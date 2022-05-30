@@ -32,9 +32,14 @@ export interface PostImageInterface {
 
 export interface PostActionsInterface {
     likes: number
+    isModal?: boolean
+    editAvailable?: boolean
+    deleteAvailable?: boolean
     isLiked: boolean
-    handleCommentFocus: () => void
+    handleCommentFocus?: () => void
     handleLike: () => Promise<void>
+    handleEditPost?: () => void
+    handleDeletePost?: () => void
 }
 
 export interface PostContentInterface {
@@ -44,6 +49,7 @@ export interface PostContentInterface {
 
 export interface PostCommentsInterface {
     comments: Array<Comment>
+    post: PostInterface
     dateCreated: number
     docId: string
     handleAddComment: (e: React.SyntheticEvent, comment: string) => void

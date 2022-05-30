@@ -43,7 +43,7 @@ const NavigationContainer: React.FC = () => {
                 });
 
                 enqueueSnackbar('Your account has been created', { variant: 'success' });
-                navigate(ROUTES.HOME);
+                navigate(ROUTES.SIGNIN);
             } catch (error: unknown) {
                 enqueueSnackbar((error as Error).message, { variant: 'error' });
             }

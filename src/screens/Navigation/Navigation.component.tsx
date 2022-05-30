@@ -11,6 +11,7 @@ const SignInScreen = lazy(() => import('../SignIn'));
 const SignUpScreen = lazy(() => import('../SignUp'));
 const NotFoundScreen = lazy(() => import('../NotFound'));
 const ProfileScreen = lazy(() => import('../Profile'));
+const CreatePost = lazy(() => import('../CreatePost'));
 
 const Navigation = ({ children, user }: NavigationProps) => (
 	<>
@@ -20,7 +21,7 @@ const Navigation = ({ children, user }: NavigationProps) => (
 				<Route element={<ProtectedRoute user={user} />}>
 					<Route path={ROUTES.HOME} element={<HomeScreen />} />
 					<Route path={ROUTES.PROFILE} element={<ProfileScreen />} />
-					<Route path={ROUTES.DIRECT} element={<div>Messages</div>} />
+					<Route path={ROUTES.CREATE_POST} element={<CreatePost />} />
 				</Route>
 				<Route
 					path={ROUTES.SIGNIN}

@@ -37,6 +37,10 @@ export const getUserById = async (userId: string) => {
 };
 
 export const getUsersById = async (userIds: Array<string>) => {
+    if (userIds.length < 1) {
+        return [];
+    }
+
     const response = await firebase
 		.firestore()
 		.collection('users')
@@ -132,6 +136,35 @@ export const getPosts = async (userId: string, following: Array<string>) => {
     return detailedPosts;
 };
 
+export const getDetailedPost = async (userId: string, postId: number) => {
+    const response = await firebase
+		.firestore()
+		.collection('posts')
+		.where('photoId', '==', postId)
+        .get();
+
+    const followedUsersPosts: any = response.docs.map((post) => ({
+        ...post.data(),
+        docId: post.id
+    }));
+
+    const detailedPost: Array<PostInterface> = await Promise.all(
+        followedUsersPosts.map(async (post: any) => {
+            let isLiked = false;
+            if (post.likes.includes(userId)) {
+                isLiked = true;
+            }
+
+            const user: any = await getUserById(post.userId);
+            const { username } = user[0];
+
+            return { username, ...post, isLiked };
+        })
+    );
+
+    return detailedPost[0];
+};
+
 export const getUserPosts = async (user: User): Promise<Array<PostInterface>> => {
     const response = await firebase
 		.firestore()
@@ -142,7 +175,7 @@ export const getUserPosts = async (user: User): Promise<Array<PostInterface>> =>
     return response.docs.map((post) => ({
         ...post.data(),
         docId: post.id
-    } as PostInterface));
+    } as PostInterface)).sort((a, b) => b.dateCreated - a.dateCreated);
 };
 
 export const getIsFollowingProfile = async (
@@ -159,14 +192,40 @@ export const getIsFollowingProfile = async (
 	return response.docs.map((user) => user.data().length > 0).length > 0;
 };
 
-export const getUserAvatar = (userId: string) => {
+export const getUserAvatar = (username: string) => {
     try {
-        const path = ref(storage, `avatars/${userId}`);
+        const path = ref(storage, `avatars/${username}/avatar`);
 
-        return getDownloadURL(path)
-            .then((url) => Promise.resolve(url))
-            .catch(() => Promise.resolve(''));
+        if (path) {
+            return getDownloadURL(path)
+                .then((foundURL) => foundURL, () => '');
+        }
+
+        return '';
     } catch {
         return '';
     }
+};
+
+export const createPost = async (userId: string, caption: string) => {
+    const { id: postId } = await firebase
+		.firestore()
+		.collection('posts')
+        .add({
+            caption,
+            comments: [],
+            dateCreated: Date.now(),
+            likes: [],
+            userId,
+            photoId: +(new Date().getTime().toString())
+        });
+
+    return postId;
+};
+
+export const getPostImage = (username: string, postDocId: string): Promise<string> => {
+    const path = ref(storage, `posts/${username}/${postDocId}`);
+
+    return getDownloadURL(path)
+        .then((foundURL) => foundURL, () => '');
 };

@@ -1,15 +1,14 @@
-import { ReducerStateInterface } from 'Component/Profile/Profile.config';
-import React from 'react';
 import * as Yup from 'yup';
 
 export interface SettingsModalContainerInterface {
     fullName: string
+    username: string
+    avatar: string
     description: string
     docId: string
     userId: string
     isShowing: boolean
     onClose: () => void
-    dispatch: React.Dispatch<ReducerStateInterface>
 }
 
 export interface SettingsModalComponentInterface {
@@ -17,13 +16,14 @@ export interface SettingsModalComponentInterface {
     onClose: () => void
     fullName: string
     description?: string
+    avatar: string,
     handleUpdateProfile: (values: UserFormInterface) => void
 }
 
 export interface UserFormInterface {
     fullName: string,
     description?: string,
-    avatar?: File
+    avatar?: string
 }
 
 export const ProfileSettingsSchema = Yup.object().shape({

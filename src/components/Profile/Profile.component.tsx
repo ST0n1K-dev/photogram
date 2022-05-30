@@ -37,7 +37,7 @@ const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
         dispatch={dispatch}
       />
       <Divider />
-      <UserPosts posts={posts} />
+      <UserPosts posts={posts} profile={profile} />
     </div>
   );
 };

@@ -19,6 +19,9 @@
       ],
       "Util/*": [
         "./utils/*"
+      ],
+      "Store/*": [
+        "./redux/slices/*"
       ]
     }
   }
