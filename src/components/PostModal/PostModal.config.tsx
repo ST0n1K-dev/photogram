@@ -25,6 +25,9 @@ export interface PostModalComponentInterface {
     handleAddComment: (e: React.SyntheticEvent, comment: string) => void
     handleCommentFocus?: () => void
     handleDeletePost: () => void
+    handleEditPostClick?: () => void
+    exitPostEditMode?: () => void
+    updatePostCaption: (caption: string) => void
     commentInput: React.RefObject<HTMLInputElement>
 }
 

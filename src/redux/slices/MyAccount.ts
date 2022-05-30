@@ -47,7 +47,7 @@ export const myAccountSlice = createSlice({
     },
     setFollowingPosts: (state, action: PayloadAction<Array<PostInterface>>) => {
         state.followingPosts = action.payload;
-    },
+    }
   },
 });
 

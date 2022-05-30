@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import myAccountReducer from './slices/MyAccount';
-import selectedProfiletReducer from './slices/SelectedProfile';
+import selectedProfileReducer from './slices/SelectedProfile';
+import postActionsReducer from './slices/PostActions';
 
 export const store = configureStore({
   reducer: {
     MyAccount: myAccountReducer,
-    SelectedProfile: selectedProfiletReducer
+    SelectedProfile: selectedProfileReducer,
+    PostActions: postActionsReducer
   },
 });
 

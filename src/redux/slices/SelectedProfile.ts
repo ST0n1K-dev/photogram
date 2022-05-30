@@ -71,12 +71,21 @@ export const selectedUserSlice = createSlice({
                 ? { ...post, comments: [...post.comments, ...[{ displayName, comment }]] }
                 : post));
     },
+    updateUserPostCaption: (state, action: PayloadAction<{
+        docId: string, caption: string
+    }>) => {
+        const { docId, caption } = action.payload;
+
+        state.posts = state.posts.map(
+            (post) => (post.docId === docId ? { ...post, caption } : post)
+        );
+    },
   },
 });
 
 export const {
     setUser, setUserPosts, handleSelectedAccountFollow, updateUser,
-    deletePost, likePost, commentPost
+    deletePost, likePost, commentPost, updateUserPostCaption
 } = selectedUserSlice.actions;
 
 export default selectedUserSlice.reducer;

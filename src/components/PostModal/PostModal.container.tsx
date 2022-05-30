@@ -2,7 +2,10 @@ import React, {
   useState, useEffect, useContext, useRef
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { deletePost, likePost, commentPost } from 'Store/SelectedProfile';
+import {
+  deletePost, likePost, commentPost, updateUserPostCaption
+} from 'Store/SelectedProfile';
+import { setPostEditMode } from 'Store/PostActions';
 import { useSnackbar } from 'notistack';
 
 import { UserContext } from 'Context/user';
@@ -99,6 +102,25 @@ const PostModalContainer = (props: PostModalContainerInterface) => {
     onClose();
   };
 
+  const handleEditPostClick = () => {
+    dispatch(setPostEditMode(true));
+  };
+
+  const exitPostEditMode = () => {
+    dispatch(setPostEditMode(false));
+  };
+
+  const updatePostCaption = (caption: string) => {
+    firebase
+      .firestore()
+      .collection('posts')
+      .doc(docId)
+      .update({ caption });
+
+    dispatch(updateUserPostCaption({ docId, caption }));
+    dispatch(setPostEditMode(false));
+  };
+
   const containerProps = () => ({
     isShowing,
     post: detailedPost,
@@ -110,12 +132,21 @@ const PostModalContainer = (props: PostModalContainerInterface) => {
     isMyPost: post?.userId === userId
   });
 
+  const onPostModalClose = () => {
+    dispatch(setPostEditMode(false));
+
+    onClose();
+  };
+
   const containerFunctions = {
-    onClose,
+    onClose: onPostModalClose,
     handleLike,
     handleAddComment,
     handleCommentFocus,
-    handleDeletePost
+    handleDeletePost,
+    handleEditPostClick,
+    exitPostEditMode,
+    updatePostCaption
   };
 
   return (
