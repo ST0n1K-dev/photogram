@@ -53,6 +53,8 @@ const PostContainer: React.FC<PostContainerInterface> = ({ post }) => {
       });
   };
 
+  const handleEditPost = () => {};
+
   const handleCommentFocus = () => {
     if (commentInput && commentInput.current) {
       commentInput.current.focus();
@@ -70,7 +72,8 @@ const PostContainer: React.FC<PostContainerInterface> = ({ post }) => {
   const containerFunctions = {
     handleLike,
     handleCommentFocus,
-    handleAddComment
+    handleAddComment,
+    handleEditPost
   };
 
   return (

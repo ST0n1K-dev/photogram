@@ -13,7 +13,7 @@ import { PostActionsInterface } from './Post.config';
 
 const PostActions = ({
     likes, isLiked, handleLike, handleCommentFocus, editAvailable, deleteAvailable,
-    handleEditPost, handleDeletePost
+    handleEditPostClick, handleDeletePost
 }: PostActionsInterface) => (
     <div className="Post__Actions">
         <div className="Post__Actions--buttons">
@@ -29,7 +29,7 @@ const PostActions = ({
                 <ChatBubbleOutlineIcon />
             </IconButton>
             {editAvailable && (
-                <IconButton onClick={handleEditPost}>
+                <IconButton onClick={handleEditPostClick}>
                     <EditIcon />
                 </IconButton>
             )}

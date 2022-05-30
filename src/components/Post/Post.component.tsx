@@ -12,7 +12,7 @@ import './Post.style.scss';
 
 const PostComponent: React.FC<PostComponentInterface> = (props) => {
   const {
-    post = {}, likes, handleLike, isLiked,
+    post = {}, likes, handleLike, isLiked, handleEditPost,
     comments, handleCommentFocus, handleAddComment, commentInput
   } = props;
   const [postImage, setPostImage] = useState<string>('');
@@ -48,6 +48,7 @@ const PostComponent: React.FC<PostComponentInterface> = (props) => {
         likes={likes}
         isLiked={isLiked}
         handleLike={handleLike}
+        handleEditPost={handleEditPost}
         handleCommentFocus={handleCommentFocus}
       />
       <PostContent username={username} caption={caption} />
