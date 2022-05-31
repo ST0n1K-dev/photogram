@@ -1,0 +1,34 @@
+.SearchPage {
+    justify-content: center;
+    text-align: center;
+    padding: 40px 0;
+
+    &__InputWrapper {
+        width: 80%;
+    }
+
+    &__FoundUsers {
+        margin: 40px 0;
+    }
+}
+
+.SearchUsers {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+
+    .FollowingUser {
+        display: flex;
+        column-gap: 30px;
+        align-items: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+
+        &__Info {
+            &--title {
+                margin: 0;
+            }
+        }
+    }
+}

@@ -229,3 +229,17 @@ export const getPostImage = (username: string, postDocId: string): Promise<strin
     return getDownloadURL(path)
         .then((foundURL) => foundURL, () => '');
 };
+
+export const searchUsersByUsername = async (username: string): Promise<Array<User>> => {
+    const response = await firebase
+        .firestore()
+        .collection('users')
+        .where('username', '>=', username)
+        .where('username', '<=', `${username}~`)
+        .get();
+
+    return response.docs.map((user) => ({
+        ...user.data(),
+        docId: user.id
+    } as User));
+};

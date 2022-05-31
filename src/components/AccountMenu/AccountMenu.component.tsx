@@ -12,7 +12,8 @@ import { User } from 'Type/User';
 import {
 	Person as PersonIcon,
 	Add as AddIcon,
-	Home as HomeIcon
+	Home as HomeIcon,
+	Search as SearchIcon
 } from '@mui/icons-material';
 import * as ROUTES from 'Type/routes';
 
@@ -33,9 +34,10 @@ const MenuItems = () => {
 
 	return (
 		<>
-			{user && renderDrawerListItem('Home', <HomeIcon />, ROUTES.HOME)}
+			{user && renderDrawerListItem('Home', <SearchIcon />, ROUTES.SEARCH)}
+			{user && renderDrawerListItem('Search', <HomeIcon />, ROUTES.HOME)}
 			{renderDrawerListItem('Profile', <PersonIcon />, user ? `/profile/${(user as User).username}` : ROUTES.SIGNIN)}
-			{user && renderDrawerListItem('Create post', <AddIcon />, ROUTES.PROFILE)}
+			{user && renderDrawerListItem('Create post', <AddIcon />, ROUTES.CREATE_POST)}
 		</>
 	);
 };

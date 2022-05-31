@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import {
 	Person as PersonIcon,
 	Add as AddIcon,
-	Home as HomeIcon
+	Home as HomeIcon,
+	Search as SearchIcon
 } from '@mui/icons-material';
 import * as ROUTES from 'Type/routes';
 import { User } from 'Type/User';
@@ -33,6 +34,7 @@ const SpeedDialContainer = () => {
 
 	if (activeUser && Object.keys(activeUser).length > 0) {
 		speedDialActions.splice(0, 0, { icon: <HomeIcon />, name: 'Home', url: ROUTES.HOME });
+		speedDialActions.splice(1, 0, { icon: <SearchIcon />, name: 'Search', url: ROUTES.SEARCH });
 		speedDialActions.splice(2, 0, { icon: <AddIcon />, name: 'New post', url: ROUTES.CREATE_POST });
 	}
 
