@@ -1,18 +1,15 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import {
     Box,
     Modal,
-    Typography,
-    Avatar
+    Typography
 } from '@mui/material';
-import useUser from 'Hook/useUser';
-import { useUserAvatar } from 'Hook/useUserAvatar';
 import { User } from 'Type/User';
 import { getUsersById } from 'Util/firebase';
+import FollowingUserProfile from './FollowingUserProfile';
 
-import { FollowersModalInterface, UserProfileInterface } from './Profile.config';
+import { FollowersModalInterface } from './Profile.config';
 
 const style = {
     position: 'absolute',
@@ -25,38 +22,6 @@ const style = {
     boxShadow: 24,
     p: 4,
   };
-
-const FollowingUserProfile = (props: UserProfileInterface) => {
-    const {
-        fullName, username
-    } = props;
-    const { user } = useUser();
-    const { avatar } = useUserAvatar(username);
-    const {
-        username: currentUsername = ''
-    } = user as User || {};
-
-    return (
-        <Link to={`/profile/${username}`}>
-            <div className="FollowingUser">
-                <Avatar alt="Remy Sharp" src={avatar || '/images/avatar.png'} />
-                <div className="FollowingUser__InfoWrapper">
-                    <div className="FollowingUser__Info">
-                        <h5 className="FollowingUser__Info--title">
-                            {fullName}
-                        </h5>
-                        <span className="FollowingUser__Info--username">
-                            {username}
-                        </span>
-                    </div>
-                    <div className="FollowingUser__Action">
-                        { currentUsername === username && <span>It&apos;s you</span> }
-                    </div>
-                </div>
-            </div>
-        </Link>
-    );
-};
 
 const FollowersModal = ({
     isOpen, onClose, followers, type
