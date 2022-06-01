@@ -15,8 +15,8 @@ function App() {
 			<BrowserRouter>
 				<SnackbarProvider
 					anchorOrigin={{
-						vertical: 'top',
-						horizontal: 'right',
+						vertical: 'bottom',
+						horizontal: 'left',
 					}}
 					maxSnack={3}
 				>
