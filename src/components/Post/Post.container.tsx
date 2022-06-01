@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSnackbar } from 'notistack';
-
+import { likeStripPost, commentStripPost } from 'Store/MyAccount';
 import { PostInterface } from 'Type/Post';
 
 import UserContext from 'Context/user';
@@ -10,6 +11,8 @@ import { PostContainerInterface } from './Post.config';
 
 const PostContainer: React.FC<PostContainerInterface> = ({ post }) => {
   const { user } = useContext(UserContext);
+  const dispatch = useDispatch();
+
   const { uid: userId = '', displayName = '' } = user || {};
   const { firebase, FieldValue } = useContext(FirebaseContext) as FirebaseContextInterface;
 
@@ -31,6 +34,7 @@ const PostContainer: React.FC<PostContainerInterface> = ({ post }) => {
           likes: isLiked ? FieldValue.arrayRemove(userId) : FieldValue.arrayUnion(userId)
         });
 
+      dispatch(likeStripPost({ userId, docId, isLiked }));
       setLikes((prevLikes: number) => (isLiked ? prevLikes - 1 : prevLikes + 1));
     } catch (e) {
       enqueueSnackbar((e as Error).message, { variant: 'error' });
@@ -43,6 +47,7 @@ const PostContainer: React.FC<PostContainerInterface> = ({ post }) => {
     }
 
     setComments([...comments, { displayName, comment }]);
+    dispatch(commentStripPost({ displayName, comment, docId }));
 
     return firebase
       .firestore()

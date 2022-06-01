@@ -47,13 +47,38 @@ export const myAccountSlice = createSlice({
     },
     setFollowingPosts: (state, action: PayloadAction<Array<PostInterface>>) => {
         state.followingPosts = action.payload;
-    }
+    },
+    likeStripPost: (state, action: PayloadAction<{
+        userId: string, docId: string, isLiked: boolean
+    }>) => {
+        const { userId, docId, isLiked } = action.payload;
+
+        state.followingPosts = state.followingPosts.map((post) => {
+            if (isLiked) {
+                return post.docId === docId ? {
+                ...post,
+                likes: post.likes
+                    .filter((userIdLike) => userIdLike !== userId)
+                } : post;
+            }
+
+            return post.docId === docId ? { ...post, likes: [...post.likes, userId] } : post;
+    });
+    },
+    commentStripPost: (state, action: PayloadAction<{
+        displayName: string, comment: string, docId: string
+    }>) => {
+        const { docId, comment, displayName } = action.payload;
+        state.followingPosts = state.followingPosts.map((post) => (post.docId === docId
+                ? { ...post, comments: [...post.comments, ...[{ displayName, comment }]] }
+                : post));
+    },
   },
 });
 
 export const {
     setUser, setUserPosts, handleFollow, updateUser,
-    setFollowingPosts
+    setFollowingPosts, likeStripPost, commentStripPost
 } = myAccountSlice.actions;
 
 export default myAccountSlice.reducer;
