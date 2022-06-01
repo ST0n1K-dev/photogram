@@ -231,14 +231,23 @@ export const getPostImage = (username: string, postDocId: string): Promise<strin
 };
 
 export const searchUsersByUsername = async (username: string): Promise<Array<User>> => {
-    const response = await firebase
+    const responseByUsername = await firebase
         .firestore()
         .collection('users')
         .where('username', '>=', username)
         .where('username', '<=', `${username}~`)
         .get();
 
-    return response.docs.map((user) => ({
+    const responseByName = await firebase
+        .firestore()
+        .collection('users')
+        .where('fullName', '>=', username)
+        .where('fullName', '<=', `${username}~`)
+        .get();
+
+    return [...responseByUsername.docs, ...responseByName.docs]
+        .filter((v, i, a) => a.indexOf(v) === i)
+        .map((user) => ({
         ...user.data(),
         docId: user.id
     } as User));
