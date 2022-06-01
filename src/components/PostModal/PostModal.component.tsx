@@ -92,7 +92,7 @@ const PostModalComponent = (props: PostModalComponentInterface) => {
                   updatePostCaption={updatePostCaption}
                 />
                 <Divider />
-                <h3>Comments</h3>
+                <h3>Коментарі</h3>
               </div>
               <Comments
                 comments={comments}

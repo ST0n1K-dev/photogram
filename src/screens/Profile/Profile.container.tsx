@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getUserByUsername, getUserPosts, getUserAvatar } from 'Util/firebase';
@@ -13,9 +13,11 @@ const ProfileContainer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.SelectedProfile.user);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     async function isUserExists() {
+      setIsLoading(true);
       const receivedUser = await getUserByUsername(username!);
 
       if (receivedUser.length) {
@@ -29,13 +31,15 @@ const ProfileContainer = () => {
         dispatch(setUser({}));
         navigate(ROUTES.NOTFOUND);
       }
+      setIsLoading(false);
     }
 
     isUserExists();
   }, [username, dispatch, navigate]);
 
   const containerProps = () => ({
-    user
+    user,
+    isLoading
   });
 
   const containerFunctions = {};
