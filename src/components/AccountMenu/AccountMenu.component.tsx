@@ -92,7 +92,7 @@ const AccountMenu: React.FC<HeaderProps> = (props) => {
 				<ListItemIcon>
 					<Logout fontSize="small" />
 				</ListItemIcon>
-				Logout
+				Вийти
 			</MenuItem>
 		</Menu>
 	);

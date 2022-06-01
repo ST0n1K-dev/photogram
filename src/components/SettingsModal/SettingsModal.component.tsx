@@ -53,7 +53,7 @@ const SettingsModalComponent: React.FC<SettingsModalComponentInterface> = (
 			>
 				<Box className="SettingsModal" sx={style}>
 					<Typography id="title" variant="h6" component="h2">
-						Settings
+						Налаштування
 					</Typography>
 					<Formik
 						initialValues={{ fullName, description, avatar }}
@@ -125,7 +125,7 @@ const SettingsModalComponent: React.FC<SettingsModalComponentInterface> = (
 									}
 								/>
 								<Button type="submit" variant="contained">
-									Save
+									Зберегти
 								</Button>
 							</Form>
 						)}

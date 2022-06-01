@@ -49,7 +49,7 @@ const SearchComponent: React.FC<SearchComponentInterface> = (props) => {
                     </div>
                 )
                 : (
-                    <h3 className="SearchPage__NoResults">No results found. Specify the search, please.</h3>
+                    <h3 className="SearchPage__NoResults">Нічого не знайдено. Будь ласка, уточніть пошуковий запит.</h3>
                 ))}
             </div>
         </div>

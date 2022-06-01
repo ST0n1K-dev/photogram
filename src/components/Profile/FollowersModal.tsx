@@ -58,7 +58,7 @@ const FollowersModal = ({
                         userId={profile?.userId}
                         docId={profile?.docId}
                     />
-                )) : <h4 className="FollowersModal__NoUsers">No people here</h4>}
+                )) : <h4 className="FollowersModal__NoUsers">Нажаль, тут нікого немає</h4>}
             </Box>
             </Modal>
         </div>

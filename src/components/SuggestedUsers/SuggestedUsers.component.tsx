@@ -16,7 +16,7 @@ const SuggestedUsersComponent = (props: SuggestedUsersComponentInterface): any =
 
 	return (
     <>
-      <h4>Check out this ninjas</h4>
+      <h4>Рекомендовані користувачі</h4>
       <div className="SuggestedUsers__Wrapper">
         { profiles.map((profile) => {
           const {

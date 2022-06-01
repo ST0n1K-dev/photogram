@@ -84,14 +84,14 @@ export const SignIn: React.FC<SingUpInterface> = (props) => {
 			</div>
 			<div className="SignUp__LoginFormWrapper">
 				<h2 className="SignUp__LoginFormWrapper--title">
-					Create a new account
+					Створіть новий акаунт
 				</h2>
 				<div className="SignUp__LoginForm">
 					<SignUpForm handleSignUp={handleSignUp} />
 				</div>
 				<div className="SignUp__CreateAccount">
-					<p>Already have an account?</p>
-					<Link to={ROUTES.SIGNIN}>Sign in</Link>
+					<p>Вже маєте акаунт?</p>
+					<Link to={ROUTES.SIGNIN}>Увійти</Link>
 				</div>
 			</div>
 		</div>

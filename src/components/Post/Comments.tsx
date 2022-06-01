@@ -18,7 +18,7 @@ const PostComments = (props: PostCommentsInterface) => {
 
 	return (
         <>
-        <p className="Post__Comment--title">Comments</p>
+        <p className="Post__Comment--title">Коментарі</p>
         { comments.slice(0, 2).map(({ comment, displayName }) => (
             <div key={`${displayName}${comment}`} className="Post__Comment">
                 <Link to={`/profile/${displayName}`}>
@@ -32,7 +32,7 @@ const PostComments = (props: PostCommentsInterface) => {
                 className="Post__Comment--viewAll"
                 onClick={toggle}
             >
-                View all comments
+                Переглянути всі коментарі
             </Button>
         )}
         <AddComment

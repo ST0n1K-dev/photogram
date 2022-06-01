@@ -44,7 +44,7 @@ const SignInForm: React.FC<SingInInterface> = ({ handleLogin }) => {
                         onBlur={handleBlur('password')}
                         error={(errors.password && touched.password) ? errors.password : null}
 					/>
-					<Button type="submit" variant="contained">Sign In</Button>
+					<Button type="submit" variant="contained">Увійти</Button>
 				</Form>
 			)}
 		</Formik>
@@ -64,14 +64,14 @@ export const SignIn: React.FC<SingInInterface> = (props) => {
 			</div>
 			<div className="SignIn__LoginFormWrapper">
 				<h2 className="SignIn__LoginFormWrapper--title">
-					Login to your account
+					Увійдіть до вашого акаунту
 				</h2>
 				<div className="SignIn__LoginForm">
 					<SignInForm handleLogin={handleLogin} />
 				</div>
 				<div className="SignIn__CreateAccount">
-					<p>Don&apos;t have an account?</p>
-					<Link to={ROUTES.SIGNUP}>Sign up</Link>
+					<p>Ще не маєте акаунта?</p>
+					<Link to={ROUTES.SIGNUP}>Зареєструватися</Link>
 				</div>
 			</div>
 		</div>
