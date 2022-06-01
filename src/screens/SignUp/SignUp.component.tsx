@@ -64,7 +64,7 @@ const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp }) => {
                         onBlur={handleBlur('password')}
                         error={(errors.password && touched.password) ? errors.password : null}
 					/>
-					<Button type="submit" variant="contained">Sign Up</Button>
+					<Button type="submit" variant="contained">Зареєструватись</Button>
 				</Form>
 			)}
 		</Formik>
