@@ -30,6 +30,8 @@ const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
     }}
     >
     {({
+      errors,
+      touched,
       values,
       handleBlur,
       handleChange,
@@ -64,6 +66,7 @@ const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
               </figcaption>
             </figure>
           </label>
+          { (errors.postPicture && touched.postPicture) ? <p style={{ color: 'red' }}>{errors.postPicture}</p> : null }
         </div>
         <TextField
           id="caption"
@@ -76,6 +79,8 @@ const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
           onChange={handleChange('caption')}
           onBlur={handleBlur('caption')}
         />
+        { (errors.caption && touched.caption) ? <p style={{ color: 'red' }}>{errors.caption}</p> : null }
+
         <Button type="submit" variant="contained">
           Створити пост
         </Button>

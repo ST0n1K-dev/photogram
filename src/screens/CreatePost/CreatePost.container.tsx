@@ -42,6 +42,11 @@ const CreatePostContainer = () => {
     try {
       const { postPicture, caption } = values;
 
+      if (!postPicture || !caption) {
+        enqueueSnackbar('Fill all the necessary fields to create your post', { variant: 'error' });
+        return;
+      }
+
       const postId = await createPost(userId, caption!);
 
       if (postPicture) {

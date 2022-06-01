@@ -20,8 +20,8 @@ export interface PostFormComponentInterface {
 }
 
 export const CreatePostSchema = Yup.object().shape({
-    postPicture: Yup.string().required(),
+    postPicture: Yup.string().required('You need to select a picture'),
     caption: Yup.string()
         .max(1000, 'Too Long!')
-        .required()
+        .required('Caption is required')
 });
