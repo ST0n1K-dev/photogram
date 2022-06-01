@@ -28,7 +28,7 @@ const FollowingUserProfile = (props: UserProfileInterface) => {
 					</div>
 					<div className="FollowingUser__Action">
 						{currentUsername === username && (
-							<span>It&apos;s you</span>
+							<span>Це ви</span>
 						)}
 					</div>
 				</div>

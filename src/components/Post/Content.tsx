@@ -35,8 +35,8 @@ const PostCaption = ({
                 value={postCaption}
                 onChange={handlePostCaptionChange}
             />
-            <Button onClick={() => updatePostCaption && updatePostCaption(postCaption)} variant="contained">Update</Button>
-            <Button onClick={exitPostEditMode} variant="outlined">Cancel</Button>
+            <Button onClick={() => updatePostCaption && updatePostCaption(postCaption)} variant="contained">Оновити</Button>
+            <Button onClick={exitPostEditMode} variant="outlined">Відміна</Button>
         </div>
     );
 };

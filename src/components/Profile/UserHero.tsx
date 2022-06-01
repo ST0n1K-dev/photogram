@@ -109,16 +109,16 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 				{username ? (
 					<div className="Profile__Details--statistics">
 						<p className="Profile__Details--stat">
-							<b>{postsTotal}</b> posts
+							<b>{postsTotal}</b> постів
 						</p>
 						<button type="button" className="Profile__Details--button" onClick={handleFollowersPopupOpen}>
 							<p className="Profile__Details--stat">
-								<b>{totalFollowers}</b> followers
+								<b>{totalFollowers}</b> підписників
 							</p>
 						</button>
 						<button type="button" className="Profile__Details--button" onClick={handleFollowingPopupOpen}>
 							<p className="Profile__Details--stat">
-								<b>{following?.length}</b> following
+								<b>{following?.length}</b> стежить
 							</p>
 						</button>
 					</div>

@@ -36,7 +36,7 @@ const SuggestedUserProfileComponent: React.FC<SuggestedUserProfileComponentInter
 					</div>
 					<div className="SuggestedUsers__Action">
 						<Button onClick={followUser} variant="text">
-							Follow
+							Підписатися
 						</Button>
 					</div>
 				</div>

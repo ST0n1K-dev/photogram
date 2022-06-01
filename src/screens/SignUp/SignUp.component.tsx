@@ -30,7 +30,7 @@ const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp }) => {
 					<InputField
                         id="email"
                         name="email"
-                        placeholder="Email"
+                        placeholder="Пошта"
                         value={values.email}
                         onChange={handleChange('email')}
                         onBlur={handleBlur('email')}
@@ -39,7 +39,7 @@ const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp }) => {
                     <InputField
                         id="username"
                         name="username"
-                        placeholder="Username"
+                        placeholder="Ім'я користувача"
                         value={values.username}
                         onChange={handleChange('username')}
                         onBlur={handleBlur('username')}
@@ -48,7 +48,7 @@ const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp }) => {
 					<InputField
                         id="fullName"
                         name="fullName"
-                        placeholder="Full Name"
+                        placeholder="Повне ім'я"
                         value={values.fullName}
                         onChange={handleChange('fullName')}
                         onBlur={handleBlur('fullName')}
@@ -58,7 +58,7 @@ const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp }) => {
                         id="password"
                         type="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="Пароль"
                         value={values.password}
                         onChange={handleChange('password')}
                         onBlur={handleBlur('password')}
@@ -84,14 +84,14 @@ export const SignIn: React.FC<SingUpInterface> = (props) => {
 			</div>
 			<div className="SignUp__LoginFormWrapper">
 				<h2 className="SignUp__LoginFormWrapper--title">
-					Create a new account
+					Створіть новий акаунт
 				</h2>
 				<div className="SignUp__LoginForm">
 					<SignUpForm handleSignUp={handleSignUp} />
 				</div>
 				<div className="SignUp__CreateAccount">
-					<p>Already have an account?</p>
-					<Link to={ROUTES.SIGNIN}>Sign in</Link>
+					<p>Вже маєте акаунт?</p>
+					<Link to={ROUTES.SIGNIN}>Увійти</Link>
 				</div>
 			</div>
 		</div>

@@ -10,13 +10,12 @@ const NotFound = () => (
 			<img src="https://i.postimg.cc/2yrFyxKv/giphy.gif" alt="gif_ing" />
 		</div>
 		<div className="NotFound__content">
-			<h1 className="NotFound__content--heading">This page is gone.</h1>
+			<h1 className="NotFound__content--heading">Ця сторінка не існує.</h1>
 			<p>
-				...maybe the page you&apos;re looking for is not found or never
-				existed.
+				...схоже що ти шукав те чого ще не існуж на цьому сайті.
 			</p>
 			<Link to={ROUTES.HOME}>
-				<Button>Go back home</Button>
+				<Button>Повернутись на головну</Button>
 			</Link>
 		</div>
 	</div>

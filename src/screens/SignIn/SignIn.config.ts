@@ -6,11 +6,9 @@ export interface SingInInterface {
 }
 
 export const SignupSchema = Yup.object().shape({
-    username: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .matches(/[a-zA-Z]/, 'Username latin letters only.')
-      .required('Required'),
+    email: Yup.string()
+      .email('Invalid email format')
+      .required('Email is required'),
     password: Yup.string()
         .required('No password provided.')
         .min(8, 'Password is too short - should be 8 chars minimum.')
@@ -18,6 +16,6 @@ export const SignupSchema = Yup.object().shape({
   });
 
 export interface SignInValues {
-    username: string;
+    email: string;
     password: string;
 }

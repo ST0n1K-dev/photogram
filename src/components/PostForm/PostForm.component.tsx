@@ -77,7 +77,7 @@ const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
           onBlur={handleBlur('caption')}
         />
         <Button type="submit" variant="contained">
-          Create post
+          Створити пост
         </Button>
       </Form>
     )}

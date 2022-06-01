@@ -64,7 +64,7 @@ const UserPosts = ({ posts, profile }: UserPostsInterface) => {
 		return (
 			<div className="Profile__UserPosts--noPosts">
 				<PhotoCamera />
-				<h3>No posts there yet</h3>
+				<h3>Нажаль, поки постів немає</h3>
 			</div>
 		);
 	}

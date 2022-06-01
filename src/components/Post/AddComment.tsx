@@ -44,7 +44,7 @@ const PostAddComment = (props: AddCommentInterface) => {
                     type="submit"
                     disabled={!comment.length}
                 >
-                    Comment
+                    Коментувати
                 </Button>
             </form>
         </div>

@@ -10,6 +10,12 @@
    padding: 0 20px;
  }
 
+ .App {
+  @media (max-width: 810px) {
+    padding: 0;
+  }
+ }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

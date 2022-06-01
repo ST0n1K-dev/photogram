@@ -15,7 +15,7 @@ const PostHeader = ({ username }: PostHeaderInterface) => {
                 <Avatar alt="User avatar" src={avatar || '/images/avatar.png'} />
                 <div className="Post__Header--user">
                     <span className="Post__Header--username">{ username }</span>
-                    <span className="Post__Header--location">Zhytomyr</span>
+                    <span className="Post__Header--location">Житомир</span>
                 </div>
             </div>
         </Link>

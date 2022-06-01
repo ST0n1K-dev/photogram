@@ -12,10 +12,10 @@ const NavigationContainer: React.FC = () => {
     const { enqueueSnackbar } = useSnackbar();
 
 	const handleLogin = async (credentials: SignInValues) => {
-        const { username, password } = credentials;
+        const { email, password } = credentials;
 
         try {
-            await firebase.auth().signInWithEmailAndPassword(username, password);
+            await firebase.auth().signInWithEmailAndPassword(email, password);
             enqueueSnackbar('You are successfully logged in', { variant: 'success' });
             navigate(ROUTES.HOME);
         } catch (error: unknown) {
