@@ -9,7 +9,7 @@ import './SignIn.style.scss';
 
 const SignInForm: React.FC<SingInInterface> = ({ handleLogin }) => {
     const initialValues: SignInValues = {
-        username: '',
+        email: '',
 		password: '',
     };
 
@@ -26,19 +26,19 @@ const SignInForm: React.FC<SingInInterface> = ({ handleLogin }) => {
             }) => (
 				<Form>
                     <InputField
-                        id="username"
-                        name="username"
-                        placeholder="Username"
-                        value={values.username}
-                        onChange={handleChange('username')}
-                        onBlur={handleBlur('username')}
-                        error={(errors.username && touched.username) ? errors.username : null}
+                        id="email"
+                        name="email"
+                        placeholder="Пошта"
+                        value={values.email}
+                        onChange={handleChange('email')}
+                        onBlur={handleBlur('email')}
+                        error={(errors.email && touched.email) ? errors.email : null}
                     />
 					<InputField
                         id="password"
                         type="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="Пароль"
                         value={values.password}
                         onChange={handleChange('password')}
                         onBlur={handleBlur('password')}

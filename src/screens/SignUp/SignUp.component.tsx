@@ -30,7 +30,7 @@ const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp }) => {
 					<InputField
                         id="email"
                         name="email"
-                        placeholder="Email"
+                        placeholder="Пошта"
                         value={values.email}
                         onChange={handleChange('email')}
                         onBlur={handleBlur('email')}
@@ -39,7 +39,7 @@ const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp }) => {
                     <InputField
                         id="username"
                         name="username"
-                        placeholder="Username"
+                        placeholder="Ім'я користувача"
                         value={values.username}
                         onChange={handleChange('username')}
                         onBlur={handleBlur('username')}
@@ -48,7 +48,7 @@ const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp }) => {
 					<InputField
                         id="fullName"
                         name="fullName"
-                        placeholder="Full Name"
+                        placeholder="Повне ім'я"
                         value={values.fullName}
                         onChange={handleChange('fullName')}
                         onBlur={handleBlur('fullName')}
@@ -58,7 +58,7 @@ const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp }) => {
                         id="password"
                         type="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="Пароль"
                         value={values.password}
                         onChange={handleChange('password')}
                         onBlur={handleBlur('password')}
