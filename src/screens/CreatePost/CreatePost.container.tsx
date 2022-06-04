@@ -25,9 +25,10 @@ const CreatePostContainer = () => {
   const initialState = {
     postPicture: '',
     caption: '',
+    isLoading: false
   };
 
-  const [{ postPicture, caption }, dispatch] = useReducer(reducer, initialState);
+  const [{ postPicture, caption, isLoading }, dispatch] = useReducer(reducer, initialState);
 
   const { storage } = useContext(FirebaseContext) as FirebaseContextInterface;
 
@@ -42,6 +43,8 @@ const CreatePostContainer = () => {
     try {
       const { postPicture, caption } = values;
 
+      dispatch({ isLoading: true });
+
       if (!postPicture || !caption) {
         enqueueSnackbar('Fill all the necessary fields to create your post', { variant: 'error' });
         return;
@@ -53,6 +56,8 @@ const CreatePostContainer = () => {
         await uploadPostPicture(postPicture!, postId);
       }
 
+      dispatch({ isLoading: false });
+
       enqueueSnackbar('Your post is being created', { variant: 'success' });
 
       navigate(`/profile/${username}`);
@@ -63,7 +68,8 @@ const CreatePostContainer = () => {
 
   const containerProps = () => ({
     postPicture,
-    caption
+    caption,
+    isLoading
   });
 
   const containerFunctions = {

@@ -1394,6 +1394,14 @@
     "@firebase/util" "1.5.2"
     tslib "^2.1.0"
 
+"@firebase/component@0.5.14":
+  version "0.5.14"
+  resolved "https://registry.yarnpkg.com/@firebase/component/-/component-0.5.14.tgz#23d2cc9f4aff5a516c91553a433326d366166bc3"
+  integrity sha512-ct2p1MTMV5P/nGIlkC3XjAVwHwjsIZaeo8JVyDAkJCNTROu5mYX3FBK16hjIUIIVJDpgnnzFh9nP74gciL4WrA==
+  dependencies:
+    "@firebase/util" "1.6.0"
+    tslib "^2.1.0"
+
 "@firebase/database-compat@0.1.8":
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/@firebase/database-compat/-/database-compat-0.1.8.tgz#ab627f2bdbe94367f515d5bded880c86886bbd28"
@@ -1618,10 +1626,27 @@
     node-fetch "2.6.7"
     tslib "^2.1.0"
 
+"@firebase/storage@^0.9.6":
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/@firebase/storage/-/storage-0.9.6.tgz#496bc8c7e6062b2efc35f8b0f26c4241302c1029"
+  integrity sha512-q8/s3qFbFl+AlKbyEtGA7FRVhcMu3NKPqHueBTn5XSI0B3bfxptBcDJMb9txs69ppve6P3jrK1//TEWpjTGJUg==
+  dependencies:
+    "@firebase/component" "0.5.14"
+    "@firebase/util" "1.6.0"
+    node-fetch "2.6.7"
+    tslib "^2.1.0"
+
 "@firebase/util@1.5.2":
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@firebase/util/-/util-1.5.2.tgz#bdd2bc11c956a8a6a0fa25fbd752a13e033558bc"
   integrity sha512-YvBH2UxFcdWG2HdFnhxZptPl2eVFlpOyTH66iDo13JPEYraWzWToZ5AMTtkyRHVmu7sssUpQlU9igy1KET7TOw==
+  dependencies:
+    tslib "^2.1.0"
+
+"@firebase/util@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@firebase/util/-/util-1.6.0.tgz#31aea6bba3ee98fc83a60eb189cb187243f4ef4b"
+  integrity sha512-6+hhqb4Zzjoo12xofTDHPkgW3FnN4ydBsjd5X2KuQI268DR3W3Ld64W/gkKPZrKRgUxeNeb+pykfP3qRe7q+vA==
   dependencies:
     tslib "^2.1.0"
 

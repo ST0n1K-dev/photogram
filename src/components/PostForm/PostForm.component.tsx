@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, CircularProgress } from '@mui/material';
 
 import { CreatePostSchema, PostFormComponentInterface } from './PostForm.config';
 
@@ -8,7 +8,7 @@ import './PostForm.style.scss';
 
 const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
   const {
-    postPicture, caption, handleSubmit, handlePictureSet
+    postPicture, caption, isLoading, handleSubmit, handlePictureSet
   } = props;
 
   const getImageFromFile = (file: any): string => {
@@ -22,6 +22,7 @@ const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
 	};
 
   return (
+    <>
     <Formik
     initialValues={{ postPicture, caption }}
     validationSchema={CreatePostSchema}
@@ -53,11 +54,18 @@ const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
               }}
             />
             <figure className="PostForm__PostFigure">
-              <img
-                src={postPicture ? getImageFromFile(postPicture) : '/images/post-placeholder.png'}
-                className="PostForm__PostPreview"
-                alt="postPicture"
-              />
+
+              { postPicture && (postPicture as any)?.type.includes('video') ? (
+                <video width="100%" height="100%" controls muted>
+                    <source src={getImageFromFile(postPicture)} type="video/mp4" />
+                </video>
+                ) : (
+                <img
+                  src={postPicture ? getImageFromFile(postPicture) : '/images/post-placeholder.png'}
+                  className="PostForm__PostPreview"
+                  alt="postPicture"
+                />
+                )}
               <figcaption className="PostForm__Figcaption">
                 <img
                   src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png"
@@ -81,12 +89,14 @@ const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
         />
         { (errors.caption && touched.caption) ? <p style={{ color: 'red' }}>{errors.caption}</p> : null }
 
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="contained" disabled={isLoading}>
           Створити пост
         </Button>
       </Form>
     )}
     </Formik>
+    { isLoading && <CircularProgress /> }
+    </>
     );
 };
 

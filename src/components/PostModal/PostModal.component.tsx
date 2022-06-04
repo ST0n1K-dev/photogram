@@ -11,6 +11,7 @@ import PostHeader from 'Component/Post/Header';
 import PostImage from 'Component/Post/Image';
 import PostActions from 'Component/Post/Actions';
 import PostContent from 'Component/Post/Content';
+import { FullMetadata } from '@firebase/storage';
 import Comments from './Comments';
 
 import { PostModalComponentInterface } from './PostModal.config';
@@ -36,6 +37,7 @@ const PostModalComponent = (props: PostModalComponentInterface) => {
     handleDeletePost, handleEditPostClick, exitPostEditMode, updatePostCaption
   } = props;
   const [postImage, setPostImage] = useState<string>('');
+  const [postMeta, setPostMeta] = useState<FullMetadata | any>({});
 
   const {
     username = '',
@@ -46,9 +48,10 @@ const PostModalComponent = (props: PostModalComponentInterface) => {
 
   useEffect(() => {
 		async function setImage() {
-			const image = await getPostImage(username, docId);
+			const { content, metadata } = await getPostImage(username, docId);
 
-			setPostImage(image);
+			setPostImage(content);
+			setPostMeta(metadata);
 		}
 
 		if (username && post) {
@@ -66,7 +69,13 @@ const PostModalComponent = (props: PostModalComponentInterface) => {
         <div className="PostModal__PostArea">
           <div className="Post">
             {isLoading ? <Skeleton variant="rectangular" width={100} height={40} /> : <PostHeader username={username} />}
-            {isLoading ? <Skeleton variant="rectangular" width={450} height={500} /> : <PostImage src={postImage} caption={caption} />}
+            {isLoading ? <Skeleton variant="rectangular" width={450} height={500} /> : (
+              <PostImage
+                src={postImage}
+                caption={caption}
+                metadata={postMeta}
+              />
+            )}
             {isLoading ? <Skeleton variant="rectangular" /> : (
               <PostActions
                 editAvailable={isMyPost}

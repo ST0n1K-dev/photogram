@@ -29,6 +29,7 @@ export interface PostHeaderInterface {
 export interface PostImageInterface {
     src: string
     caption: string
+    metadata: any
 }
 
 export interface PostActionsInterface {

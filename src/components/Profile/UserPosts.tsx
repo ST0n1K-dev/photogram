@@ -9,28 +9,40 @@ import { PostInterface } from 'Type/Post';
 import { User } from 'Type/User';
 import useModal from 'Hook/useModal';
 
+import { FullMetadata } from '@firebase/storage';
 import { UserPostsInterface, PostContentInterface } from './Profile.config';
 
 const PostHover = (props: { post: PostInterface }) => {
-  const { post: { likes = [], comments = [] } } = props;
+	const {
+		post: { likes = [], comments = [] },
+	} = props;
 
-  return (
-    <div className="Profile__UserPost--hover">
-      <span><Favorite /> {likes.length}</span>
-      <span><Comment /> {comments.length}</span>
-    </div>
-  );
+	return (
+		<div className="Profile__UserPost--hover">
+			<span>
+				<Favorite /> {likes.length}
+			</span>
+			<span>
+				<Comment /> {comments.length}
+			</span>
+		</div>
+	);
 };
 
 const PostContent = (props: PostContentInterface) => {
 	const { post, onPostClick, username } = props;
 	const [postImage, setPostImage] = useState<string>('');
+	const [postMeta, setPostMeta] = useState<FullMetadata | any>({});
 
 	useEffect(() => {
 		async function setImage() {
-			const image = await getPostImage(username, post.docId);
+			const { content, metadata } = await getPostImage(
+				username,
+				post.docId
+			);
 
-			setPostImage(image);
+			setPostImage(content);
+			setPostMeta(metadata);
 		}
 
 		if (username && post) {
@@ -39,21 +51,33 @@ const PostContent = (props: PostContentInterface) => {
 	}, [post, username]);
 
 	return (
-		<Button key={post.docId} type="button" onClick={() => onPostClick(post)}>
+		<Button
+			key={post.docId}
+			type="button"
+			onClick={() => onPostClick(post)}
+		>
 			<div className="Profile__UserPost">
-				{postImage && <img src={postImage} alt={post.caption} />}
+				{postMeta?.contentType?.includes('video')
+					? postImage && (
+						<video width="100%" height="100%" muted>
+							<source src={postImage} type="video/mp4" />
+						</video>
+					  )
+					: postImage && <img src={postImage} alt={post.caption} />}
 				<div className="Profile__UserPost--hidden">
 					<PostHover post={post} />
 				</div>
 			</div>
 		</Button>
-	  );
+	);
 };
 
 const UserPosts = ({ posts, profile }: UserPostsInterface) => {
 	const { isShowing, toggle } = useModal();
-	const [activePost, setActivePost] = useState<PostInterface | undefined>(undefined);
-	const { username = '' } = profile as User || {};
+	const [activePost, setActivePost] = useState<PostInterface | undefined>(
+		undefined
+	);
+	const { username = '' } = (profile as User) || {};
 
 	const onPostClick = (post: PostInterface) => {
 		setActivePost(post);
@@ -73,23 +97,29 @@ const UserPosts = ({ posts, profile }: UserPostsInterface) => {
 		<div className="Profile__UserPosts">
 			{posts?.length
 				? posts.map((post) => (
-					<PostContent
-						key={post.photoId}
-						post={post}
-						username={username}
-						onPostClick={onPostClick}
-					/>
-				))
+						<PostContent
+							key={post.photoId}
+							post={post}
+							username={username}
+							onPostClick={onPostClick}
+						/>
+				  ))
 				: Array(9).map((_, i) => (
-					<Skeleton
-						key={i}
-						variant="rectangular"
-						width={300}
-						height={400}
-					/>
-				))}
+						<Skeleton
+							key={i}
+							variant="rectangular"
+							width={300}
+							height={400}
+						/>
+				  ))}
 
-			{activePost && <PostModal isShowing={isShowing} post={activePost} onClose={toggle} /> }
+			{activePost && (
+				<PostModal
+					isShowing={isShowing}
+					post={activePost}
+					onClose={toggle}
+				/>
+			)}
 		</div>
 	);
 };

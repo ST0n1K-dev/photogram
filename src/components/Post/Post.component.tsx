@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FullMetadata } from '@firebase/storage';
 import { PostInterface } from 'Type/Post';
 import { getPostImage } from 'Util/firebase';
 
@@ -16,6 +17,7 @@ const PostComponent: React.FC<PostComponentInterface> = (props) => {
     comments, handleCommentFocus, handleAddComment, commentInput
   } = props;
   const [postImage, setPostImage] = useState<string>('');
+  const [postMeta, setPostMeta] = useState<FullMetadata | any>({});
 
   const {
     username = '',
@@ -26,9 +28,10 @@ const PostComponent: React.FC<PostComponentInterface> = (props) => {
 
   useEffect(() => {
 		async function setImage() {
-			const image = await getPostImage(username, docId);
+			const { content, metadata } = await getPostImage(username, docId);
 
-			setPostImage(image);
+			setPostImage(content);
+			setPostMeta(metadata);
 		}
 
 		if (username && post) {
@@ -43,7 +46,7 @@ const PostComponent: React.FC<PostComponentInterface> = (props) => {
   return (
     <div className="Post">
       <PostHeader username={username} />
-      <PostImage src={postImage} caption={caption} />
+      <PostImage src={postImage} caption={caption} metadata={postMeta} />
       <PostActions
         likes={likes}
         isLiked={isLiked}

@@ -7,6 +7,7 @@ export interface FormValues {
 
 export interface PostFormContainerInterface {
     postPicture: string
+    isLoading: boolean
     caption: string
     handleSubmit: (values: FormValues) => void
     handlePictureSet: (src: File) => void
@@ -15,6 +16,7 @@ export interface PostFormContainerInterface {
 export interface PostFormComponentInterface {
     postPicture: string
     caption: string
+    isLoading: boolean
     handleSubmit: (values: FormValues) => void
     handlePictureSet: (src: File) => void
 }

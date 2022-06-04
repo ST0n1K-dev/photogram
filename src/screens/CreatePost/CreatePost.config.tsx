@@ -13,6 +13,7 @@ export interface CreatePostComponentInterface extends CreatePostForm {
 export interface CreatePostForm {
     caption?: string
     postPicture?: any
+    isLoading?: boolean
 }
 
 export const CreatePostSchema = Yup.object().shape({

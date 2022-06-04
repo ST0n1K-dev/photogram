@@ -1,4 +1,4 @@
-import { ref, getDownloadURL } from 'firebase/storage';
+import { ref, getDownloadURL, getMetadata } from 'firebase/storage';
 import { User } from 'Type/User';
 import { PostInterface } from 'Type/Post';
 import { FieldValue, firebase, storage } from '../lib/firebase';
@@ -223,11 +223,16 @@ export const createPost = async (userId: string, caption: string) => {
     return postId;
 };
 
-export const getPostImage = (username: string, postDocId: string): Promise<string> => {
+export const getPostImage = async (username: string, postDocId: string) => {
     const path = ref(storage, `posts/${username}/${postDocId}`);
 
-    return getDownloadURL(path)
-        .then((foundURL) => foundURL, () => '');
+    const metadata = await getMetadata(path);
+    const content = await getDownloadURL(path);
+
+    return {
+        content,
+        metadata
+    };
 };
 
 export const searchUsersByUsername = async (username: string): Promise<Array<User>> => {

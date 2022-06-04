@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import { useAuth } from 'Hook/useAuth';
+import { useVideoAutoplayback } from 'Hook/useVideoAutoplayback';
 import { UserContext } from 'Context/user';
 import './App.scss';
 import Navigation from './screens/Navigation';
@@ -10,6 +11,7 @@ import Header from './components/Header';
 
 function App() {
 	const { user } = useAuth();
+	useVideoAutoplayback();
 	return (
 		<UserContext.Provider value={{ user }}>
 			<BrowserRouter>
