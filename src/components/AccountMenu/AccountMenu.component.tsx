@@ -34,10 +34,10 @@ const MenuItems = () => {
 
 	return (
 		<>
-			{user && renderDrawerListItem('Home', <HomeIcon />, ROUTES.HOME)}
-			{user && renderDrawerListItem('Search', <SearchIcon />, ROUTES.SEARCH)}
-			{renderDrawerListItem('Profile', <PersonIcon />, user ? `/profile/${(user as User).username}` : ROUTES.SIGNIN)}
-			{user && renderDrawerListItem('Create post', <AddIcon />, ROUTES.CREATE_POST)}
+			{user && renderDrawerListItem('Стрічка', <HomeIcon />, ROUTES.HOME)}
+			{user && renderDrawerListItem('Пошук', <SearchIcon />, ROUTES.SEARCH)}
+			{renderDrawerListItem('Профіль', <PersonIcon />, user ? `/profile/${(user as User).username}` : ROUTES.SIGNIN)}
+			{user && renderDrawerListItem('Нова публікація', <AddIcon />, ROUTES.CREATE_POST)}
 		</>
 	);
 };

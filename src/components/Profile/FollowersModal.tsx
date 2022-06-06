@@ -48,7 +48,7 @@ const FollowersModal = ({
             >
             <Box className="FollowersModal" sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                    { type === 'followers' ? 'Current followers' : 'Following accounts'}
+                    { type === 'followers' ? 'Підписники:' : 'Підписки:'}
                 </Typography>
                 { profiles.length ? profiles?.map((profile) => (
                     <FollowingUserProfile
