@@ -57,12 +57,17 @@ export const myAccountSlice = createSlice({
             if (isLiked) {
                 return post.docId === docId ? {
                 ...post,
+                isLiked: !isLiked,
                 likes: post.likes
                     .filter((userIdLike) => userIdLike !== userId)
                 } : post;
             }
 
-            return post.docId === docId ? { ...post, likes: [...post.likes, userId] } : post;
+            return post.docId === docId ? {
+                ...post,
+                isLiked: !isLiked,
+                likes: [...post.likes, userId]
+            } : post;
     });
     },
     commentStripPost: (state, action: PayloadAction<{

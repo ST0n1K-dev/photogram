@@ -28,15 +28,19 @@ const PostCaption = ({
     }
 
     return (
-        <div className="Post__Content--captionEditWrapper">
+        <div
+            className="Post__Content--captionEditWrapper"
+            style={{ margin: '10px 0', textAlign: 'right' }}
+        >
             <Input
                 className="Post__Content--captionEdit"
-                placeholder="Write your post caption here"
+                style={{ width: '100%', marginBottom: '10px' }}
+                placeholder="Описання публікації..."
                 value={postCaption}
                 onChange={handlePostCaptionChange}
             />
-            <Button onClick={() => updatePostCaption && updatePostCaption(postCaption)} variant="contained">Оновити</Button>
-            <Button onClick={exitPostEditMode} variant="outlined">Відміна</Button>
+            <Button style={{ margin: '0 10px' }} onClick={() => updatePostCaption && updatePostCaption(postCaption)} variant="contained">Оновити</Button>
+            <Button style={{ margin: '0 10px' }} onClick={exitPostEditMode} variant="outlined">Відміна</Button>
         </div>
     );
 };

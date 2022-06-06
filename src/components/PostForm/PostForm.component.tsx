@@ -79,7 +79,7 @@ const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
         <TextField
           id="caption"
           name="caption"
-          label="Post caption"
+          label="Опис публікації"
           className="PostForm__Caption"
           multiline
           maxRows={10}
@@ -90,7 +90,7 @@ const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
         { (errors.caption && touched.caption) ? <p style={{ color: 'red' }}>{errors.caption}</p> : null }
 
         <Button type="submit" variant="contained" disabled={isLoading}>
-          Створити пост
+          Створити публікацію
         </Button>
       </Form>
     )}

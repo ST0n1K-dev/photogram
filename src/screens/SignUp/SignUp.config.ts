@@ -7,22 +7,25 @@ export interface SingUpInterface {
 
 export const SignupSchema = Yup.object().shape({
 	username: Yup.string()
-		.min(2, 'Too Short!')
-		.max(50, 'Too Long!')
-		.matches(/[a-zA-Z]/, 'Username latin letters only.')
-		.required('Username is required'),
+		.min(2, 'Занадто коротке ім\'я користувача')
+		.max(50, 'Занадто довге ім\'я користувача')
+		.matches(/[a-zA-Z]/, 'Лише латинські літери')
+		.required('Це поле є обов\'язковим'),
 	password: Yup.string()
-		.required('No password provided')
-		.min(8, 'Password is too short - should be 8 chars minimum.')
-		.matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+		.required('Це поле є обов\'язковим')
+		.min(8, 'Пароль має містити не менше 8 символів'),
+	fullName: Yup.string()
+		.min(2, 'Занадто коротке повне ім\'я')
+		.max(80, 'Занадто довге повне ім\'я')
+		.required('Це поле є обов\'язковим'),
 	email: Yup.string()
-		.email('Invalid email format')
-		.required('Email is required'),
+		.email('Недопустиме значення')
+		.required('Це поле є обов\'язковим'),
 });
 
 export interface SignUpValues {
 	username: string;
 	password: string;
-  fullName: string;
+  	fullName: string;
 	email: string;
 }

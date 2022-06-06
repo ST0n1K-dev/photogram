@@ -97,7 +97,7 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 					)}
                     {username && !isMe && (
                         <Button className={isFollowing ? 'Profile__FollowButton--following' : ''} variant="contained" onClick={handleFollowClick}>
-                            { isFollowing ? 'Unfollow' : 'Follow'}
+                            { isFollowing ? 'Відписатись' : 'Підписатись'}
                         </Button>
                     )}
 					{ isMe && (
@@ -109,7 +109,7 @@ const UserHero: React.FC<UserHeroInterface> = (props) => {
 				{username ? (
 					<div className="Profile__Details--statistics">
 						<p className="Profile__Details--stat">
-							<b>{postsTotal}</b> постів
+							<b>{postsTotal}</b> публікацій
 						</p>
 						<button type="button" className="Profile__Details--button" onClick={handleFollowersPopupOpen}>
 							<p className="Profile__Details--stat">

@@ -42,15 +42,15 @@ const NavigationContainer: React.FC = () => {
                     dateCreated: Date.now()
                 });
 
-                enqueueSnackbar('Your account has been created', { variant: 'success' });
+                enqueueSnackbar('Ваш акаунт було створено', { variant: 'success' });
                 navigate(ROUTES.SIGNIN);
             } catch (error: unknown) {
                 enqueueSnackbar((error as Error).message, { variant: 'error' });
             }
         } else if (emailExists) {
-                enqueueSnackbar('User with this email already exists', { variant: 'error' });
+                enqueueSnackbar('Користувач з такою поштою вже існує', { variant: 'error' });
             } else {
-                enqueueSnackbar('User with this username already exists', { variant: 'error' });
+                enqueueSnackbar('Користувач з таким ім\'ям користувача вже існує', { variant: 'error' });
             }
     };
 

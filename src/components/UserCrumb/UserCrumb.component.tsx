@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar, Skeleton } from '@mui/material';
-import { AccountCircle, Pages } from '@mui/icons-material';
+import { Person, PersonOutline } from '@mui/icons-material';
 import { useUserAvatar } from 'Hook/useUserAvatar';
 
 import { UserCrumbComponentInterface } from './UserCrumb.config';
@@ -30,11 +30,11 @@ const UserCrumbComponent: React.FC<UserCrumbComponentInterface> = (props) => {
           </div>
           <div className="UserCrumb__PromotionInfo">
             <div className="UserCrumb__PromotionInfo--accountability">
-              <Pages />
+              <Person />
               <span>{followers}</span>
             </div>
             <div className="UserCrumb__PromotionInfo--accountability">
-              <AccountCircle />
+              <PersonOutline />
               <span>{following}</span>
             </div>
           </div>

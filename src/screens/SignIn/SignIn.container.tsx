@@ -16,7 +16,7 @@ const NavigationContainer: React.FC = () => {
 
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password);
-            enqueueSnackbar('You are successfully logged in', { variant: 'success' });
+            enqueueSnackbar('Ви успішно авторизувалися', { variant: 'success' });
             navigate(ROUTES.HOME);
         } catch (error: unknown) {
             enqueueSnackbar((error as Error).message, { variant: 'error' });

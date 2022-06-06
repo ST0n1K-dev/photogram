@@ -99,7 +99,7 @@ const SettingsModalComponent: React.FC<SettingsModalComponentInterface> = (
 								<InputField
 									id="fullName"
 									name="fullName"
-									placeholder="Full name"
+									placeholder="Повне ім'я"
 									value={values.fullName}
 									onChange={handleChange('fullName')}
 									onBlur={handleBlur('fullName')}
@@ -113,7 +113,7 @@ const SettingsModalComponent: React.FC<SettingsModalComponentInterface> = (
 									id="description"
 									type="textarea"
 									name="description"
-									placeholder="Description"
+									placeholder="Опис"
 									value={values.description || ''}
 									onChange={handleChange('description')}
 									onBlur={handleBlur('description')}

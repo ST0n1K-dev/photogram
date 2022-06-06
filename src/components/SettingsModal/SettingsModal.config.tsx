@@ -28,10 +28,10 @@ export interface UserFormInterface {
 
 export const ProfileSettingsSchema = Yup.object().shape({
     fullName: Yup.string()
-      .min(10, 'Too Short!')
-      .max(40, 'Too Long!')
-      .matches(/[a-zA-Z]/, 'Username latin letters only.')
-      .required('Required'),
+      .min(2, 'Занадто коротке')
+      .max(50, 'Занадто довге!')
+      .matches(/[a-zA-Z]/, 'Лише латинські букви.')
+      .required('Це поле є обов\'язковим'),
     description: Yup.string()
-        .max(120, 'Too Long!')
+        .max(120, 'Занадто довгий опис!')
   });

@@ -69,3 +69,9 @@ export interface AddCommentInterface {
     addComment: (e: React.SyntheticEvent, comment: string) => void
     commentInput: React.RefObject<HTMLInputElement>
 }
+
+export interface DeleteConfirmationDialogInterface {
+    isOpened: boolean
+    handleClose: () => void
+    handleDeletePost?: () => void
+}

@@ -7,12 +7,11 @@ export interface SingInInterface {
 
 export const SignupSchema = Yup.object().shape({
     email: Yup.string()
-      .email('Invalid email format')
-      .required('Email is required'),
+      .email('Недопустиме значення')
+      .required('Email є обов\'язковим'),
     password: Yup.string()
-        .required('No password provided.')
-        .min(8, 'Password is too short - should be 8 chars minimum.')
-        .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
+        .required('Пароль є обов\'язковим')
+        .min(8, 'Пароль має містити не менше 8 символів')
   });
 
 export interface SignInValues {

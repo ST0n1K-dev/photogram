@@ -1,17 +1,21 @@
 import React, {
   useState, useEffect, useContext, useRef
 } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   deletePost, likePost, commentPost, updateUserPostCaption
 } from 'Store/SelectedProfile';
+import { commentStripPost, likeStripPost } from 'Store/MyAccount';
 import { setPostEditMode } from 'Store/PostActions';
 import { useSnackbar } from 'notistack';
 
 import { UserContext } from 'Context/user';
 import { FirebaseContext, FirebaseContextInterface } from 'Context/firebase';
-import { getDetailedPost } from 'Util/firebase';
+import { getDetailedPost, getIsFollowingProfile } from 'Util/firebase';
 import { PostInterface } from 'Type/Post';
+import { User } from 'Type/User';
+import { RootState } from '../../redux/store';
 
 import PostModalComponent from './PostModal.component';
 
@@ -20,6 +24,10 @@ import { PostModalContainerInterface } from './PostModal.config';
 const PostModalContainer = (props: PostModalContainerInterface) => {
   const { isShowing, post, onClose } = props;
   const dispatch = useDispatch();
+  const profileUserId = useSelector(
+    (state: RootState) => (state.SelectedProfile.user as User).userId
+  );
+
   const { user } = useContext(UserContext);
   const { uid: userId = '', displayName = '' } = user || {};
   const { firebase, FieldValue } = useContext(FirebaseContext) as FirebaseContextInterface;
@@ -66,6 +74,12 @@ const PostModalContainer = (props: PostModalContainerInterface) => {
           likes: isLiked ? FieldValue.arrayRemove(userId) : FieldValue.arrayUnion(userId)
         });
 
+      const isFollowing = await getIsFollowingProfile(displayName, profileUserId);
+
+      if (isFollowing) {
+        dispatch(likeStripPost({ userId, docId, isLiked }));
+      }
+
       dispatch(likePost({ userId, docId, isLiked }));
       setLikes((prevLikes: number | undefined) => (isLiked ? prevLikes! - 1 : prevLikes! + 1));
     } catch (e) {
@@ -73,9 +87,15 @@ const PostModalContainer = (props: PostModalContainerInterface) => {
     }
   };
 
-  const handleAddComment = (e: React.SyntheticEvent, comment: string) => {
+  const handleAddComment = async (e: React.SyntheticEvent, comment: string) => {
     if (e) {
       e.preventDefault();
+    }
+
+    const isFollowing = await getIsFollowingProfile(displayName, profileUserId);
+
+    if (isFollowing) {
+      dispatch(commentStripPost({ displayName, comment, docId }));
     }
 
     setComments([...comments, { displayName, comment }]);
@@ -98,6 +118,8 @@ const PostModalContainer = (props: PostModalContainerInterface) => {
       .delete();
 
     dispatch(deletePost({ docId }));
+
+    enqueueSnackbar('Публікацію видалено успішно', { variant: 'success' });
 
     onClose();
   };

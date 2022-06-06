@@ -19,6 +19,6 @@ export interface CreatePostForm {
 export const CreatePostSchema = Yup.object().shape({
     postPicture: Yup.string().required(),
     caption: Yup.string()
-        .max(1000, 'Too Long!')
-        .required()
+        .max(1000, 'Занадто довгий опис!')
+        .required('Опис є обов\'язковим')
 });

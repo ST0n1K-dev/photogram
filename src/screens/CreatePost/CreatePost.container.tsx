@@ -46,7 +46,7 @@ const CreatePostContainer = () => {
       dispatch({ isLoading: true });
 
       if (!postPicture || !caption) {
-        enqueueSnackbar('Fill all the necessary fields to create your post', { variant: 'error' });
+        enqueueSnackbar('Заповніть усі поля для створення публікації', { variant: 'error' });
         return;
       }
 
@@ -58,7 +58,7 @@ const CreatePostContainer = () => {
 
       dispatch({ isLoading: false });
 
-      enqueueSnackbar('Your post is being created', { variant: 'success' });
+      enqueueSnackbar('Публікацію було успішно створено', { variant: 'success' });
 
       navigate(`/profile/${username}`);
     } catch (e) {

@@ -45,7 +45,7 @@ const SettingsModalContainer = (props: SettingsModalContainerInterface) => {
           description
         });
 
-      if (avatar && avatar !== (user as User)?.avatar) {
+      if (avatar && avatar !== (user as User)?.avatar && typeof avatar !== 'string') {
         await uploadAvatar(avatar!);
         const imagePath = await getUserAvatar(username);
 
@@ -56,7 +56,7 @@ const SettingsModalContainer = (props: SettingsModalContainerInterface) => {
 
       onClose();
 
-      enqueueSnackbar('Profile info has been updated', { variant: 'success' });
+      enqueueSnackbar('Дані профіля було оновлено', { variant: 'success' });
     } catch (e) {
       enqueueSnackbar((e as Error).message, { variant: 'error' });
     }

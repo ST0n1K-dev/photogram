@@ -31,7 +31,7 @@ const PostAddComment = (props: AddCommentInterface) => {
                 onSubmit={onSubmit}
             >
                 <Input
-                    placeholder="Add a comment"
+                    placeholder="Ваш коментар"
                     autoComplete="off"
                     type="text"
                     name="comment-field"
