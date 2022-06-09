@@ -32,7 +32,11 @@ const SpeedDialComponent: React.FC<SpeedDialProps> = (props) => {
 				</Link>
 			))}
 			{Object.keys(user).length > 0 && (
-				<IconButton color="primary" onClick={() => firebase.auth().signOut()}>
+				<IconButton
+					color="primary"
+					aria-label="logout"
+					onClick={() => firebase.auth().signOut()}
+				>
 					<LogoutIcon />
 				</IconButton>
 			)}

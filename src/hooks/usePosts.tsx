@@ -20,12 +20,12 @@ export default function usePosts() {
       const [{ following = [] } = {}] = await getUserById(userId) as any;
       let followingUsersPosts: Array<PostInterface> = [];
 
-      if (following.length > 0) {
-          followingUsersPosts = await getPosts(userId, following);
+      if (following?.length > 0) {
+        followingUsersPosts = await getPosts(userId, following);
       }
 
       // sorting by date desc
-      followingUsersPosts.sort((a, b) => b.dateCreated - a.dateCreated);
+      followingUsersPosts?.sort((a, b) => b.dateCreated - a.dateCreated);
       dispatch(setFollowingPosts(followingUsersPosts));
     }
 
