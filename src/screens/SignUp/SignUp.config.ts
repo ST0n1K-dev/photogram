@@ -3,6 +3,8 @@ import * as Yup from 'yup';
 
 export interface SingUpInterface {
 	handleSignUp: (values: SignUpValues) => void;
+	pickPassport: (image: File) => void,
+	isLoading?: boolean
 }
 
 export const SignupSchema = Yup.object().shape({

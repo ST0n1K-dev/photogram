@@ -73,17 +73,17 @@ const PostActions = ({
                 >
                     { isLiked ? <FavoriteIcon className="Post__Actions--liked" /> : <FavoriteBorderIcon /> }
                 </IconButton>
-                <IconButton onClick={handleCommentFocus}>
+                <IconButton aria-label="comment" onClick={handleCommentFocus}>
                     <ChatBubbleOutlineIcon />
                 </IconButton>
                 {editAvailable && (
-                    <IconButton onClick={handleEditPostClick}>
+                    <IconButton aria-label="edit" onClick={handleEditPostClick}>
                         <EditIcon />
                     </IconButton>
                 )}
                 {deleteAvailable && (
                     <>
-                        <IconButton onClick={handleOpen}>
+                        <IconButton aria-label="delete" onClick={handleOpen}>
                             <DeleteIcon />
                         </IconButton>
                         <DeleteConfirmationDialog

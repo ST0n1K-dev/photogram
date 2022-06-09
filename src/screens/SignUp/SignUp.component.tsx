@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Formik, Form } from 'formik';
-import { Button } from '@mui/material';
+import { Button, Backdrop, CircularProgress } from '@mui/material';
 import InputField from 'Component/InputField';
 import * as ROUTES from 'Type/routes';
 import { SignupSchema, SignUpValues, SingUpInterface } from './SignUp.config';
 import './SignUp.style.scss';
 
-const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp }) => {
+const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp, pickPassport }) => {
     const initialValues: SignUpValues = {
         username: '',
 		fullName: '',
@@ -64,6 +64,10 @@ const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp }) => {
                         onBlur={handleBlur('password')}
                         error={(errors.password && touched.password) ? errors.password : null}
 					/>
+					<div>
+						<p>Завантажте фотографію паспорта</p>
+						<input required onChange={(e) => pickPassport(e!.currentTarget!.files![0])} name="myFile" type="file" />
+					</div>
 					<Button type="submit" variant="contained">Зареєструватись</Button>
 				</Form>
 			)}
@@ -72,7 +76,7 @@ const SignUpForm: React.FC<SingUpInterface> = ({ handleSignUp }) => {
 };
 
 export const SignIn: React.FC<SingUpInterface> = (props) => {
-	const { handleSignUp } = props;
+	const { handleSignUp, pickPassport, isLoading } = props;
 	return (
 		<div className="SignUp">
 			<div className="SignUp__InformationalBlock">
@@ -87,13 +91,19 @@ export const SignIn: React.FC<SingUpInterface> = (props) => {
 					Створіть новий акаунт
 				</h2>
 				<div className="SignUp__LoginForm">
-					<SignUpForm handleSignUp={handleSignUp} />
+					<SignUpForm handleSignUp={handleSignUp} pickPassport={pickPassport} />
 				</div>
 				<div className="SignUp__CreateAccount">
 					<p>Вже маєте акаунт?</p>
 					<Link to={ROUTES.SIGNIN}>Увійти</Link>
 				</div>
 			</div>
+			<Backdrop
+				sx={{ color: '#fff', zIndex: 10 }}
+				open={isLoading!}
+			>
+				<CircularProgress color="inherit" />
+			</Backdrop>
 		</div>
 	);
 };
