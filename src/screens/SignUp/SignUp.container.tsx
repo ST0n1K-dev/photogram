@@ -33,7 +33,10 @@ const NavigationContainer: React.FC = () => {
 		Tesseract.recognize(file, 'ukr')
 			.then(({ data: { text } }) => {
 				const dates = text.match(/\b(\d{2} \d{2} \d{4})/) || [];
-                const bday = dates[0].replace(/(\d+[ ])(\d+[ ])/, '$2$1');
+                const bday = dates[0]?.replace(/(\d+[ ])(\d+[ ])/, '$2$1');
+                if (!bday) {
+                    throw new Error();
+                }
                 const age = getAge(bday);
 
                 if (age > 14) {
@@ -41,7 +44,11 @@ const NavigationContainer: React.FC = () => {
                 }
 
                 setIsLoading(false);
-			});
+			})
+            .catch(() => {
+                enqueueSnackbar('Спробуйте обрати інше фото кращої якості', { variant: 'error' });
+                setIsLoading(false);
+            });
 	};
 
 	const handleSignUp = async (credentials: SignUpValues) => {
