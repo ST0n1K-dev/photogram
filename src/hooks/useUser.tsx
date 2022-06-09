@@ -16,7 +16,7 @@ export function useUser() {
 
   useEffect(() => {
       async function getUser() {
-          const [receivedUser] = await getUserById(user!.uid!);
+          const [receivedUser = {}] = await getUserById(user!.uid!);
           const receivedPosts = await getUserPosts(receivedUser as User);
           const receivedAvatar = await getUserAvatar(user!.displayName!);
           // setCurrentUser(receivedUser || {});
