@@ -13,6 +13,7 @@ export interface CreatePostComponentInterface extends CreatePostForm {
 export interface CreatePostForm {
     caption?: string
     postPicture?: any
+    postCategory?: string
     isLoading?: boolean
 }
 

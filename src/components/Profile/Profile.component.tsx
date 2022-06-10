@@ -2,6 +2,7 @@ import React from 'react';
 import { Divider } from '@mui/material';
 import UserHero from './UserHero';
 import UserPosts from './UserPosts';
+import PostsCategories from './PostsCategories';
 
 import { ProfileComponentInterface } from './Profile.config';
 import './Profile.style.scss';
@@ -10,6 +11,7 @@ const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
   const {
     profile,
     posts,
+    displayingPosts,
     totalFollowers,
     followersPopupOpen,
     followingPopupOpen,
@@ -18,6 +20,8 @@ const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
     fullName,
     description,
     avatar,
+    activeCategory,
+    handleCategorySelect,
     dispatch
   } = props;
 
@@ -37,7 +41,12 @@ const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
         dispatch={dispatch}
       />
       <Divider />
-      <UserPosts posts={posts} profile={profile} />
+      <PostsCategories
+        posts={posts}
+        activeCategory={activeCategory!}
+        handleCategorySelect={handleCategorySelect}
+      />
+      <UserPosts posts={displayingPosts} profile={profile} />
     </div>
   );
 };

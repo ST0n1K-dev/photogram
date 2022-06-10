@@ -22,6 +22,7 @@ const PostComponent: React.FC<PostComponentInterface> = (props) => {
   const {
     username = '',
     caption = '',
+    category = '',
     dateCreated,
     docId
   } = post as PostInterface;
@@ -54,7 +55,7 @@ const PostComponent: React.FC<PostComponentInterface> = (props) => {
         handleEditPost={handleEditPost}
         handleCommentFocus={handleCommentFocus}
       />
-      <PostContent username={username} caption={caption} />
+      <PostContent username={username} caption={caption} category={category} />
       <PostComments
         comments={comments}
         post={post as PostInterface}

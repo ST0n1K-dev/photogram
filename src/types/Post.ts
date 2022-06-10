@@ -1,5 +1,7 @@
 export interface PostInterface {
+    [x: string]: any
     photoId: number
+    category: string
     isLiked: boolean
     docId: string
     userId: string

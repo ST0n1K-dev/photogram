@@ -5,13 +5,14 @@ import PostFormComponent from './PostForm.component';
 
 const PostFormContainer = (props: PostFormContainerInterface) => {
   const {
-    postPicture, caption, isLoading, handlePictureSet, handleSubmit
+    postPicture, caption, postCategory, isLoading, handlePictureSet, handleSubmit
   } = props;
 
   const containerProps = () => ({
     postPicture,
     isLoading,
-    caption
+    caption,
+    postCategory
   });
 
   const containerFunctions = {

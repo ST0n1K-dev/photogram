@@ -157,6 +157,45 @@
             }
         }
     }
+
+    &__PostCategories {
+        display: flex;
+        column-gap: 20px;
+        flex-wrap: nowrap;
+        width: 100%;
+        overflow: scroll;
+        margin: 20px auto;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &--category {
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            min-width: 180px;
+            border-radius: 20px;
+            height: 60px;
+            background-color: #fff;
+            border: 1px solid #3873cb;
+
+            &.active {
+                background-color: #3873cb;
+                color: #fff;
+            }
+
+            p {
+                font-size: 18px;
+                font-weight: 700;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 .FollowersModal {

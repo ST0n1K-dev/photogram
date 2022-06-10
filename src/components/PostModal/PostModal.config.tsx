@@ -28,6 +28,7 @@ export interface PostModalComponentInterface {
     handleEditPostClick?: () => void
     exitPostEditMode?: () => void
     updatePostCaption: (caption: string) => void
+    updatePostCategory: (caption: string) => void
     commentInput: React.RefObject<HTMLInputElement>
 }
 

@@ -6,7 +6,7 @@ import './CreatePost.style.scss';
 
 const CreatePostComponent: React.FC<CreatePostComponentInterface> = (props) => {
 	const {
-		handleCreatePost, postPicture, caption, dispatch, isLoading
+		handleCreatePost, postPicture, postCategory, caption, dispatch, isLoading
 	} = props;
 
 	const setPicture = (file: File) => {
@@ -17,6 +17,7 @@ const CreatePostComponent: React.FC<CreatePostComponentInterface> = (props) => {
 		<div className="CreatePostPage">
 			<PostForm
 				postPicture={postPicture}
+				postCategory={postCategory!}
 				caption={caption!}
 				isLoading={isLoading!}
 				handleSubmit={handleCreatePost}

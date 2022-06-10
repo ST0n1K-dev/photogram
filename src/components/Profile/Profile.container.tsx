@@ -18,12 +18,14 @@ const ProfileContainer = () => {
 
   const initialState = {
     followersPopupOpen: false,
-    followingPopupOpen: false
+    followingPopupOpen: false,
+    activeCategory: ''
   };
 
   const [{
     followersPopupOpen,
-    followingPopupOpen
+    followingPopupOpen,
+    activeCategory
   }, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -39,9 +41,18 @@ const ProfileContainer = () => {
     }
   }, [user, currentUsername]);
 
+  const handleCategorySelect = (category: string) => {
+    dispatch({ activeCategory: category });
+  };
+
+  const getUserPosts = () => (activeCategory
+      ? selectedUserPosts.filter((post) => post.category === activeCategory)
+      : selectedUserPosts);
+
   const containerProps = () => ({
     profile: user,
     posts: selectedUserPosts,
+    displayingPosts: getUserPosts(),
     totalFollowers: user?.followers.length,
     followersPopupOpen,
     followingPopupOpen,
@@ -49,11 +60,13 @@ const ProfileContainer = () => {
     following: user?.following,
     fullName: user?.fullName,
     description: user?.description,
-    avatar: user?.avatar
+    avatar: user?.avatar,
+    activeCategory
   });
 
   const containerFunctions = {
-    dispatch
+    dispatch,
+    handleCategorySelect
   };
 
   return (

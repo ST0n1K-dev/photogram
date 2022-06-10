@@ -4,7 +4,7 @@ import React, {
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  deletePost, likePost, commentPost, updateUserPostCaption
+  deletePost, likePost, commentPost, updateUserPostCaption, updateUserPostCategory
 } from 'Store/SelectedProfile';
 import { commentStripPost, likeStripPost } from 'Store/MyAccount';
 import { setPostEditMode } from 'Store/PostActions';
@@ -143,6 +143,16 @@ const PostModalContainer = (props: PostModalContainerInterface) => {
     dispatch(setPostEditMode(false));
   };
 
+  const updatePostCategory = (category: string) => {
+    firebase
+      .firestore()
+      .collection('posts')
+      .doc(docId)
+      .update({ category });
+
+    dispatch(updateUserPostCategory({ docId, category }));
+  };
+
   const containerProps = () => ({
     isShowing,
     post: detailedPost,
@@ -168,7 +178,8 @@ const PostModalContainer = (props: PostModalContainerInterface) => {
     handleDeletePost,
     handleEditPostClick,
     exitPostEditMode,
-    updatePostCaption
+    updatePostCaption,
+    updatePostCategory
   };
 
   return (
