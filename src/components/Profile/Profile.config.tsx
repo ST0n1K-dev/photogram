@@ -7,7 +7,9 @@ export interface ProfileContainerInterface {
 }
 
 export interface ProfileComponentInterface extends ReducerStateInterface {
-    dispatch: React.Dispatch<ReducerStateInterface>
+    dispatch: React.Dispatch<ReducerStateInterface>,
+    handleCategorySelect: (category: string) => void,
+    displayingPosts?: Array<PostInterface> | Array<never>
 }
 
 export interface ReducerStateInterface {
@@ -21,6 +23,7 @@ export interface ReducerStateInterface {
     fullName?: string
     description?: string
     avatar?: any
+    activeCategory?: string
 }
 
 export interface UserHeroInterface {
@@ -63,4 +66,10 @@ export interface PostContentInterface {
     post: PostInterface
     onPostClick: (post: PostInterface) => void
     username: string
+}
+
+export interface PostsCategoriesInterface {
+    posts?: Array<PostInterface> | Array<never>
+    activeCategory: string
+    handleCategorySelect: (category: string) => void
 }

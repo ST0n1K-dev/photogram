@@ -50,8 +50,15 @@ export interface PostActionsInterface {
 export interface PostContentInterface {
     username: string
     caption: string,
+    category: string
     updatePostCaption?: (caption: string) => void
+    updatePostCategory?: (category: string) => void
     exitPostEditMode?: () => void
+}
+
+export interface PostCategoryInterface {
+    category: string
+    updatePostCategory?: (category: string) => void
 }
 
 export interface PostCommentsInterface {

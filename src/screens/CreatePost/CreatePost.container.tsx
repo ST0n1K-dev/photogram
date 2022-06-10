@@ -25,10 +25,13 @@ const CreatePostContainer = () => {
   const initialState = {
     postPicture: '',
     caption: '',
+    postCategory: 'Інше',
     isLoading: false
   };
 
-  const [{ postPicture, caption, isLoading }, dispatch] = useReducer(reducer, initialState);
+  const [{
+    postPicture, caption, postCategory, isLoading
+  }, dispatch] = useReducer(reducer, initialState);
 
   const { storage } = useContext(FirebaseContext) as FirebaseContextInterface;
 
@@ -41,7 +44,7 @@ const CreatePostContainer = () => {
 
   const handleCreatePost = async (values: CreatePostForm) => {
     try {
-      const { postPicture, caption } = values;
+      const { postPicture, caption, postCategory } = values;
 
       dispatch({ isLoading: true });
 
@@ -50,7 +53,7 @@ const CreatePostContainer = () => {
         return;
       }
 
-      const postId = await createPost(userId, caption!);
+      const postId = await createPost(userId, caption!, postCategory!);
 
       if (postPicture) {
         await uploadPostPicture(postPicture!, postId);
@@ -69,6 +72,7 @@ const CreatePostContainer = () => {
   const containerProps = () => ({
     postPicture,
     caption,
+    postCategory,
     isLoading
   });
 

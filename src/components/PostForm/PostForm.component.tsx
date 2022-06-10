@@ -1,14 +1,16 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
-import { Button, TextField, CircularProgress } from '@mui/material';
+import {
+  Button, TextField, CircularProgress, Autocomplete
+} from '@mui/material';
 
-import { CreatePostSchema, PostFormComponentInterface } from './PostForm.config';
+import { CreatePostSchema, PostFormComponentInterface, categoriesList } from './PostForm.config';
 
 import './PostForm.style.scss';
 
 const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
   const {
-    postPicture, caption, isLoading, handleSubmit, handlePictureSet
+    postPicture, caption, postCategory, isLoading, handleSubmit, handlePictureSet
   } = props;
 
   const getImageFromFile = (file: any): string => {
@@ -24,7 +26,7 @@ const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
   return (
     <>
     <Formik
-    initialValues={{ postPicture, caption }}
+    initialValues={{ postPicture, caption, postCategory }}
     validationSchema={CreatePostSchema}
     onSubmit={(values) => {
       handleSubmit(values);
@@ -88,6 +90,21 @@ const PostFormComponent:React.FC<PostFormComponentInterface> = (props) => {
           onBlur={handleBlur('caption')}
         />
         { (errors.caption && touched.caption) ? <p style={{ color: 'red' }}>{errors.caption}</p> : null }
+        <Autocomplete
+          disablePortal
+          value={values.postCategory}
+          onChange={(event: any, newValue: string | null) => {
+            setFieldValue(
+              'postCategory',
+              newValue
+            );
+          }}
+          onBlur={handleBlur('postCategory')}
+          id="post-category"
+          options={categoriesList}
+          sx={{ width: 300, margin: '20px auto' }}
+          renderInput={(params) => <TextField {...params} label="Категорія" />}
+        />
 
         <Button type="submit" variant="contained" disabled={isLoading}>
           Створити публікацію

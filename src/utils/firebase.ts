@@ -207,7 +207,7 @@ export const getUserAvatar = (username: string) => {
     }
 };
 
-export const createPost = async (userId: string, caption: string) => {
+export const createPost = async (userId: string, caption: string, category: string) => {
     const { id: postId } = await firebase
 		.firestore()
 		.collection('posts')
@@ -217,6 +217,7 @@ export const createPost = async (userId: string, caption: string) => {
             dateCreated: Date.now(),
             likes: [],
             userId,
+            category,
             photoId: +(new Date().getTime().toString())
         });
 

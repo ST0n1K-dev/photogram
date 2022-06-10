@@ -34,7 +34,8 @@ const PostModalComponent = (props: PostModalComponentInterface) => {
   const {
     isShowing, onClose, post, likes, isLiked, comments = [],
     handleLike, handleAddComment, commentInput, isLoading, isMyPost,
-    handleDeletePost, handleEditPostClick, exitPostEditMode, updatePostCaption
+    handleDeletePost, handleEditPostClick, exitPostEditMode, updatePostCaption,
+    updatePostCategory
   } = props;
   const [postImage, setPostImage] = useState<string>('');
   const [postMeta, setPostMeta] = useState<FullMetadata | any>({});
@@ -42,6 +43,7 @@ const PostModalComponent = (props: PostModalComponentInterface) => {
   const {
     username = '',
     caption = '',
+    category = '',
     dateCreated,
     docId = ''
   } = post as PostInterface || {};
@@ -97,8 +99,10 @@ const PostModalComponent = (props: PostModalComponentInterface) => {
                 <PostContent
                   username={username}
                   caption={caption}
+                  category={category}
                   exitPostEditMode={exitPostEditMode}
                   updatePostCaption={updatePostCaption}
+                  updatePostCategory={updatePostCategory}
                 />
                 <Divider />
                 <h3>Коментарі</h3>
