@@ -40,12 +40,12 @@ const ProfileComponent: React.FC<ProfileComponentInterface> = (props) => {
         description={description}
         dispatch={dispatch}
       />
-      <Divider />
       <PostsCategories
         posts={posts}
         activeCategory={activeCategory!}
         handleCategorySelect={handleCategorySelect}
       />
+      <Divider />
       <UserPosts posts={displayingPosts} profile={profile} />
     </div>
   );

@@ -176,9 +176,9 @@
             justify-content: center;
             align-items: center;
             min-width: 180px;
-            border-radius: 20px;
-            height: 60px;
-            background-color: #fff;
+            border-radius: 12px;
+            height: 50px;
+            background-color: transparent;
             border: 1px solid #3873cb;
 
             &.active {
@@ -187,8 +187,7 @@
             }
 
             p {
-                font-size: 18px;
-                font-weight: 700;
+                font-size: 16px;
             }
 
             &:hover {
